@@ -30154,6 +30154,21 @@ table.dataTable tbody > tr.selected th.select-checkbox:after {
     padding-right: 16px;
 }
 
+.datatable-table th button, .datatable-pagination-list button {
+    color: inherit;
+    border: 0;
+    background-color: inherit;
+    cursor: pointer;
+    text-align: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+.datatable-pagination .datatable-active a, .datatable-pagination .datatable-active a:focus, .datatable-pagination .datatable-active a:hover, .datatable-pagination .datatable-active button, .datatable-pagination .datatable-active button:focus, .datatable-pagination .datatable-active button:hover {
+    background-color: #d9d9d9;
+    cursor: default;
+}
+
 .dataTable-sorter {
     display: inline-block;
     height: 100%;
@@ -30405,6 +30420,8 @@ table.dataTable tbody > tr.selected th.select-checkbox:after {
 .datatable-sorter {
     padding-right: 18px;
 }
+
+
 .datatable-sorter:after {
     border-top: 0px;
     top: 4px;
