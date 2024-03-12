@@ -15,7 +15,7 @@ function Login() {
 
                             <h4 className="text-center f-w-500 m-3">Login with your email</h4>
                             <div className="form-group mb-3">
-                                <input type="email" className="form-control" id="floatingInput" placeholder="Email Address" />
+                                <input type="email" className="form-control" id="floatingInput" placeholder="Email Address" autoFocus />
                             </div>
                             <div className="form-group mb-3">
                                 <input type="password" className="form-control" id="floatingInput1" placeholder="Password" />
