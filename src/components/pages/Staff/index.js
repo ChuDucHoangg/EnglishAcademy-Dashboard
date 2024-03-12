@@ -34,7 +34,9 @@ function StaffList() {
                                                 <th data-sortable="true">Phone Number</th>
                                                 <th data-sortable="true">Gender</th>
                                                 <th data-sortable="true">Class Name</th>
-                                                <th data-sortable="true">Actions</th>
+                                                <th data-sortable="true" className="text-center">
+                                                    Actions
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -11,6 +11,12 @@ import StudentEdit from "./components/pages/Student/StudentEdit";
 import StaffList from "./components/pages/Staff";
 import StaffCreate from "./components/pages/Staff/StaffCreate";
 import StaffEdit from "./components/pages/Staff/StaffEdit";
+import CourseList from "./components/pages/Course";
+import CourseCreate from "./components/pages/Course/CourseCreate";
+import CourseEdit from "./components/pages/Course/CourseEdit";
+import Lesson from "./components/pages/Lesson";
+import LessonCreate from "./components/pages/Lesson/LessonCreate";
+import LessonEdit from "./components/pages/Lesson/LessonEdit";
 
 function App() {
     return (
@@ -19,6 +25,18 @@ function App() {
                 {/* ===== Start Dashboard ===== */}
                 <Route path="/" element={<Dashboard />} />
                 {/* ===== End Dashboard ===== */}
+
+                {/* ===== Start Course ===== */}
+                <Route path="/course" element={<CourseList />} />
+                <Route path="/course-create" element={<CourseCreate />} />
+                <Route path="/course-edit" element={<CourseEdit />} />
+                {/* ===== End Course ===== */}
+
+                {/* ===== Start Lesson ===== */}
+                <Route path="/lesson" element={<Lesson />} />
+                <Route path="/lesson-create" element={<LessonCreate />} />
+                <Route path="/lesson-edit" element={<LessonEdit />} />
+                {/* ===== End Lesson ===== */}
 
                 {/* ===== Start Student ===== */}
                 <Route path="/student" element={<StudentList />} />
