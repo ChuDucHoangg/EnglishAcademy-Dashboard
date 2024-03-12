@@ -6,8 +6,8 @@ function Sidebar() {
             <div className="navbar-wrapper">
                 <div className="m-header">
                     <Link to="/" className="b-brand text-primary">
-                        <img src="../assets/images/logo-dark.svg" alt="" />
-                        <span className="badge bg-light-success rounded-pill ms-2 theme-version">v9.0</span>
+                        <img src="../assets/images/logo.png" alt="" className="img-fluid" />
+                        {/* <span className="badge bg-light-success rounded-pill ms-2 theme-version">v9.0</span> */}
                     </Link>
                 </div>
                 <div className="navbar-content">
@@ -78,7 +78,7 @@ function Sidebar() {
                                 </li>
                             </ul> */}
                         </li>
-                        <li className="pc-item pc-hasmenu">
+                        {/* <li className="pc-item pc-hasmenu">
                             <a href="#!" className="pc-link">
                                 <span className="pc-micon">
                                     <svg className="pc-icon">
@@ -125,7 +125,7 @@ function Sidebar() {
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> */}
 
                         {/* <li className="pc-item pc-caption">
                             <label>Widget</label>
@@ -162,9 +162,9 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Chart</span>
                             </a>
-                        </li> */}
+                        </li>
 
-                        <li className="pc-item pc-caption">
+                     <li className="pc-item pc-caption">
                             <label>UI Components</label>
                             <svg className="pc-icon">
                                 <use xlinkHref="#custom-box-1"></use>
@@ -1407,6 +1407,30 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Landing</span>
                             </a>
+                        </li> */}
+
+                        <li className="pc-item pc-caption">
+                            <label>Student</label>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
+                            <Link to="/student" className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-user-graduate"></i>
+                                </span>
+                                <span className="pc-mtext">Student</span>
+                            </Link>
+                        </li>
+
+                        <li className="pc-item pc-caption">
+                            <label>Staff</label>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
+                            <Link to="/staff" className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-users"></i>
+                                </span>
+                                <span className="pc-mtext">Staff</span>
+                            </Link>
                         </li>
 
                         <li className="pc-item pc-caption">
