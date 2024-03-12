@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom";
+
 function Sidebar() {
     return (
         <nav className="pc-sidebar">
             <div className="navbar-wrapper">
                 <div className="m-header">
-                    <a href="#!" className="b-brand text-primary">
-                        {/* ========   Change your logo from here   ============ */}
+                    <Link to="/" className="b-brand text-primary">
                         <img src="../assets/images/logo-dark.svg" alt="" />
                         <span className="badge bg-light-success rounded-pill ms-2 theme-version">v9.0</span>
-                    </a>
+                    </Link>
                 </div>
                 <div className="navbar-content">
                     <div className="card pc-user-card">
@@ -28,10 +29,10 @@ function Sidebar() {
                             </div>
                             <div className="collapse pc-user-links" id="pc_sidebar_userlink">
                                 <div className="pt-3">
-                                    <a href="#!">
+                                    <Link to="profile">
                                         <i className="ti ti-user"></i>
                                         <span>My Account</span>
-                                    </a>
+                                    </Link>
                                     <a href="#!">
                                         <i className="ti ti-settings"></i>
                                         <span>Settings</span>
@@ -51,22 +52,20 @@ function Sidebar() {
 
                     <ul className="pc-navbar">
                         <li className="pc-item pc-caption">
-                            <label>Navigation</label>
+                            <label>Dashboard</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <a href="#!" className="pc-link">
+                            <Link to="/" className="pc-link">
                                 <span className="pc-micon">
                                     <svg className="pc-icon">
                                         <use xlinkHref="#custom-status-up"></use>
                                     </svg>
                                 </span>
                                 <span className="pc-mtext">Dashboard</span>
-                                <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
-                                </span>
-                                <span className="pc-badge">2</span>
-                            </a>
-                            <ul className="pc-submenu">
+
+                                {/* <span className="pc-badge">2</span> */}
+                            </Link>
+                            {/* <ul className="pc-submenu">
                                 <li className="pc-item">
                                     <a className="pc-link" href="../dashboard/index.html">
                                         Default
@@ -77,7 +76,7 @@ function Sidebar() {
                                         Analytics
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> */}
                         </li>
                         <li className="pc-item pc-hasmenu">
                             <a href="#!" className="pc-link">
@@ -88,7 +87,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Layouts</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -114,7 +126,8 @@ function Sidebar() {
                                 </li>
                             </ul>
                         </li>
-                        <li className="pc-item pc-caption">
+
+                        {/* <li className="pc-item pc-caption">
                             <label>Widget</label>
                             <svg className="pc-icon">
                                 <use xlinkHref="#custom-presentation-chart"></use>
@@ -149,7 +162,8 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Chart</span>
                             </a>
-                        </li>
+                        </li> */}
+
                         <li className="pc-item pc-caption">
                             <label>UI Components</label>
                             <svg className="pc-icon">
@@ -175,7 +189,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Icons</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -221,7 +248,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Forms Elements</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -276,7 +316,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Forms Plugins</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -284,7 +337,20 @@ function Sidebar() {
                                     <a className="pc-link" href="#!">
                                         Date
                                         <span className="pc-arrow">
-                                            <i data-feather="chevron-right"></i>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                height="24"
+                                                className="main-grid-item-icon"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                            >
+                                                <polyline points="9 18 15 12 9 6" />
+                                            </svg>
                                         </span>
                                     </a>
                                     <ul className="pc-submenu">
@@ -309,7 +375,20 @@ function Sidebar() {
                                     <a className="pc-link" href="#!">
                                         Select
                                         <span className="pc-arrow">
-                                            <i data-feather="chevron-right"></i>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                height="24"
+                                                className="main-grid-item-icon"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                            >
+                                                <polyline points="9 18 15 12 9 6" />
+                                            </svg>
                                         </span>
                                     </a>
                                     <ul className="pc-submenu">
@@ -361,7 +440,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Text Editors</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -379,7 +471,20 @@ function Sidebar() {
                                     <a className="pc-link" href="#!">
                                         CK editor
                                         <span className="pc-arrow">
-                                            <i data-feather="chevron-right"></i>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                height="24"
+                                                className="main-grid-item-icon"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                            >
+                                                <polyline points="9 18 15 12 9 6" />
+                                            </svg>
                                         </span>
                                     </a>
                                     <ul className="pc-submenu">
@@ -421,7 +526,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Form Layouts</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -456,7 +574,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">File upload</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -507,7 +638,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Bootstrap Table</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -542,7 +686,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Vanilla Table</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -553,7 +710,7 @@ function Sidebar() {
                                 </li>
                                 <li className="pc-item">
                                     <a className="pc-link" href="../table/tbl_dt-dynamic-import.html">
-                                        Dynamic Import
+                                        Dynamic Importimport Profile from '../views/Profile/index';
                                     </a>
                                 </li>
                                 <li className="pc-item">
@@ -607,7 +764,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Data table</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -647,7 +817,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">DT extensions</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -660,7 +843,20 @@ function Sidebar() {
                                     <a href="#!" className="pc-link">
                                         Button
                                         <span className="pc-arrow">
-                                            <i data-feather="chevron-right"></i>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                height="24"
+                                                className="main-grid-item-icon"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                            >
+                                                <polyline points="9 18 15 12 9 6" />
+                                            </svg>
                                         </span>
                                     </a>
                                     <ul className="pc-submenu">
@@ -733,7 +929,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Charts</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -789,7 +998,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">E-commerce</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -849,7 +1071,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Users</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -881,7 +1116,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Authentication</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -889,7 +1137,20 @@ function Sidebar() {
                                     <a href="#!" className="pc-link">
                                         Authentication 1
                                         <span className="pc-arrow">
-                                            <i data-feather="chevron-right"></i>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                height="24"
+                                                className="main-grid-item-icon"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                            >
+                                                <polyline points="9 18 15 12 9 6" />
+                                            </svg>
                                         </span>
                                     </a>
                                     <ul className="pc-submenu">
@@ -929,7 +1190,20 @@ function Sidebar() {
                                     <a href="#!" className="pc-link">
                                         Authentication 2
                                         <span className="pc-arrow">
-                                            <i data-feather="chevron-right"></i>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                height="24"
+                                                className="main-grid-item-icon"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                            >
+                                                <polyline points="9 18 15 12 9 6" />
+                                            </svg>
                                         </span>
                                     </a>
                                     <ul className="pc-submenu">
@@ -981,7 +1255,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Maintenance</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -999,7 +1286,20 @@ function Sidebar() {
                                     <a href="#!" className="pc-link">
                                         Under construction
                                         <span className="pc-arrow">
-                                            <i data-feather="chevron-right"></i>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                height="24"
+                                                className="main-grid-item-icon"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                            >
+                                                <polyline points="9 18 15 12 9 6" />
+                                            </svg>
                                         </span>
                                     </a>
                                     <ul className="pc-submenu">
@@ -1019,7 +1319,20 @@ function Sidebar() {
                                     <a href="#!" className="pc-link">
                                         Coming soon
                                         <span className="pc-arrow">
-                                            <i data-feather="chevron-right"></i>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                height="24"
+                                                className="main-grid-item-icon"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                            >
+                                                <polyline points="9 18 15 12 9 6" />
+                                            </svg>
                                         </span>
                                     </a>
                                     <ul className="pc-submenu">
@@ -1056,7 +1369,20 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Price</span>
                                 <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        className="main-grid-item-icon"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </span>
                             </a>
                             <ul className="pc-submenu">
@@ -1084,120 +1410,20 @@ function Sidebar() {
                         </li>
 
                         <li className="pc-item pc-caption">
-                            <label>Other</label>
+                            <label>Profile</label>
                             <svg className="pc-icon">
-                                <use xlinkHref="#custom-notification-status"></use>
+                                <use xlinkHref="#custom-user-square"></use>
                             </svg>
                         </li>
-                        <li className="pc-item pc-hasmenu">
-                            <a href="#!" className="pc-link">
-                                <span className="pc-micon">
-                                    <svg className="pc-icon">
-                                        <use xlinkHref="#custom-level"></use>
-                                    </svg>
-                                </span>
-                                <span className="pc-mtext">Menu levels</span>
-                                <span className="pc-arrow">
-                                    <i data-feather="chevron-right"></i>
-                                </span>
-                            </a>
-                            <ul className="pc-submenu">
-                                <li className="pc-item">
-                                    <a className="pc-link" href="#!">
-                                        Level 2.1
-                                    </a>
-                                </li>
-                                <li className="pc-item pc-hasmenu">
-                                    <a href="#!" className="pc-link">
-                                        Level 2.2
-                                        <span className="pc-arrow">
-                                            <i data-feather="chevron-right"></i>
-                                        </span>
-                                    </a>
-                                    <ul className="pc-submenu">
-                                        <li className="pc-item">
-                                            <a className="pc-link" href="#!">
-                                                Level 3.1
-                                            </a>
-                                        </li>
-                                        <li className="pc-item">
-                                            <a className="pc-link" href="#!">
-                                                Level 3.2
-                                            </a>
-                                        </li>
-                                        <li className="pc-item pc-hasmenu">
-                                            <a href="#!" className="pc-link">
-                                                Level 3.3
-                                                <span className="pc-arrow">
-                                                    <i data-feather="chevron-right"></i>
-                                                </span>
-                                            </a>
-                                            <ul className="pc-submenu">
-                                                <li className="pc-item">
-                                                    <a className="pc-link" href="#!">
-                                                        Level 4.1
-                                                    </a>
-                                                </li>
-                                                <li className="pc-item">
-                                                    <a className="pc-link" href="#!">
-                                                        Level 4.2
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="pc-item pc-hasmenu">
-                                    <a href="#!" className="pc-link">
-                                        Level 2.3
-                                        <span className="pc-arrow">
-                                            <i data-feather="chevron-right"></i>
-                                        </span>
-                                    </a>
-                                    <ul className="pc-submenu">
-                                        <li className="pc-item">
-                                            <a className="pc-link" href="#!">
-                                                Level 3.1
-                                            </a>
-                                        </li>
-                                        <li className="pc-item">
-                                            <a className="pc-link" href="#!">
-                                                Level 3.2
-                                            </a>
-                                        </li>
-                                        <li className="pc-item pc-hasmenu">
-                                            <a href="#!" className="pc-link">
-                                                Level 3.3
-                                                <span className="pc-arrow">
-                                                    <i data-feather="chevron-right"></i>
-                                                </span>
-                                            </a>
-                                            <ul className="pc-submenu">
-                                                <li className="pc-item">
-                                                    <a className="pc-link" href="#!">
-                                                        Level 4.1
-                                                    </a>
-                                                </li>
-                                                <li className="pc-item">
-                                                    <a className="pc-link" href="#!">
-                                                        Level 4.2
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
                         <li className="pc-item">
-                            <a href="../other/sample-page.html" className="pc-link">
+                            <Link to="/profile" className="pc-link">
                                 <span className="pc-micon">
                                     <svg className="pc-icon">
-                                        <use xlinkHref="#custom-notification-status"></use>
+                                        <use xlinkHref="#custom-user-square"></use>
                                     </svg>
                                 </span>
-                                <span className="pc-mtext">Sample page</span>
-                            </a>
+                                <span className="pc-mtext">Profile</span>
+                            </Link>
                         </li>
                     </ul>
                 </div>

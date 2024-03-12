@@ -3,14 +3,18 @@ import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import Setting from "./Setting";
 import Breadcrumb from "./Breadcrumb";
-function Layout({ children }) {
+import { Helmet } from "react-helmet";
+function Layout({ children, title }) {
     return (
         <>
+            <Helmet>
+                <title>{title} | English Academy</title>
+            </Helmet>
             <Sidebar />
             <Header />
             <div className="pc-container">
                 <div className="pc-content">
-                    <Breadcrumb title="Dashboard" />
+                    <Breadcrumb title={title} />
                     <div className="row">{children}</div>
                 </div>
             </div>
