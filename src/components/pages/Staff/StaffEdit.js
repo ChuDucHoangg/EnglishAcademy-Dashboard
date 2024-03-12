@@ -3,61 +3,61 @@ import Layout from "../../layouts";
 function StaffEdit() {
     return (
         <Layout title="Staff Edit">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter Product Name" />
+            <div className="col-sm-12">
+                <div className="card">
+                    <div className="card-body">
+                        <div className="row">
+                            <div className="col-md-6">
+                                <div className="form-group">
+                                    <label className="form-label">Full Name</label>
+                                    <input type="text" className="form-control" placeholder="Enter Product Name" />
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Address</label>
-                                    <input type="text" class="form-control" placeholder="Enter Address" />
+                                <div className="form-group">
+                                    <label className="form-label">Address</label>
+                                    <input type="text" className="form-control" placeholder="Enter Address" />
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="text" class="form-control" placeholder="Enter Phone Number" />
+                                <div className="form-group">
+                                    <label className="form-label">Phone Number</label>
+                                    <input type="text" className="form-control" placeholder="Enter Phone Number" />
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Gender</label>
-                                    <select class="form-select">
+                                <div className="form-group">
+                                    <label className="form-label">Gender</label>
+                                    <select className="form-select">
                                         <option>FeMale</option>
                                         <option>Male</option>
                                         <option>Other</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Class Name</label>
-                                    <select class="form-select">
+                                <div className="form-group">
+                                    <label className="form-label">Class Name</label>
+                                    <select className="form-select">
                                         <option>T2207A</option>
                                         <option>T2208A</option>
                                         <option>T2209A</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label">Birthday</label>
-                                    <input type="date" class="form-control" />
+                            <div className="col-md-6">
+                                <div className="form-group">
+                                    <label className="form-label">Birthday</label>
+                                    <input type="date" className="form-control" />
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Email</label>
-                                    <input type="text" class="form-control" placeholder="Enter Product Name" />
+                                <div className="form-group">
+                                    <label className="form-label">Email</label>
+                                    <input type="text" className="form-control" placeholder="Enter Product Name" />
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <p>
-                                        <span class="text-danger">*</span> Recommended resolution is 640*640 with file size
+                                        <span className="text-danger">*</span> Recommended resolution is 640*640 with file size
                                     </p>
-                                    <label class="btn btn-outline-secondary" for="flupld">
-                                        <i class="ti ti-upload me-2"></i> Click to Upload
+                                    <label className="btn btn-outline-secondary" for="flupld">
+                                        <i className="ti ti-upload me-2"></i> Click to Upload
                                     </label>
-                                    <input type="file" id="flupld" class="d-none" />
+                                    <input type="file" id="flupld" className="d-none" />
                                 </div>
-                                <div class="text-end btn-page mb-0 mt-4">
-                                    <button class="btn btn-outline-secondary">Cancel</button>
-                                    <button class="btn btn-primary">Save Change</button>
+                                <div className="text-end btn-page mb-0 mt-4">
+                                    <button className="btn btn-outline-secondary">Cancel</button>
+                                    <button className="btn btn-primary">Save Change</button>
                                 </div>
                             </div>
                         </div>
