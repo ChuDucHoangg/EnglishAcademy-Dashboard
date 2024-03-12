@@ -1,4 +1,4 @@
-function ForgotPassword() {
+function ResetPassword() {
     return (
         <div className="auth-main">
             <div className="auth-wrapper v1">
@@ -10,7 +10,7 @@ function ForgotPassword() {
                             </a>
                             <div className="d-flex justify-content-between align-items-end mb-4">
                                 <h3 className="mb-0">
-                                    <b>Forgot Password</b>
+                                    <b>Reset Password</b>
                                 </h3>
                                 <a href="/login" className="link-primary">
                                     Back to Login
@@ -18,12 +18,19 @@ function ForgotPassword() {
                             </div>
                             <div className="form-group mb-3">
                                 <label className="form-label">Email Address</label>
-                                <input type="email" className="form-control" id="floatingInput" placeholder="Email Address" autoFocus />
+                                <input type="email" className="form-control" id="email" placeholder="Email Address" autoFocus />
                             </div>
-                            <p className="mt-4 text-sm text-muted">Do not forgot to check SPAM box.</p>
+                            <div className="form-group mb-3">
+                                <label className="form-label">New Password</label>
+                                <input type="password" className="form-control" id="newPassword" placeholder="********" />
+                            </div>
+                            <div className="form-group mb-3">
+                                <label className="form-label">Confirm Password</label>
+                                <input type="password" className="form-control" id="confirmPassword" placeholder="********" />
+                            </div>
                             <div className="d-grid mt-3">
                                 <button type="button" className="btn btn-primary">
-                                    Send Password Reset Email
+                                    Update Password
                                 </button>
                             </div>
                         </div>
@@ -34,4 +41,4 @@ function ForgotPassword() {
     );
 }
 
-export default ForgotPassword;
+export default ResetPassword;
