@@ -103,6 +103,62 @@ function Sidebar() {
                                 <span className="pc-mtext">Test</span>
                             </Link>
                         </li>
+                        <li className="pc-item pc-hasmenu">
+                            <Link to="/entrance-test" className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-inbox"></i>
+                                </span>
+                                <span className="pc-mtext">Entrance Test</span>
+                            </Link>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
+                            <Link to="/question" className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-info-circle"></i>
+                                </span>
+                                <span className="pc-mtext">Question</span>
+                            </Link>
+                        </li>
+
+                        <li className="pc-item pc-caption">
+                            <label>Timetable</label>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
+                            <Link to="/timetable" className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-calendar-alt"></i>
+                                </span>
+                                <span className="pc-mtext">Timetable</span>
+                            </Link>
+                        </li>
+
+                        <li className="pc-item pc-caption">
+                            <label>Class & Room</label>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
+                            <Link to="/class" className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-chalkboard-teacher"></i>
+                                </span>
+                                <span className="pc-mtext">Class</span>
+                            </Link>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
+                            <Link to="/classroom" className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-door-open"></i>
+                                </span>
+                                <span className="pc-mtext">Classroom</span>
+                            </Link>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
+                            <Link to="/device" className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-network-wired"></i>
+                                </span>
+                                <span className="pc-mtext">Device</span>
+                            </Link>
+                        </li>
 
                         <li className="pc-item pc-caption">
                             <label>Student</label>
@@ -129,7 +185,7 @@ function Sidebar() {
                         </li>
 
                         <li className="pc-item pc-caption">
-                            <label>Profile</label>
+                            <label>Information</label>
                             <svg className="pc-icon">
                                 <use xlinkHref="#custom-user-square"></use>
                             </svg>

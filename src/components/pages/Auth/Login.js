@@ -8,9 +8,7 @@ function Login() {
                     <div className="card my-5">
                         <div className="card-body">
                             <div className="text-center">
-                                <a href="#!">
-                                    <img src="../assets/images/logo-dark.svg" alt="img" />
-                                </a>
+                                <img src="../assets/images/logo.png" alt="img" />
                             </div>
 
                             <h4 className="text-center f-w-500 m-3">Login with your email</h4>
