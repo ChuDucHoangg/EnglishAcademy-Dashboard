@@ -17,6 +17,12 @@ import CourseEdit from "./components/pages/Course/CourseEdit";
 import Lesson from "./components/pages/Lesson";
 import LessonCreate from "./components/pages/Lesson/LessonCreate";
 import LessonEdit from "./components/pages/Lesson/LessonEdit";
+import ExamList from "./components/pages/Exam";
+import ExamCreate from "./components/pages/Exam/ExamCreate";
+import ExamEdit from "./components/pages/Exam/ExamEdit";
+import TestList from "./components/pages/Test/index";
+import MultipleChoice from "./components/pages/Test/MultipleChoice";
+import PracticalExam from "./components/pages/Test/PracticalExam";
 
 function App() {
     return (
@@ -37,6 +43,21 @@ function App() {
                 <Route path="/lesson-create" element={<LessonCreate />} />
                 <Route path="/lesson-edit" element={<LessonEdit />} />
                 {/* ===== End Lesson ===== */}
+
+                {/* ===== Start Exam ===== */}
+                <Route path="/exam" element={<ExamList />} />
+                <Route path="/exam-create" element={<ExamCreate />} />
+                <Route path="/exam-edit" element={<ExamEdit />} />
+                {/* ===== End Exam ===== */}
+
+                {/* ===== Start Test ===== */}
+                <Route path="/test" element={<TestList />} />
+                <Route path="/test-create" element={<ExamCreate />} />
+                <Route path="/test-edit" element={<ExamEdit />} />
+
+                <Route path="/multiple-choice" element={<MultipleChoice />} />
+                <Route path="/practical-exam" element={<PracticalExam />} />
+                {/* ===== End Test ===== */}
 
                 {/* ===== Start Student ===== */}
                 <Route path="/student" element={<StudentList />} />
