@@ -84,25 +84,25 @@ function Sidebar() {
                             </Link>
                         </li>
 
-                        {/* <li className="pc-item pc-caption">
+                        <li className="pc-item pc-caption">
                             <label>Exam & Test</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/course" className="pc-link">
+                            <Link to="/exam" className="pc-link">
                                 <span className="pc-micon">
-                                    <i className="fas fa-book-reader"></i>
+                                    <i className="fas fa-scroll"></i>
                                 </span>
-                                <span className="pc-mtext">Course</span>
+                                <span className="pc-mtext">Exam</span>
                             </Link>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/course" className="pc-link">
+                            <Link to="/test" className="pc-link">
                                 <span className="pc-micon">
-                                    <i className="fas fa-book-reader"></i>
+                                    <i className="fas fa-edit"></i>
                                 </span>
-                                <span className="pc-mtext">Course</span>
+                                <span className="pc-mtext">Test</span>
                             </Link>
-                        </li> */}
+                        </li>
 
                         <li className="pc-item pc-caption">
                             <label>Student</label>
