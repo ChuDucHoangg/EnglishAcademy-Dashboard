@@ -5,9 +5,7 @@ function ResetPassword() {
                 <div className="auth-form">
                     <div className="card my-5">
                         <div className="card-body">
-                            <a href="#!">
-                                <img src="../assets/images/logo-dark.svg" className="mb-4 img-fluid" alt="img" />
-                            </a>
+                            <img src="../assets/images/logo.png" className="mb-4 img-fluid" alt="" style={{ marginLeft: -60 }} />
                             <div className="d-flex justify-content-between align-items-end mb-4">
                                 <h3 className="mb-0">
                                     <b>Reset Password</b>

@@ -23,6 +23,14 @@ import ExamEdit from "./components/pages/Exam/ExamEdit";
 import TestList from "./components/pages/Test/index";
 import MultipleChoice from "./components/pages/Test/MultipleChoice";
 import PracticalExam from "./components/pages/Test/PracticalExam";
+import Timetable from "./components/pages/Timetable";
+import ClassList from "./components/pages/Class";
+import ClassCreate from "./components/pages/Class/CourseCreate";
+import ClassEdit from "./components/pages/Class/CourseEdit";
+import Question from "./components/pages/Question";
+import EntranceTest from "./components/pages/Test/EntranceTest";
+import Classroom from "./components/pages/Classroom";
+import Device from "./components/pages/Device";
 
 function App() {
     return (
@@ -57,7 +65,29 @@ function App() {
 
                 <Route path="/multiple-choice" element={<MultipleChoice />} />
                 <Route path="/practical-exam" element={<PracticalExam />} />
+                <Route path="/entrance-test" element={<EntranceTest />} />
+
+                <Route path="/question" element={<Question />} />
+
                 {/* ===== End Test ===== */}
+
+                {/* ===== Start Student ===== */}
+                <Route path="/timetable" element={<Timetable />} />
+                {/* ===== End Student ===== */}
+
+                {/* ===== Start Class ===== */}
+                <Route path="/class" element={<ClassList />} />
+                <Route path="/class-create" element={<ClassCreate />} />
+                <Route path="/class-edit" element={<ClassEdit />} />
+                {/* ===== End Class ===== */}
+
+                {/* ===== Start Device ===== */}
+                <Route path="/device" element={<Device />} />
+                {/* ===== End Device ===== */}
+
+                {/* ===== Start Classroom ===== */}
+                <Route path="/classroom" element={<Classroom />} />
+                {/* ===== End Classroom ===== */}
 
                 {/* ===== Start Student ===== */}
                 <Route path="/student" element={<StudentList />} />
