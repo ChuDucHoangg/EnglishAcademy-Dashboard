@@ -1,4 +1,72 @@
+import { useState } from "react";
+
 function ResetPassword() {
+    // const { resetToken } = useParams();
+    const [showPassword, setShowPassword] = useState(false);
+
+    // const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+        email: "",
+        newPassword: "",
+    });
+
+    const [formErrors, setFormErrors] = useState({
+        email: "",
+        newPassword: "",
+    });
+
+    const handleTogglePassword = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        setFormErrors({ ...formErrors, [name]: "" });
+    };
+
+    const isEmailValid = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const validateForm = () => {
+        let valid = true;
+        const newErrors = {};
+
+        if (!formData.email) {
+            valid = false;
+            newErrors.email = "Please enter your email.";
+        } else if (!isEmailValid(formData.email)) {
+            valid = false;
+            newErrors.email = "Please enter a valid email address.";
+        }
+
+        if (!formData.newPassword) {
+            newErrors.newPassword = "Please enter a new password.";
+            valid = false;
+        } else if (formData.newPassword.length < 6) {
+            newErrors.newPassword = "New password must be at least 6 characters.";
+            valid = false;
+        } else if (formData.newPassword.length > 50) {
+            newErrors.newPassword = "New password must be less than 50 characters.";
+            valid = false;
+        }
+
+        setFormErrors(newErrors);
+
+        return valid;
+    };
+
+    const submitResponse = async (e) => {
+        e.preventDefault();
+
+        if (validateForm()) {
+            try {
+            } catch (error) {}
+        }
+    };
     return (
         <div className="auth-main">
             <div className="auth-wrapper v1">
@@ -14,23 +82,55 @@ function ResetPassword() {
                                     Back to Login
                                 </a>
                             </div>
-                            <div className="form-group mb-3">
-                                <label className="form-label">Email Address</label>
-                                <input type="email" className="form-control" id="email" placeholder="Email Address" autoFocus />
-                            </div>
-                            <div className="form-group mb-3">
-                                <label className="form-label">New Password</label>
-                                <input type="password" className="form-control" id="newPassword" placeholder="********" />
-                            </div>
-                            <div className="form-group mb-3">
-                                <label className="form-label">Confirm Password</label>
-                                <input type="password" className="form-control" id="confirmPassword" placeholder="********" />
-                            </div>
-                            <div className="d-grid mt-3">
-                                <button type="button" className="btn btn-primary">
-                                    Update Password
-                                </button>
-                            </div>
+                            <form onSubmit={submitResponse}>
+                                <div className="form-group">
+                                    <label className="form-label" htmlFor="email">
+                                        Email Address
+                                    </label>
+                                    <div className="form-group__custom mb-3">
+                                        <input
+                                            type="email"
+                                            className={`form-control ${formErrors.email ? "is-invalid" : ""}`}
+                                            id="email"
+                                            name="email"
+                                            placeholder="Email Address"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            autoFocus
+                                        />
+                                        {formErrors.email && <div className="invalid-feedback">{formErrors.email}</div>}
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="form-label" htmlFor="newPassword">
+                                        New Password
+                                    </label>
+                                    <div className="form-group__custom mb-3">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            className={`form-control ${formErrors.newPassword ? "is-invalid" : ""}`}
+                                            name="newPassword"
+                                            id="newPassword"
+                                            placeholder="********"
+                                            value={formData.newPassword}
+                                            onChange={handleChange}
+                                        />
+                                        {formErrors.newPassword && <div className="invalid-feedback">{formErrors.newPassword}</div>}
+                                        {!formErrors.newPassword && (
+                                            <span className="view-password" onClick={handleTogglePassword}>
+                                                {!showPassword ? <i className="fa fa-eye-slash"></i> : <i className="fa fa-eye"></i>}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="d-grid mt-3">
+                                    <button type="submit" className="btn btn-primary">
+                                        Update Password
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

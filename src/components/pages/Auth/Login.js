@@ -1,6 +1,59 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Login() {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const [formStaff, setFormStaff] = useState({
+        email: "",
+        password: "",
+    });
+
+    const [formErrors, setFormErrors] = useState({
+        email: "",
+        password: "",
+    });
+
+    const handleTogglePassword = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormStaff({ ...formStaff, [name]: value });
+        setFormErrors({ ...formErrors, [name]: "" });
+    };
+
+    const validateForm = () => {
+        let valid = true;
+        const newErrors = {};
+
+        if (!formStaff.email) {
+            newErrors.email = "Please enter your email address.";
+            valid = false;
+        }
+
+        if (!formStaff.password) {
+            newErrors.password = "Please enter your password.";
+            valid = false;
+        } else if (formStaff.password.length < 6) {
+            newErrors.password = "Password must be at least 6 characters.";
+            valid = false;
+        } else if (formStaff.password.length > 50) {
+            newErrors.password = "Password must be less than 50 characters.";
+            valid = false;
+        }
+
+        setFormErrors(newErrors);
+        return valid;
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+        }
+    };
+
     return (
         <div className="auth-main">
             <div className="auth-wrapper v1">
@@ -12,28 +65,57 @@ function Login() {
                             </div>
 
                             <h4 className="text-center f-w-500 m-3">Login with your email</h4>
-                            <div className="form-group mb-3">
-                                <input type="email" className="form-control" id="floatingInput" placeholder="Email Address" autoFocus />
-                            </div>
-                            <div className="form-group mb-3">
-                                <input type="password" className="form-control" id="floatingInput1" placeholder="Password" />
-                            </div>
-                            <div className="d-flex mt-1 justify-content-between align-items-center">
-                                <div className="form-check">
-                                    <input className="form-check-input input-primary" type="checkbox" id="customCheckc1" />
-                                    <label className="form-check-label text-muted" for="customCheckc1">
-                                        Remember me?
-                                    </label>
+                            <form onSubmit={handleLogin}>
+                                <div className="form-group">
+                                    <div className="form-control__custom mb-3">
+                                        <input
+                                            type="email"
+                                            className={`form-control ${formErrors.email ? "is-invalid" : ""}`}
+                                            placeholder="Email Address"
+                                            name="email"
+                                            value={formStaff.email}
+                                            onChange={handleChange}
+                                            autoFocus
+                                        />
+                                        {formErrors.email && <div className="invalid-feedback">{formErrors.email}</div>}
+                                    </div>
                                 </div>
-                                <Link to="/forgot-password" className="text-secondary f-w-400 mb-0">
-                                    Forgot Password?
-                                </Link>
-                            </div>
-                            <div className="d-grid mt-4">
-                                <button type="button" className="btn btn-primary">
-                                    Login
-                                </button>
-                            </div>
+                                <div className="form-group mb-3">
+                                    <div className="form-group__custom">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            className={`form-control ${formErrors.password ? "is-invalid" : ""}`}
+                                            name="password"
+                                            placeholder="Password"
+                                            value={formStaff.password}
+                                            onChange={handleChange}
+                                            onClick={handleTogglePassword}
+                                        />
+                                        {formErrors.password && <div className="invalid-feedback">{formErrors.password}</div>}
+                                        {!formErrors.password && (
+                                            <span className="view-password" onClick={handleTogglePassword}>
+                                                {!showPassword ? <i className="fa fa-eye-slash"></i> : <i className="fa fa-eye"></i>}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="d-flex mt-1 justify-content-between align-items-center">
+                                    <div className="form-check">
+                                        <input className="form-check-input input-primary" type="checkbox" />
+                                        <label className="form-check-label text-muted" htmlFor="customCheckc1">
+                                            Remember me?
+                                        </label>
+                                    </div>
+                                    <Link to="/forgot-password" className="text-secondary f-w-400 mb-0">
+                                        Forgot Password?
+                                    </Link>
+                                </div>
+                                <div className="d-grid mt-4">
+                                    <button type="submit" className="btn btn-primary">
+                                        Login
+                                    </button>
+                                </div>
+                            </form>
                             <div className="saprator my-3">
                                 <span>OR</span>
                             </div>

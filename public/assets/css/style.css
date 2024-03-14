@@ -282,7 +282,7 @@ $btn-border-radius-lg: 14px; */
     }
 }
 
- /* Scrollbar CSS */
+/* Scrollbar CSS */
 html ::-webkit-scrollbar {
     border-radius: 0px;
     width: 8px;
@@ -291,7 +291,6 @@ html ::-webkit-scrollbar {
 html ::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: rgba(22, 24, 35, 0.03);
-
 }
 
 html ::-webkit-scrollbar-track {
@@ -21120,6 +21119,7 @@ pre[class*="language-"] > code {
 .pc-header .pc-h-dropdown.dropdown-menu-end {
     right: 0 !important;
     left: auto !important;
+    overflow-y: auto;
 }
 .pc-header .pc-level-menu {
     position: relative;
@@ -24518,7 +24518,7 @@ a.pc-footer__name:hover {
 .dropdown-menu {
     box-shadow: 0 4px 24px 0 rgba(62, 57, 107, 0.18);
     border: none;
-    padding: 8px;
+    padding: 8px 0 8px 8px;
 }
 .dropdown-menu .dropdown-item {
     border-radius: 8px;
@@ -30154,7 +30154,8 @@ table.dataTable tbody > tr.selected th.select-checkbox:after {
     padding-right: 16px;
 }
 
-.datatable-table th button, .datatable-pagination-list button {
+.datatable-table th button,
+.datatable-pagination-list button {
     color: inherit;
     border: 0;
     background-color: inherit;
@@ -30164,7 +30165,12 @@ table.dataTable tbody > tr.selected th.select-checkbox:after {
     font-size: inherit;
 }
 
-.datatable-pagination .datatable-active a, .datatable-pagination .datatable-active a:focus, .datatable-pagination .datatable-active a:hover, .datatable-pagination .datatable-active button, .datatable-pagination .datatable-active button:focus, .datatable-pagination .datatable-active button:hover {
+.datatable-pagination .datatable-active a,
+.datatable-pagination .datatable-active a:focus,
+.datatable-pagination .datatable-active a:hover,
+.datatable-pagination .datatable-active button,
+.datatable-pagination .datatable-active button:focus,
+.datatable-pagination .datatable-active button:hover {
     background-color: #d9d9d9;
     cursor: default;
 }
@@ -30420,7 +30426,6 @@ table.dataTable tbody > tr.selected th.select-checkbox:after {
 .datatable-sorter {
     padding-right: 18px;
 }
-
 
 .datatable-sorter:after {
     border-top: 0px;
@@ -30718,6 +30723,20 @@ div.dataTables_wrapper div.dt-row {
 
 .auth-main ~ .pct-offcanvas .pc-boxcontainer {
     display: none;
+}
+
+/* Custom css */
+
+.form-group__custom {
+    position: relative;
+}
+
+.view-password {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
 /**  =====================
