@@ -50,7 +50,7 @@ function StudentEdit() {
                                     <p>
                                         <span className="text-danger">*</span> Recommended resolution is 640*640 with file size
                                     </p>
-                                    <label className="btn btn-outline-secondary" for="flupld">
+                                    <label className="btn btn-outline-secondary" htmlFor="flupld">
                                         <i className="ti ti-upload me-2"></i> Click to Upload
                                     </label>
                                     <input type="file" id="flupld" className="d-none" />

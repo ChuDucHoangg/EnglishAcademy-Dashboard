@@ -67,7 +67,7 @@ function MyAccount() {
                                         <p className="text-muted text-sm mb-0">Browsing Securely ( https ) when it's necessary</p>
                                     </div>
                                     <div className="form-check form-switch p-0">
-                                        <input className="form-check-input h4 position-relative m-0" type="checkbox" role="switch" checked="" />
+                                        <input className="form-check-input h4 position-relative m-0" type="checkbox" role="switch" />
                                     </div>
                                 </div>
                             </li>
@@ -78,7 +78,7 @@ function MyAccount() {
                                         <p className="text-muted text-sm mb-0">Notify when login attempted from other place</p>
                                     </div>
                                     <div className="form-check form-switch p-0">
-                                        <input className="form-check-input h4 position-relative m-0" type="checkbox" role="switch" checked="" />
+                                        <input className="form-check-input h4 position-relative m-0" type="checkbox" role="switch" />
                                     </div>
                                 </div>
                             </li>
@@ -89,7 +89,7 @@ function MyAccount() {
                                         <p className="text-muted text-sm mb-0">Approvals is not required when login from unrecognized devices.</p>
                                     </div>
                                     <div className="form-check form-switch p-0">
-                                        <input className="form-check-input h4 position-relative m-0" type="checkbox" role="switch" checked="" />
+                                        <input className="form-check-input h4 position-relative m-0" type="checkbox" role="switch" />
                                     </div>
                                 </div>
                             </li>

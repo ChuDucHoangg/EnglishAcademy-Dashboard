@@ -2,10 +2,8 @@ function Header() {
     return (
         <header className="pc-header">
             <div className="header-wrapper">
-                {/* [Mobile Media Block] start */}
                 <div className="me-auto pc-mob-drp">
                     <ul className="list-unstyled">
-                        {/* ======= Menu collapse Icon ===== */}
                         <li className="pc-h-item pc-sidebar-collapse">
                             <a href="#!" className="pc-head-link ms-0" id="sidebar-hide">
                                 <i className="ti ti-menu-2"></i>
@@ -30,7 +28,7 @@ function Header() {
                         </li>
                     </ul>
                 </div>
-                {/* [Mobile Media Block end] */}
+
                 <div className="ms-auto">
                     <ul className="list-unstyled">
                         <li className="dropdown pc-h-item">
@@ -101,7 +99,7 @@ function Header() {
                                 <svg className="pc-icon">
                                     <use xlinkHref="#custom-notification"></use>
                                 </svg>
-                                <span className="badge bg-success pc-h-badge">3</span>
+                                <span className="badge bg-success pc-h-badge">2</span>
                             </a>
                             <div className="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
                                 <div className="dropdown-header d-flex align-items-center justify-content-between">
@@ -143,65 +141,6 @@ function Header() {
                                                     <span className="float-end text-sm text-muted">1 hour ago</span>
                                                     <h5 className="text-body mb-2">Message</h5>
                                                     <p className="mb-0">Lorem Ipsum has been the industry's standard dummy text ever since the 1500.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p className="text-span">Yesterday</p>
-                                    <div className="card mb-2">
-                                        <div className="card-body">
-                                            <div className="d-flex">
-                                                <div className="flex-shrink-0">
-                                                    <svg className="pc-icon text-primary">
-                                                        <use xlinkHref="#custom-document-text"></use>
-                                                    </svg>
-                                                </div>
-                                                <div className="flex-grow-1 ms-3">
-                                                    <span className="float-end text-sm text-muted">2 hour ago</span>
-                                                    <h5 className="text-body mb-2">Forms</h5>
-                                                    <p className="mb-0">
-                                                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                                        make a type
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card mb-2">
-                                        <div className="card-body">
-                                            <div className="d-flex">
-                                                <div className="flex-shrink-0">
-                                                    <svg className="pc-icon text-primary">
-                                                        <use xlinkHref="#custom-user-bold"></use>
-                                                    </svg>
-                                                </div>
-                                                <div className="flex-grow-1 ms-3">
-                                                    <span className="float-end text-sm text-muted">12 hour ago</span>
-                                                    <h5 className="text-body mb-2">Challenge invitation</h5>
-                                                    <p className="mb-2">
-                                                        <span className="text-dark">Jonny aber</span> invites to join the challenge
-                                                    </p>
-                                                    <button className="btn btn-sm btn-outline-secondary me-2">Decline</button>
-                                                    <button className="btn btn-sm btn-primary">Accept</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card mb-2">
-                                        <div className="card-body">
-                                            <div className="d-flex">
-                                                <div className="flex-shrink-0">
-                                                    <svg className="pc-icon text-primary">
-                                                        <use xlinkHref="#custom-security-safe"></use>
-                                                    </svg>
-                                                </div>
-                                                <div className="flex-grow-1 ms-3">
-                                                    <span className="float-end text-sm text-muted">5 hour ago</span>
-                                                    <h5 className="text-body mb-2">Security</h5>
-                                                    <p className="mb-0">
-                                                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                                        make a type
-                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -283,58 +222,7 @@ function Header() {
                                             </span>
                                         </a>
                                         <hr className="border-secondary border-opacity-50" />
-                                        <p className="text-span">Team</p>
-                                        <a href="#!" className="dropdown-item">
-                                            <span>
-                                                <svg className="pc-icon text-muted me-2">
-                                                    <use xlinkHref="#custom-profile-2user-outline"></use>
-                                                </svg>
-                                                <span>UI Design team</span>
-                                            </span>
-                                            <div className="user-group">
-                                                <img src="../assets/images/user/avatar-1.jpg" alt="" className="avtar" />
-                                                <span className="avtar bg-danger text-white">K</span>
-                                                <span className="avtar bg-success text-white">
-                                                    <svg className="pc-icon m-0">
-                                                        <use xlinkHref="#custom-user"></use>
-                                                    </svg>
-                                                </span>
-                                                <span className="avtar bg-light-primary text-primary">+2</span>
-                                            </div>
-                                        </a>
-                                        <a href="#!" className="dropdown-item">
-                                            <span>
-                                                <svg className="pc-icon text-muted me-2">
-                                                    <use xlinkHref="#custom-profile-2user-outline"></use>
-                                                </svg>
-                                                <span>Friends Groups</span>
-                                            </span>
-                                            <div className="user-group">
-                                                <img src="../assets/images/user/avatar-1.jpg" alt="" className="avtar" />
-                                                <span className="avtar bg-danger text-white">K</span>
-                                                <span className="avtar bg-success text-white">
-                                                    <svg className="pc-icon m-0">
-                                                        <use xlinkHref="#custom-user"></use>
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                        </a>
-                                        <a href="#!" className="dropdown-item">
-                                            <span>
-                                                <svg className="pc-icon text-muted me-2">
-                                                    <use xlinkHref="#custom-add-outline"></use>
-                                                </svg>
-                                                <span>Add new</span>
-                                            </span>
-                                            <div className="user-group">
-                                                <span className="avtar bg-primary text-white">
-                                                    <svg className="pc-icon m-0">
-                                                        <use xlinkHref="#custom-add-outline"></use>
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                        </a>
-                                        <hr className="border-secondary border-opacity-50" />
+
                                         <div className="d-grid mb-3">
                                             <button className="btn btn-primary">
                                                 <svg className="pc-icon me-2">
@@ -342,27 +230,6 @@ function Header() {
                                                 </svg>
                                                 Logout
                                             </button>
-                                        </div>
-                                        <div className="card border-0 shadow-none drp-upgrade-card mb-0" style={{ backgroundImage: "url(../assets/images/layout/img-profile-card.jpg)" }}>
-                                            <div className="card-body">
-                                                <div className="user-group">
-                                                    <img src="../assets/images/user/avatar-1.jpg" alt="" className="avtar" />
-                                                    <img src="../assets/images/user/avatar-2.jpg" alt="" className="avtar" />
-                                                    <img src="../assets/images/user/avatar-3.jpg" alt="" className="avtar" />
-                                                    <img src="../assets/images/user/avatar-4.jpg" alt="" className="avtar" />
-                                                    <img src="../assets/images/user/avatar-5.jpg" alt="" className="avtar" />
-                                                    <span className="avtar bg-light-primary text-primary">+20</span>
-                                                </div>
-                                                <h3 className="my-3 text-dark">
-                                                    245.3k <small className="text-muted">Followers</small>
-                                                </h3>
-                                                <div className="btn btn btn-warning">
-                                                    <svg className="pc-icon me-2">
-                                                        <use xlinkHref="#custom-logout-1-outline"></use>
-                                                    </svg>
-                                                    Upgrade to Business
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
