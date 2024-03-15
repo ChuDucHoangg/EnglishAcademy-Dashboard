@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Sidebar() {
     return (
@@ -54,134 +54,134 @@ function Sidebar() {
                             <label>Dashboard</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/" className="pc-link">
+                            <NavLink to="/" className="pc-link">
                                 <span className="pc-micon">
                                     <svg className="pc-icon">
                                         <use xlinkHref="#custom-status-up"></use>
                                     </svg>
                                 </span>
                                 <span className="pc-mtext">Dashboard</span>
-                            </Link>
+                            </NavLink>
                         </li>
 
                         <li className="pc-item pc-caption">
                             <label>Course & Lesson</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/course" className="pc-link">
+                            <NavLink to="/course" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-book-reader"></i>
                                 </span>
                                 <span className="pc-mtext">Course</span>
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/lesson" className="pc-link">
+                            <NavLink to="/lesson" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-book-open"></i>
                                 </span>
                                 <span className="pc-mtext">Lesson</span>
-                            </Link>
+                            </NavLink>
                         </li>
 
                         <li className="pc-item pc-caption">
                             <label>Exam & Test</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/exam" className="pc-link">
+                            <NavLink to="/exam" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-scroll"></i>
                                 </span>
                                 <span className="pc-mtext">Exam</span>
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/test" className="pc-link">
+                            <NavLink to="/test" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-edit"></i>
                                 </span>
                                 <span className="pc-mtext">Test</span>
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/entrance-test" className="pc-link">
+                            <NavLink to="/entrance-test" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-inbox"></i>
                                 </span>
                                 <span className="pc-mtext">Entrance Test</span>
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/question" className="pc-link">
+                            <NavLink to="/question" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-info-circle"></i>
                                 </span>
                                 <span className="pc-mtext">Question</span>
-                            </Link>
+                            </NavLink>
                         </li>
 
                         <li className="pc-item pc-caption">
                             <label>Timetable</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/timetable" className="pc-link">
+                            <NavLink to="/timetable" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-calendar-alt"></i>
                                 </span>
                                 <span className="pc-mtext">Timetable</span>
-                            </Link>
+                            </NavLink>
                         </li>
 
                         <li className="pc-item pc-caption">
                             <label>Class & Room</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/class" className="pc-link">
+                            <NavLink to="/class" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-chalkboard-teacher"></i>
                                 </span>
                                 <span className="pc-mtext">Class</span>
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/classroom" className="pc-link">
+                            <NavLink to="/classroom" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-door-open"></i>
                                 </span>
                                 <span className="pc-mtext">Classroom</span>
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/device" className="pc-link">
+                            <NavLink to="/device" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-network-wired"></i>
                                 </span>
                                 <span className="pc-mtext">Device</span>
-                            </Link>
+                            </NavLink>
                         </li>
 
                         <li className="pc-item pc-caption">
                             <label>Student</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/student" className="pc-link">
+                            <NavLink to="/student" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-user-graduate"></i>
                                 </span>
                                 <span className="pc-mtext">Student</span>
-                            </Link>
+                            </NavLink>
                         </li>
 
                         <li className="pc-item pc-caption">
                             <label>Staff</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <Link to="/staff" className="pc-link">
+                            <NavLink to="/staff" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-users"></i>
                                 </span>
                                 <span className="pc-mtext">Staff</span>
-                            </Link>
+                            </NavLink>
                         </li>
 
                         <li className="pc-item pc-caption">
@@ -191,14 +191,14 @@ function Sidebar() {
                             </svg>
                         </li>
                         <li className="pc-item">
-                            <Link to="/profile" className="pc-link">
+                            <NavLink to="/profile" className="pc-link">
                                 <span className="pc-micon">
                                     <svg className="pc-icon">
                                         <use xlinkHref="#custom-user-square"></use>
                                     </svg>
                                 </span>
                                 <span className="pc-mtext">Profile</span>
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
                 </div>

@@ -1,9 +1,9 @@
+import { Helmet } from "react-helmet";
+
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
-import Setting from "./Setting";
 import Breadcrumb from "./Breadcrumb";
-import { Helmet } from "react-helmet";
 function Layout({ children, title }) {
     return (
         <>
@@ -19,7 +19,6 @@ function Layout({ children, title }) {
                 </div>
             </div>
             <Footer />
-            <Setting />
         </>
     );
 }
