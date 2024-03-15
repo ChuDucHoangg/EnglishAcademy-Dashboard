@@ -20487,6 +20487,10 @@ pre[class*="language-"] > code {
 .pc-sidebar .pc-link:hover {
     text-decoration: none;
 }
+.pc-sidebar .pc-link.active::after{
+    background-color: var(--pc-sidebar-color);
+    opacity: 0.1;
+}
 .pc-sidebar .pc-navbar > .pc-item {
     margin: 0 10px;
 }
@@ -30737,6 +30741,11 @@ div.dataTables_wrapper div.dt-row {
     right: 15px;
     transform: translateY(-50%);
     cursor: pointer;
+}
+
+.btn-cs {
+    border: none;
+    background: transparent;
 }
 
 /**  =====================

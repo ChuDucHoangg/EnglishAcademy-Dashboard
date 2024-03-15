@@ -1,18 +1,45 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 function Header() {
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
+    const [closeSidebar, setCloseSidebar] = useState(false);
+
+    useEffect(() => {
+        const body = document.querySelector("body");
+        const menu = document.querySelector("nav");
+
+        body.setAttribute("data-pc-theme", isDarkTheme ? "dark" : "light");
+
+        if (closeSidebar) {
+            menu.classList.add("pc-sidebar-hide");
+        } else {
+            menu.classList.remove("pc-sidebar-hide");
+        }
+    }, [isDarkTheme, closeSidebar]);
+
+    const toggleTheme = () => {
+        setIsDarkTheme((prevTheme) => !prevTheme);
+    };
+
+    const toggleMenu = () => {
+        setCloseSidebar((prevMenu) => !prevMenu);
+    };
+
     return (
         <header className="pc-header">
             <div className="header-wrapper">
                 <div className="me-auto pc-mob-drp">
                     <ul className="list-unstyled">
                         <li className="pc-h-item pc-sidebar-collapse">
-                            <a href="#!" className="pc-head-link ms-0" id="sidebar-hide">
+                            <button onClick={toggleMenu} className="btn-cs pc-head-link ms-0">
                                 <i className="ti ti-menu-2"></i>
-                            </a>
+                            </button>
                         </li>
                         <li className="pc-h-item pc-sidebar-popup">
-                            <a href="#!" className="pc-head-link ms-0" id="mobile-collapse">
+                            <button onClick={toggleMenu} className="btn-cs pc-head-link ms-0">
                                 <i className="ti ti-menu-2"></i>
-                            </a>
+                            </button>
                         </li>
                         <li className="dropdown pc-h-item">
                             <a className="pc-head-link dropdown-toggle arrow-none m-0 trig-drp-search" data-bs-toggle="dropdown" href="#!" role="button" aria-haspopup="false" aria-expanded="false">
@@ -32,31 +59,11 @@ function Header() {
                 <div className="ms-auto">
                     <ul className="list-unstyled">
                         <li className="dropdown pc-h-item">
-                            <a className="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#!" role="button" aria-haspopup="false" aria-expanded="false">
+                            <button className="pc-head-link dropdown-toggle arrow-none me-0 btn-cs" onClick={toggleTheme}>
                                 <svg className="pc-icon">
-                                    <use xlinkHref="#custom-sun-1"></use>
+                                    <use xlinkHref={isDarkTheme ? "#custom-sun-1" : "#custom-moon"}></use>
                                 </svg>
-                            </a>
-                            <div className="dropdown-menu dropdown-menu-end pc-h-dropdown">
-                                <a href="#!" className="dropdown-item" onclick="layout_change('dark')">
-                                    <svg className="pc-icon">
-                                        <use xlinkHref="#custom-moon"></use>
-                                    </svg>
-                                    <span>Dark</span>
-                                </a>
-                                <a href="#!" className="dropdown-item" onclick="layout_change('light')">
-                                    <svg className="pc-icon">
-                                        <use xlinkHref="#custom-sun-1"></use>
-                                    </svg>
-                                    <span>Light</span>
-                                </a>
-                                <a href="#!" className="dropdown-item" onclick="layout_change_default()">
-                                    <svg className="pc-icon">
-                                        <use xlinkHref="#custom-setting-2"></use>
-                                    </svg>
-                                    <span>Default</span>
-                                </a>
-                            </div>
+                            </button>
                         </li>
                         <li className="dropdown pc-h-item">
                             <a className="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#!" role="button" aria-haspopup="false" aria-expanded="false">
@@ -65,10 +72,10 @@ function Header() {
                                 </svg>
                             </a>
                             <div className="dropdown-menu dropdown-menu-end pc-h-dropdown">
-                                <a href="#!" className="dropdown-item">
+                                <Link to="/profile" className="dropdown-item">
                                     <i className="ti ti-user"></i>
                                     <span>My Account</span>
-                                </a>
+                                </Link>
                                 <a href="#!" className="dropdown-item">
                                     <i className="ti ti-settings"></i>
                                     <span>Settings</span>
