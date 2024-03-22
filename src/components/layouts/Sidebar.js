@@ -68,11 +68,11 @@ function Sidebar() {
                             <label>Course & Lesson</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/course" className="pc-link">
+                            <NavLink to="/course-online" className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-book-reader"></i>
                                 </span>
-                                <span className="pc-mtext">Course</span>
+                                <span className="pc-mtext">Course Online</span>
                             </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
