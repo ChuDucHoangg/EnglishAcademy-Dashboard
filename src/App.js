@@ -40,11 +40,11 @@ function App() {
                 <Route path="/" element={<Dashboard />} />
                 {/* ===== End Dashboard ===== */}
 
-                {/* ===== Start Course ===== */}
-                <Route path="/course" element={<CourseList />} />
-                <Route path="/course-create" element={<CourseCreate />} />
-                <Route path="/course-edit" element={<CourseEdit />} />
-                {/* ===== End Course ===== */}
+                {/* ===== Start Course Online ===== */}
+                <Route path="/course-online" element={<CourseList />} />
+                <Route path="/course-online-create" element={<CourseCreate />} />
+                <Route path="/course-online-edit" element={<CourseEdit />} />
+                {/* ===== End Course Online ===== */}
 
                 {/* ===== Start Lesson ===== */}
                 <Route path="/lesson" element={<Lesson />} />
