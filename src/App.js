@@ -31,6 +31,7 @@ import Question from "./components/pages/Question";
 import EntranceTest from "./components/pages/Test/EntranceTest";
 import Classroom from "./components/pages/Classroom";
 import Device from "./components/pages/Device";
+import CourseDetail from "./components/pages/Course/CourseDetail";
 
 function App() {
     return (
@@ -42,8 +43,9 @@ function App() {
 
                 {/* ===== Start Course Online ===== */}
                 <Route path="/course-online" element={<CourseList />} />
+                <Route path="/course-online-detail/:slug" element={<CourseDetail />} />
                 <Route path="/course-online-create" element={<CourseCreate />} />
-                <Route path="/course-online-edit" element={<CourseEdit />} />
+                <Route path="/course-online-edit/:slug" element={<CourseEdit />} />
                 {/* ===== End Course Online ===== */}
 
                 {/* ===== Start Lesson ===== */}

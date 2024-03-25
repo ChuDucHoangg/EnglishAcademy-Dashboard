@@ -1,25 +1,101 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Layout from "../../layouts";
 import { useEffect, useState } from "react";
 import url from "../../../services/url";
 import api from "../../../services/api";
 import { format } from "date-fns";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 function CourseList() {
     const [error, setError] = useState(null);
     const [courses, setCourses] = useState([]);
+    const [isDeleteVisible, setDeleteVisible] = useState(false);
+    const [tbodyCheckboxes, setTbodyCheckboxes] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
 
-    //show list course online
+    //show list data
     useEffect(() => {
         const loadCourses = async () => {
             try {
                 const response = await api.get(url.COURSE.LIST);
                 setCourses(response.data.data);
-                console.log(response.data.data);
+                setTbodyCheckboxes(Array.from({ length: response.data.data.length }).fill(false));
+                // console.log(response.data.data);
             } catch (error) {}
         };
         loadCourses();
     }, []);
+
+    //hanlde check all and show trash
+    const handleSelectAll = () => {
+        const updatedCheckboxes = !selectAll ? Array.from({ length: courses.length }).fill(true) : Array.from({ length: courses.length }).fill(false);
+        setTbodyCheckboxes(updatedCheckboxes);
+        setSelectAll(!selectAll);
+        const checkboxes = document.querySelectorAll('#orders input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = !selectAll;
+        });
+        setDeleteVisible(!selectAll);
+    };
+    const handleCheckboxChange = () => {
+        const checkboxes = document.querySelectorAll('#orders input[type="checkbox"]');
+        const selectedCheckboxes = Array.from(checkboxes).filter((checkbox) => checkbox.checked);
+        setDeleteVisible(selectedCheckboxes.length > 0);
+    };
+    const handleTbodyCheckboxChange = (index) => {
+        const updatedTbodyCheckboxes = [...tbodyCheckboxes];
+        updatedTbodyCheckboxes[index] = !updatedTbodyCheckboxes[index];
+        setTbodyCheckboxes(updatedTbodyCheckboxes);
+        const isDeleteVisible = selectAll || updatedTbodyCheckboxes.some((checkbox) => checkbox);
+        setDeleteVisible(isDeleteVisible);
+    };
+
+    //hanlde delete data
+    const handleDeleteData = async () => {
+        const selectedDataIds = [];
+
+        // get id of data
+        courses.forEach((item, index) => {
+            if (selectAll || tbodyCheckboxes[index]) {
+                selectedDataIds.push(item.id);
+            }
+        });
+
+        const isConfirmed = await Swal.fire({
+            title: "Are you sure?",
+            text: "You want to delete selected data?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "I'm sure",
+        });
+        if (isConfirmed.isConfirmed) {
+            try {
+                const deleteResponse = await api.delete(url.COURSE.DELETE, {
+                    data: selectedDataIds,
+                });
+                if (deleteResponse.status === 200) {
+                    setCourses((prevDatas) => prevDatas.filter((data) => !selectedDataIds.includes(data.id)));
+                    setTbodyCheckboxes((prevCheckboxes) => prevCheckboxes.filter((_, index) => !selectedDataIds.includes(courses[index].id)));
+                    setDeleteVisible(false);
+                    toast.success("Delete Datas Successfully.", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
+                    });
+                    // console.log("data:", deleteResponse.data);
+                } else {
+                }
+            } catch (error) {
+                toast.error("Failed to delete data!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                console.error("Failed to delete promotions:", error);
+            }
+        }
+    };
 
     //search, filter
     const [searchName, setSearchName] = useState("");
@@ -80,21 +156,50 @@ function CourseList() {
                             </div>
                         </div>
                     </div>
+                    <div className="row" style={{ marginTop: "20px" }}>
+                        <div className="col-lg-5"></div>
+                        <div className="col-lg-1 text-end">
+                            <NavLink onClick={handleDeleteData}>
+                                <button type="button" className={`btn btn-danger ${isDeleteVisible ? "" : "d-none"}`}>
+                                    <i className="ti ti-trash"></i>
+                                </button>
+                            </NavLink>
+                        </div>
+                        <div className="col-lg-2 text-end">
+                            <NavLink to="/course-online-delete-at">
+                                <button type="button" className="btn btn-warning d-flex align-items-center justify-content-center">
+                                    <i className="ti ti-trash"></i>
+                                    Deleted List
+                                </button>
+                            </NavLink>
+                        </div>
+                        <div className="col-lg-4 text-end">
+                            <Link to="/course-online-create" className="btn btn-primary d-flex align-items-center justify-content-center">
+                                <i className="ti ti-plus"></i> Add New Course Online
+                            </Link>
+                        </div>
+                    </div>
                     <div className="card-body table-border-style">
                         <div className="table-responsive">
                             <div className="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-                                <div className="datatable-top">
-                                    <div className="datatable-dropdown">
-                                        <Link to="/course-online-create" className="btn btn-primary d-flex align-items-center justify-content-center">
-                                            <i className="ti ti-plus"></i> Add New Course Online
-                                        </Link>
-                                    </div>
-                                </div>
                                 <div className="datatable-container">
                                     <table className="table table-hover datatable-table" id="pc-dt-simple">
                                         <thead>
                                             <tr>
-                                                <th data-sortable="true">No.</th>
+                                                <th data-sortable="true">
+                                                    {" "}
+                                                    <div className="form-check custom-checkbox">
+                                                        <input
+                                                            type="checkbox"
+                                                            className="form-check-input"
+                                                            onChange={() => {
+                                                                handleSelectAll();
+                                                                handleCheckboxChange();
+                                                            }}
+                                                            checked={selectAll}
+                                                        />
+                                                    </div>
+                                                </th>
                                                 <th data-sortable="true">Course Name</th>
                                                 <th data-sortable="true">Price</th>
                                                 <th data-sortable="true">Language</th>
@@ -106,11 +211,21 @@ function CourseList() {
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="orders">
                                             {currentContents.map((item, index) => {
                                                 return (
                                                     <tr data-index="0">
-                                                        <td>{index + 1}</td>
+                                                        <td>
+                                                            {" "}
+                                                            <div className="form-check custom-checkbox checkbox-primary">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    className="form-check-input"
+                                                                    onChange={() => handleTbodyCheckboxChange(index)}
+                                                                    checked={tbodyCheckboxes[index]}
+                                                                />
+                                                            </div>
+                                                        </td>
                                                         <td>
                                                             <div className="row">
                                                                 <div className="col-auto">
@@ -130,18 +245,13 @@ function CourseList() {
                                                         <td className="text-center">
                                                             <ul className="list-inline me-auto mb-0">
                                                                 <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="View" data-bs-original-title="View">
-                                                                    <a href="#!" className="avtar avtar-xs btn-link-secondary btn-pc-default">
+                                                                    <Link to={`/course-online-detail/${item.slug}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
                                                                         <i className="ti ti-eye f-18"></i>
-                                                                    </a>
+                                                                    </Link>
                                                                 </li>
-                                                                <Link to="/staff-edit" className="avtar avtar-xs btn-link-success btn-pc-default">
+                                                                <Link to={`/course-online-edit/${item.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
                                                                     <i className="ti ti-edit-circle f-18"></i>
                                                                 </Link>
-                                                                <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Delete" data-bs-original-title="Delete">
-                                                                    <a href="#!" className="avtar avtar-xs btn-link-danger btn-pc-default">
-                                                                        <i className="ti ti-trash f-18"></i>
-                                                                    </a>
-                                                                </li>
                                                             </ul>
                                                         </td>
                                                     </tr>
