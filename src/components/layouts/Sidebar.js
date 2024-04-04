@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import config from "../../config/index";
 
 function Sidebar() {
     return (
@@ -28,7 +29,7 @@ function Sidebar() {
                             </div>
                             <div className="collapse pc-user-links" id="pc_sidebar_userlink">
                                 <div className="pt-3">
-                                    <Link to="profile">
+                                    <Link to={config.routes.profile}>
                                         <i className="ti ti-user"></i>
                                         <span>My Account</span>
                                     </Link>
@@ -54,7 +55,7 @@ function Sidebar() {
                             <label>Dashboard</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/" className="pc-link">
+                            <NavLink to={config.routes.dashboard} className="pc-link">
                                 <span className="pc-micon">
                                     <svg className="pc-icon">
                                         <use xlinkHref="#custom-status-up"></use>
@@ -68,7 +69,7 @@ function Sidebar() {
                             <label>Course & Lesson</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/course-online" className="pc-link">
+                            <NavLink to={config.routes.course_online} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-book-reader"></i>
                                 </span>
@@ -76,7 +77,7 @@ function Sidebar() {
                             </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/lesson" className="pc-link">
+                            <NavLink to={config.routes.lesson_online} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-book-open"></i>
                                 </span>
@@ -88,7 +89,7 @@ function Sidebar() {
                             <label>Exam & Test</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/exam" className="pc-link">
+                            <NavLink to={config.routes.exam_online} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-scroll"></i>
                                 </span>
@@ -96,7 +97,7 @@ function Sidebar() {
                             </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/test" className="pc-link">
+                            <NavLink to={config.routes.test_online} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-edit"></i>
                                 </span>
@@ -104,7 +105,7 @@ function Sidebar() {
                             </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/entrance-test" className="pc-link">
+                            <NavLink to={config.routes.entrance_test} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-inbox"></i>
                                 </span>
@@ -112,7 +113,7 @@ function Sidebar() {
                             </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/question" className="pc-link">
+                            <NavLink to={config.routes.question_online} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-info-circle"></i>
                                 </span>
@@ -124,7 +125,7 @@ function Sidebar() {
                             <label>Timetable</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/timetable" className="pc-link">
+                            <NavLink to={config.routes.timetable} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-calendar-alt"></i>
                                 </span>
@@ -136,7 +137,7 @@ function Sidebar() {
                             <label>Class & Room</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/class" className="pc-link">
+                            <NavLink to={config.routes.class_list} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-chalkboard-teacher"></i>
                                 </span>
@@ -144,7 +145,7 @@ function Sidebar() {
                             </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/classroom" className="pc-link">
+                            <NavLink to={config.routes.classroom} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-door-open"></i>
                                 </span>
@@ -152,7 +153,7 @@ function Sidebar() {
                             </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/device" className="pc-link">
+                            <NavLink to={config.routes.device} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-network-wired"></i>
                                 </span>
@@ -164,7 +165,7 @@ function Sidebar() {
                             <label>Student</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/student" className="pc-link">
+                            <NavLink to={config.routes.student_list} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-user-graduate"></i>
                                 </span>
@@ -176,7 +177,7 @@ function Sidebar() {
                             <label>Staff</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to="/staff" className="pc-link">
+                            <NavLink to={config.routes.staff_list} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-users"></i>
                                 </span>
@@ -191,7 +192,7 @@ function Sidebar() {
                             </svg>
                         </li>
                         <li className="pc-item">
-                            <NavLink to="/profile" className="pc-link">
+                            <NavLink to={config.routes.profile} className="pc-link">
                                 <span className="pc-micon">
                                     <svg className="pc-icon">
                                         <use xlinkHref="#custom-user-square"></use>
