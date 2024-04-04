@@ -3,12 +3,11 @@ import Layout from "../../layouts";
 import { useEffect, useState } from "react";
 import url from "../../../services/url";
 import api from "../../../services/api";
-import { format } from "date-fns";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import config from "../../../config";
 
 function CourseList() {
-    const [error, setError] = useState(null);
     const [courses, setCourses] = useState([]);
     const [isDeleteVisible, setDeleteVisible] = useState(false);
     const [tbodyCheckboxes, setTbodyCheckboxes] = useState([]);
@@ -165,18 +164,18 @@ function CourseList() {
                                 </button>
                             </NavLink>
                         </div>
-                        <div className="col-lg-2 text-end">
+                        <div className="col-lg-4 text-end">
+                            <Link to={config.routes.course_online_create} className="btn btn-primary d-flex align-items-center justify-content-center">
+                                <i className="ti ti-plus"></i> Add New Course Online
+                            </Link>
+                        </div>
+                        <div className="col-lg-2">
                             <NavLink to="/course-online-delete-at">
                                 <button type="button" className="btn btn-warning d-flex align-items-center justify-content-center">
                                     <i className="ti ti-trash"></i>
                                     Deleted List
                                 </button>
                             </NavLink>
-                        </div>
-                        <div className="col-lg-4 text-end">
-                            <Link to="/course-online-create" className="btn btn-primary d-flex align-items-center justify-content-center">
-                                <i className="ti ti-plus"></i> Add New Course Online
-                            </Link>
                         </div>
                     </div>
                     <div className="card-body table-border-style">
@@ -214,7 +213,7 @@ function CourseList() {
                                         <tbody id="orders">
                                             {currentContents.map((item, index) => {
                                                 return (
-                                                    <tr data-index="0">
+                                                    <tr data-index="0" key={index}>
                                                         <td>
                                                             {" "}
                                                             <div className="form-check custom-checkbox checkbox-primary">
@@ -229,7 +228,7 @@ function CourseList() {
                                                         <td>
                                                             <div className="row">
                                                                 <div className="col-auto">
-                                                                    <img src={item.image} alt="" className="wid-40 rounded-circle" />
+                                                                    <img src={item.image} alt="" className="rounded-circle object-fit-cover" width={40} height={40} />
                                                                 </div>
                                                                 <div className="col">
                                                                     <h6 className="mb-0">{item.name}</h6>
@@ -245,11 +244,11 @@ function CourseList() {
                                                         <td className="text-center">
                                                             <ul className="list-inline me-auto mb-0">
                                                                 <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="View" data-bs-original-title="View">
-                                                                    <Link to={`/course-online-detail/${item.slug}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
+                                                                    <Link to={`/course-online/detail/${item.slug}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
                                                                         <i className="ti ti-eye f-18"></i>
                                                                     </Link>
                                                                 </li>
-                                                                <Link to={`/course-online-edit/${item.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
+                                                                <Link to={`/course-online/edit/${item.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
                                                                     <i className="ti ti-edit-circle f-18"></i>
                                                                 </Link>
                                                             </ul>
@@ -265,21 +264,21 @@ function CourseList() {
                                         <nav>
                                             <ul className="pagination pagination-gutter pagination-primary no-bg">
                                                 <li className={`page-item page-indicator ${currentPage === 1 ? "disabled" : ""}`}>
-                                                    <a className="page-link" href="javascript:void(0)" onClick={handlePrevPage}>
+                                                    <button className="page-link" onClick={handlePrevPage}>
                                                         «
-                                                    </a>
+                                                    </button>
                                                 </li>
                                                 {Array.from({ length: totalPages }).map((_, index) => (
                                                     <li key={index} className={`page-item ${currentPage === index + 1 ? "active" : ""}`}>
-                                                        <a className="page-link" href="javascript:void(0)" onClick={() => handlePageChange(index + 1)}>
+                                                        <button className="page-link" onClick={() => handlePageChange(index + 1)}>
                                                             {index + 1}
-                                                        </a>
+                                                        </button>
                                                     </li>
                                                 ))}
                                                 <li className={`page-item page-indicator ${currentPage === totalPages ? "disabled" : ""}`}>
-                                                    <a className="page-link" href="javascript:void(0)" onClick={handleNextPage}>
+                                                    <button className="page-link" onClick={handleNextPage}>
                                                         »
-                                                    </a>
+                                                    </button>
                                                 </li>
                                             </ul>
                                         </nav>
