@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import config from "../../config";
+import { getDecodedToken, removeAccessToken } from "../../utils/auth";
 
 function Header() {
     const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -24,6 +26,19 @@ function Header() {
 
     const toggleMenu = () => {
         setCloseSidebar((prevMenu) => !prevMenu);
+    };
+
+    const decodeToken = getDecodedToken();
+    let fullName = "";
+    let email = "";
+
+    if (decodeToken && decodeToken.Fullname && decodeToken.Email) {
+        fullName = decodeToken.Fullname;
+        email = decodeToken.Email;
+    }
+
+    const handleLogout = () => {
+        removeAccessToken();
     };
 
     return (
@@ -86,12 +101,12 @@ function Header() {
                                 </a>
                                 <a href="#!" className="dropdown-item">
                                     <i className="ti ti-lock"></i>
-                                    <span>Lock Screen</span>
+                                    <span>Lock Screen aaa</span>
                                 </a>
-                                <a href="#!" className="dropdown-item">
+                                <Link to={config.routes.login} onClick={handleLogout} className="dropdown-item">
                                     <i className="ti ti-power"></i>
                                     <span>Logout</span>
-                                </a>
+                                </Link>
                             </div>
                         </li>
                         <li className="pc-h-item">
@@ -183,8 +198,8 @@ function Header() {
                                                 <img src="../assets/images/user/avatar-2.jpg" alt="" className="user-avtar wid-35" />
                                             </div>
                                             <div className="flex-grow-1 ms-3">
-                                                <h6 className="mb-1">Carson Darrin 🖖</h6>
-                                                <span>carson.darrin@company.io</span>
+                                                <h6 className="mb-1">{fullName} 🖖</h6>
+                                                <span>{email}</span>
                                             </div>
                                         </div>
                                         <hr className="border-secondary border-opacity-50" />
@@ -220,18 +235,18 @@ function Header() {
                                                 <span>Share</span>
                                             </span>
                                         </a>
-                                        <a href="#!" className="dropdown-item">
+                                        {/* <Link to={config.routes.c} className="dropdown-item">
                                             <span>
                                                 <svg className="pc-icon text-muted me-2">
                                                     <use xlinkHref="#custom-lock-outline"></use>
                                                 </svg>
                                                 <span>Change Password</span>
                                             </span>
-                                        </a>
-                                        <hr className="border-secondary border-opacity-50" />
+                                        </Link>
+                                        <hr className="border-secondary border-opacity-50" /> */}
 
                                         <div className="d-grid mb-3">
-                                            <button className="btn btn-primary">
+                                            <button className="btn btn-primary" onClick={handleLogout}>
                                                 <svg className="pc-icon me-2">
                                                     <use xlinkHref="#custom-logout-1-outline"></use>
                                                 </svg>

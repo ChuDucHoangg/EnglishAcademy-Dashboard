@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { setAccessToken } from "../../../utils/auth";
+import api from "../../../services/api";
+import url from "../../../services/url";
 
 function Login() {
+    const navigate = useNavigate();
+
     const [showPassword, setShowPassword] = useState(false);
 
     const [formStaff, setFormStaff] = useState({
@@ -51,6 +56,32 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         if (validateForm()) {
+            try {
+                const loginRequest = await api.post(url.AUTH.LOGIN, formStaff);
+
+                if (loginRequest.status === 200) {
+                    const token = loginRequest.data.token;
+                    setAccessToken(token);
+
+                    const redirectPath = localStorage.getItem("redirect_path");
+                    if (redirectPath) {
+                        navigate(`${redirectPath}`);
+                        localStorage.removeItem("redirect_path");
+                    } else {
+                        navigate("/");
+                    }
+                } else {
+                    setFormErrors({
+                        email: "Invalid email or password.",
+                        password: "Invalid email or password.",
+                    });
+                }
+            } catch (error) {
+                setFormErrors({
+                    email: "Invalid email or password.",
+                    password: "Invalid email or password.",
+                });
+            }
         }
     };
 

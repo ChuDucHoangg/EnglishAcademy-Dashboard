@@ -66,10 +66,15 @@ const privateRoutes = [
     { path: config.routes.staff_create, component: StaffCreate },
     { path: config.routes.staff_edit, component: StaffEdit },
     { path: config.routes.profile, component: ProfileWrap },
-    { path: config.routes.login, component: Login },
-    { path: config.routes.forgot_password, component: ForgotPassword },
-    { path: config.routes.reset_password, component: ResetPassword },
+
     { path: config.routes.not_found, component: NotFound },
 ];
 
+const authenticationRoutes = [
+    { path: config.routes.login, component: Login },
+    { path: config.routes.forgot_password, component: ForgotPassword },
+    { path: config.routes.reset_password, component: ResetPassword },
+];
+
 export { privateRoutes };
+export { authenticationRoutes };

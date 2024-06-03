@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import url from "../../../services/url";
+import api from "../../../services/api";
+import { toast } from "react-toastify";
+import config from "../../../config/index";
 
 function ResetPassword() {
-    // const { resetToken } = useParams();
+    const { resetToken } = useParams();
     const [showPassword, setShowPassword] = useState(false);
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         email: "",
@@ -64,7 +69,22 @@ function ResetPassword() {
 
         if (validateForm()) {
             try {
-            } catch (error) {}
+                const response = await api.post(url.AUTH.RESET_PASSWORD + `/${resetToken}`, formData);
+                if (response.status === 200) {
+                    setTimeout(() => {
+                        toast.success("Password reset successful. Please login again.", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: 5000,
+                        });
+                    }, 1500);
+                    navigate(`${config.routes.login}`);
+                }
+            } catch (error) {
+                toast.error("Error! An error occurred. Please try again later.", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000,
+                });
+            }
         }
     };
     return (
