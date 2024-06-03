@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+import api from "../../../services/api";
+import url from "../../../services/url";
 
 function ForgotPassword() {
     const [formSubmitted, setFormSubmitted] = useState(false);
@@ -46,10 +49,38 @@ function ForgotPassword() {
         if (validateForm()) {
             try {
                 setSubmitting(true);
-            } catch (error) {}
-            // finally {
-            //     setSubmitting(false);
-            // }
+
+                await api.post(url.AUTH.FORGOT_PASSWORD, formData);
+                setTimeout(() => {
+                    setFormSubmitted(true);
+                    setSubmitting(false);
+                    toast.success("Submitted successfully!", {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                }, 1500);
+            } catch (error) {
+                setTimeout(() => {
+                    setFormSubmitted(true);
+                    setSubmitting(false);
+                    toast.success("Submitted successfully!", {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                }, 1500);
+            }
         }
     };
     return (

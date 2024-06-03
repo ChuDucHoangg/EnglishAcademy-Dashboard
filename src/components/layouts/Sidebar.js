@@ -1,12 +1,24 @@
 import { Link, NavLink } from "react-router-dom";
 import config from "../../config/index";
+import { getDecodedToken, removeAccessToken } from "../../utils/auth";
+
+const decodeToken = getDecodedToken();
+let fullName = "";
+
+if (decodeToken && decodeToken.Fullname) {
+    fullName = decodeToken.Fullname;
+}
+
+const handleLogout = () => {
+    removeAccessToken();
+};
 
 function Sidebar() {
     return (
         <nav className="pc-sidebar">
             <div className="navbar-wrapper">
                 <div className="m-header">
-                    <Link to="/" className="b-brand text-primary">
+                    <Link to={config.routes.dashboard} className="b-brand text-primary">
                         <img src="../assets/images/logo.png" alt="" className="img-fluid" />
                     </Link>
                 </div>
@@ -15,10 +27,10 @@ function Sidebar() {
                         <div className="card-body">
                             <div className="d-flex align-items-center">
                                 <div className="flex-shrink-0">
-                                    <img src="../assets/images/user/avatar-1.jpg" alt="" className="user-avtar wid-45 rounded-circle" />
+                                    <img src="../assets/images/user/avatar-2.jpg" alt="" className="user-avtar wid-45 rounded-circle" />
                                 </div>
                                 <div className="flex-grow-1 ms-3 me-2">
-                                    <h6 className="mb-0">Jonh Smith</h6>
+                                    <h6 className="mb-0">{fullName}</h6>
                                     <small>Administrator</small>
                                 </div>
                                 <a className="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse" href="#pc_sidebar_userlink">
@@ -41,10 +53,10 @@ function Sidebar() {
                                         <i className="ti ti-lock"></i>
                                         <span>Lock Screen</span>
                                     </a>
-                                    <a href="#!">
+                                    <Link to={config.routes.login} onClick={handleLogout}>
                                         <i className="ti ti-power"></i>
                                         <span>Logout</span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

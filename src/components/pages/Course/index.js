@@ -6,6 +6,7 @@ import api from "../../../services/api";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import config from "../../../config";
+import { getAccessToken } from "../../../utils/auth";
 
 function CourseList() {
     const [courses, setCourses] = useState([]);
@@ -17,7 +18,7 @@ function CourseList() {
     useEffect(() => {
         const loadCourses = async () => {
             try {
-                const response = await api.get(url.COURSE.LIST);
+                const response = await api.get(url.COURSE.LIST, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
                 setCourses(response.data.data);
                 setTbodyCheckboxes(Array.from({ length: response.data.data.length }).fill(false));
                 // console.log(response.data.data);

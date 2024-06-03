@@ -1,4 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getAccessToken, removeAccessToken } from "../../../utils/auth";
+import api from "../../../services/api";
+import url from "../../../services/url";
+import { toast } from "react-toastify";
 
 function ChangePassword() {
     const [incorrectPassword, setIncorrectPassword] = useState(false);
@@ -6,7 +11,7 @@ function ChangePassword() {
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         currentPassword: "",
@@ -41,44 +46,6 @@ function ChangePassword() {
         setFormData({ ...formData, [name]: value });
         setFormErrors({ ...formErrors, [name]: "" });
     };
-
-    // const validateForm = () => {
-    //     let valid = true;
-    //     const newErrors = {};
-
-    //     if (!formData.currentPassword) {
-    //         newErrors.currentPassword = "Please enter your password.";
-    //         valid = false;
-    //     } else if (formData.currentPassword.length < 6) {
-    //         newErrors.currentPassword = "Password must be at least 6 characters.";
-    //         valid = false;
-    //     } else if (formData.currentPassword.length > 50) {
-    //         newErrors.currentPassword = "Password must be less than 50 characters.";
-    //         valid = false;
-    //     }
-
-    //     if (!formData.newPassword) {
-    //         newErrors.newPassword = "Please enter a new password.";
-    //         valid = false;
-    //     } else if (formData.newPassword.length < 6) {
-    //         newErrors.newPassword = "New password must be at least 6 characters.";
-    //         valid = false;
-    //     } else if (formData.newPassword.length > 50) {
-    //         newErrors.newPassword = "New password must be less than 50 characters.";
-    //         valid = false;
-    //     }
-
-    //     if (!formData.confirmPassword) {
-    //         newErrors.confirmPassword = "Please confirm your password.";
-    //         valid = false;
-    //     } else if (formData.confirmPassword !== formData.newPassword) {
-    //         newErrors.confirmPassword = "Passwords do not match.";
-    //         valid = false;
-    //     }
-
-    //     setFormErrors(newErrors);
-    //     return valid;
-    // };
 
     const validatePassword = (password) => {
         const eightCharacters = /.{8,}/;
@@ -148,6 +115,36 @@ function ChangePassword() {
         e.preventDefault();
 
         if (validateForm()) {
+            try {
+                const passwordResponse = await api.post(url.AUTH.CHANGE_PASSWORD, formData, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${getAccessToken()}`,
+                    },
+                });
+
+                if (passwordResponse.status === 200) {
+                    removeAccessToken();
+
+                    navigate("/login");
+
+                    setTimeout(() => {
+                        toast.success("Password changed successfully. Please login again!", {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: 2000,
+                        });
+                    }, 1500);
+                }
+            } catch (error) {
+                if (error.response && error.response.status === 400) {
+                    setIncorrectPassword(true);
+                } else {
+                    toast.error("An error occurred while changing the password.", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 5000,
+                    });
+                }
+            }
         }
     };
 
