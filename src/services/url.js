@@ -14,5 +14,9 @@ const url = {
         FORGOT_PASSWORD: "auth/user/forgot-password",
         RESET_PASSWORD: "auth/user/reset-password",
     },
+
+    TUTOR: {
+        BOOKINGS: "any/booking",
+    },
 };
 export default url;
