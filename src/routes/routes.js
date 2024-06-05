@@ -33,6 +33,7 @@ import Login from "../components/pages/Auth/Login";
 import ForgotPassword from "../components/pages/Auth/ForgotPassword";
 import ResetPassword from "../components/pages/Auth/ResetPassword";
 import NotFound from "../components/pages/Other/NotFound";
+import BookingList from "../components/pages/Tutor/Booking/BookingList";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
@@ -66,6 +67,8 @@ const privateRoutes = [
     { path: config.routes.staff_create, component: StaffCreate },
     { path: config.routes.staff_edit, component: StaffEdit },
     { path: config.routes.profile, component: ProfileWrap },
+
+    { path: config.routes.tutor_booking_list, component: BookingList },
 
     { path: config.routes.not_found, component: NotFound },
 ];

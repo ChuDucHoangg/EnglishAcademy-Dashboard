@@ -66,6 +66,10 @@ const routes = {
     reset_password: "/reset-password/:resetToken",
     // End routes Authentication
 
+    // Start routes Tutor
+    tutor_booking_list: "/tutor/bookings",
+    // End routes Tutor
+
     // Start routes Other
     not_found: "*",
     // End routes Other

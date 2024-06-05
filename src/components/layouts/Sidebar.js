@@ -146,6 +146,18 @@ function Sidebar() {
                         </li>
 
                         <li className="pc-item pc-caption">
+                            <label>Tutor</label>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
+                            <NavLink to={config.routes.tutor_booking_list} className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-calendar-alt"></i>
+                                </span>
+                                <span className="pc-mtext">Bookings</span>
+                            </NavLink>
+                        </li>
+
+                        <li className="pc-item pc-caption">
                             <label>Class & Room</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
