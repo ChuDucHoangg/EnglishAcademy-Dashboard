@@ -34,6 +34,8 @@ import ForgotPassword from "../components/pages/Auth/ForgotPassword";
 import ResetPassword from "../components/pages/Auth/ResetPassword";
 import NotFound from "../components/pages/Other/NotFound";
 import BookingList from "../components/pages/Tutor/Booking/BookingList";
+import ByPackage from "../components/pages/Tutor/BookingDetail/ByPackage";
+import ByWeeks from "../components/pages/Tutor/BookingDetail/ByWeeks";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
@@ -69,6 +71,8 @@ const privateRoutes = [
     { path: config.routes.profile, component: ProfileWrap },
 
     { path: config.routes.tutor_booking_list, component: BookingList },
+    { path: config.routes.booking_detail_package, component: ByPackage },
+    { path: config.routes.booking_detail_weeks, component: ByWeeks },
 
     { path: config.routes.not_found, component: NotFound },
 ];

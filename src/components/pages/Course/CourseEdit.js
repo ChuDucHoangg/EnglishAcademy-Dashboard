@@ -11,7 +11,7 @@ function CourseEdit() {
     const { slug } = useParams();
     const [data, setData] = useState({});
     const [ImgePreview, setImagePreview] = useState("");
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
@@ -97,12 +97,10 @@ function CourseEdit() {
                 } else {
                 }
             } catch (error) {
-                {
-                    toast.error("Unable to update course, please try again", {
-                        position: toast.POSITION.TOP_RIGHT,
-                        autoClose: 3000,
-                    });
-                }
+                toast.error("Unable to update course, please try again", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
                 // console.error("Error creating test:", error);
                 // console.error("Response data:", error.response.data);
             }
@@ -267,7 +265,7 @@ function CourseEdit() {
                                         <img
                                             id="imgPreview"
                                             src={ImgePreview || data.image}
-                                            alt="Image Preview"
+                                            alt="Preview"
                                             style={{ width: "100%", height: "200px", objectFit: "cover" }}
                                             onError={(e) => console.error("Image Preview Error:", e)}
                                         />

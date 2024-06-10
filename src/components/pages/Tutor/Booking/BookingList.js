@@ -1,20 +1,44 @@
-import { Link } from "react-router-dom";
 import Layout from "../../../layouts/index";
 import useAxiosGet from "../../../../hooks/useAxiosGet";
 import url from "../../../../services/url";
 import { getAccessToken } from "../../../../utils/auth";
-
 import Loading from "../../../layouts/Loading";
+import PackageTable from "../../../views/Tutor/Booking/PackageTable";
+import WeekTable from "../../../views/Tutor/Booking/WeekTable";
+import { Link } from "react-router-dom";
 
 function BookingList() {
+    // Call API
     const bookingData = useAxiosGet({
-        path: url.TUTOR.BOOKINGS,
+        path: url.TUTOR.BOOKING_WAITING,
         headers: {
             Authorization: `Bearer ${getAccessToken()}`,
         },
     });
 
-    const bookings = bookingData.response || [];
+    const bookings = bookingData.response || {};
+
+    // Set color according to status
+    function setColorStatus(status) {
+        let color;
+        switch (status) {
+            case "pending":
+                color = "badge bg-secondary";
+                break;
+            case "confirmed":
+                color = "badge bg-primary";
+                break;
+            case "completed":
+                color = "badge bg-success";
+                break;
+            case "cancelled":
+                color = "badge bg-danger";
+                break;
+            default:
+                break;
+        }
+        return color;
+    }
 
     return (
         <>
@@ -22,69 +46,64 @@ function BookingList() {
             <Layout title="Booking List">
                 <div className="col-xl-12">
                     <div className="card">
-                        <div className="card-header">
-                            <h5>Booking Tutor</h5>
-                        </div>
-                        <div className="card-body table-border-style">
-                            <div className="table-responsive">
-                                <div className="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-                                    {/* <div className="datatable-top">
-                                        <div className="datatable-search">
-                                            <input className="datatable-input" placeholder="Search..." type="search" title="Search within table" aria-controls="pc-dt-dynamic-import" />
-                                        </div>
-                                        <div className="datatable-dropdown">
-                                            <Link to="/lesson-create" className="btn btn-primary d-flex align-items-center justify-content-center">
-                                                <i className="ti ti-plus"></i> Add new 
-                                            </Link>
-                                        </div>
-                                    </div> */}
-                                    <div className="datatable-container">
-                                        <table className="table table-hover datatable-table" id="pc-dt-simple">
-                                            <thead>
-                                                <tr>
-                                                    <th data-sortable="true">No.</th>
-                                                    <th data-sortable="true">Tutor Name</th>
-                                                    <th data-sortable="true">Student Name</th>
-                                                    <th data-sortable="true">Description</th>
-                                                    <th data-sortable="true">Status</th>
-                                                    <th data-sortable="true">Lesson</th>
-                                                    <th data-sortable="true" className="text-center">
-                                                        Actions
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {bookings.map((booking, bookingIndex) => (
-                                                    <tr data-index={bookingIndex} key={bookingIndex}>
-                                                        <td>{bookingIndex + 1}</td>
-                                                        <td>{booking.tutorName}</td>
-                                                        <td>{booking.studentName}</td>
-                                                        <td>{booking.description}</td>
-                                                        <td>{booking.status}</td>
-                                                        <td>{booking.lessonDays}</td>
-                                                        <td className="text-center">
-                                                            <ul className="list-inline me-auto mb-0">
-                                                                <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="View" data-bs-original-title="View">
-                                                                    <Link to={`/tutor/booking-detail/${booking.id}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
-                                                                        <i className="ti ti-eye f-18"></i>
-                                                                    </Link>
-                                                                </li>
-                                                                <Link to="" className="avtar avtar-xs btn-link-success btn-pc-default">
-                                                                    <i className="ti ti-edit-circle f-18"></i>
-                                                                </Link>
-                                                                <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Delete" data-bs-original-title="Delete">
-                                                                    <a href="#!" className="avtar avtar-xs btn-link-danger btn-pc-default">
-                                                                        <i className="ti ti-trash f-18"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
+                        <div className="card-body border-bottom pb-0 table-border-style">
+                            <div className="d-flex align-items-center justify-content-between">
+                                <h5 className="mb-0">Booking List</h5>
+                                <div className="dropdown">
+                                    <a className="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none" href="#!" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i className="ti ti-dots-vertical f-18"></i>
+                                    </a>
+                                    <div className="dropdown-menu dropdown-menu-end">
+                                        <Link to="" className="dropdown-item">
+                                            Today
+                                        </Link>
+                                        <Link to="" className="dropdown-item">
+                                            Weekly
+                                        </Link>
+                                        <Link to="" className="dropdown-item">
+                                            Monthly
+                                        </Link>
                                     </div>
                                 </div>
+                            </div>
+
+                            <ul className="nav nav-tabs analytics-tab" id="myTab" role="tablist">
+                                <li className="nav-item" role="presentation">
+                                    <button
+                                        className="nav-link active"
+                                        id="analytics-tab-1"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#analytics-tab-1-pane"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="analytics-tab-1-pane"
+                                        aria-selected="true"
+                                    >
+                                        Booking by Package
+                                    </button>
+                                </li>
+                                <li className="nav-item" role="presentation">
+                                    <button
+                                        className="nav-link"
+                                        id="analytics-tab-2"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#analytics-tab-2-pane"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="analytics-tab-2-pane"
+                                        aria-selected="false"
+                                        tabIndex="-1"
+                                    >
+                                        Booking by Weeks
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="card-body border-bottom pb-0 table-border-style">
+                            <div className="tab-content" id="myTabContent">
+                                <PackageTable bookings={bookings} setColorStatus={setColorStatus} />
+
+                                <WeekTable bookings={bookings} setColorStatus={setColorStatus} />
                             </div>
                         </div>
                     </div>

@@ -76,7 +76,7 @@ function CourseDetail() {
                             <hr className="my-3 border border-secondary-subtle" />
                             <ul className="list-unstyled mb-0">
                                 <li>
-                                    <a className="d-flex align-items-center text-muted text-hover-primary mb-2" href="https://phoenixcoded.net/" target="_blank">
+                                    <a className="d-flex align-items-center text-muted text-hover-primary mb-2" href="https://phoenixcoded.net/" target="_blank" rel="noreferrer">
                                         <div className="avtar avtar-xs bg-light-secondary flex-shrink-0 me-2"> </div>
                                         <span className="text-truncate w-100">320 learner</span>
                                     </a>
@@ -94,7 +94,7 @@ function CourseDetail() {
                                     </div>
                                 </li>
                                 <li>
-                                    <a className="d-flex align-items-center text-muted text-hover-primary mb-2" href="mailto:demo123@mail.com" target="_blank">
+                                    <a className="d-flex align-items-center text-muted text-hover-primary mb-2" href="mailto:demo123@mail.com" target="_blank" rel="noreferrer">
                                         <div className="avtar avtar-xs bg-light-secondary flex-shrink-0 me-2"></div>
                                         <span className="text-truncate w-100">{data.createdBy} is the creator</span>
                                     </a>
@@ -129,12 +129,12 @@ function CourseDetail() {
                                                     <div className="d-sm-flex align-items-center">
                                                         <ul className="nav nav-tabs profile-tabs" id="myTab" role="tablist">
                                                             <li className="nav-item">
-                                                                <a className="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="#profile-1" role="tab" aria-selected="true">
+                                                                <a className="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="!#profile-1" role="tab" aria-selected="true">
                                                                     <i className="ti ti-user me-2"></i>Lesson
                                                                 </a>
                                                             </li>
                                                             <li className="nav-item">
-                                                                <a className="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="#profile-2" role="tab" aria-selected="true">
+                                                                <a className="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="!#profile-2" role="tab" aria-selected="true">
                                                                     <i className="ti ti-file-text me-2"></i>Quiz
                                                                 </a>
                                                             </li>
@@ -177,7 +177,7 @@ function CourseDetail() {
                                                                         </td>
                                                                         <td>
                                                                             <div className="d-flex align-items-center">
-                                                                                <img src="../assets/images/user/avatar-1.jpg" alt="user-image" className="img-user rounded-circle" />
+                                                                                <img src="../assets/images/user/avatar-1.jpg" alt="user" className="img-user rounded-circle" />
                                                                                 <h6 className="mb-0 ms-2 text-truncate">Barney Thea</h6>
                                                                             </div>
                                                                         </td>
@@ -197,22 +197,22 @@ function CourseDetail() {
                                                                             <div className="mail-buttons">
                                                                                 <ul className="list-inline mb-0">
                                                                                     <li className="list-inline-item">
-                                                                                        <a href="#" className="avtar avtar-s btn-link-secondary">
+                                                                                        <a href="!#" className="avtar avtar-s btn-link-secondary">
                                                                                             <i className="ti ti-archive f-18"></i>
                                                                                         </a>
                                                                                     </li>
                                                                                     <li className="list-inline-item">
-                                                                                        <a href="#" className="avtar avtar-s btn-link-secondary">
+                                                                                        <a href="!#" className="avtar avtar-s btn-link-secondary">
                                                                                             <i className="ti ti-mail f-18"></i>
                                                                                         </a>
                                                                                     </li>
                                                                                     <li className="list-inline-item">
-                                                                                        <a href="#" className="avtar avtar-s btn-link-secondary">
+                                                                                        <a href="!#" className="avtar avtar-s btn-link-secondary">
                                                                                             <i className="ti ti-trash f-18"></i>
                                                                                         </a>
                                                                                     </li>
                                                                                     <li className="list-inline-item">
-                                                                                        <a href="#" className="avtar avtar-s btn-link-secondary">
+                                                                                        <a href="!#" className="avtar avtar-s btn-link-secondary">
                                                                                             <i className="ti ti-eye-off f-18"></i>
                                                                                         </a>
                                                                                     </li>
