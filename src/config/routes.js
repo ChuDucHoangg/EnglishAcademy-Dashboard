@@ -68,6 +68,8 @@ const routes = {
 
     // Start routes Tutor
     tutor_booking_list: "/tutor/bookings",
+    booking_detail_package: "/tutor/booking-package/:bookingId",
+    booking_detail_weeks: "/tutor/booking-weeks/:bookingId",
     // End routes Tutor
 
     // Start routes Other

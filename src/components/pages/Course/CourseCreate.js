@@ -16,7 +16,6 @@ function CourseCreate() {
         trailer: "",
         image_preview: null,
     });
-    const [error, setError] = useState(null);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
@@ -216,7 +215,7 @@ function CourseCreate() {
                                 <div className="col-md-6">
                                     <div className="mb-3">
                                         <label className="text-label form-label">Preview course image</label>
-                                        {form.image_preview && <img src={form.image_preview} alt="Course Image Preview" style={{ width: "100%", height: "200px", objectFit: "cover" }} />}
+                                        {form.image_preview && <img src={form.image_preview} alt="Course Preview" style={{ width: "100%", height: "200px", objectFit: "cover" }} />}
                                     </div>
                                 </div>
 

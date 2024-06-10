@@ -4,17 +4,17 @@ import { decodeToken } from "react-jwt";
 // Store tokens in cookie after logging in
 export const setAccessToken = (token, expiresIn) => {
     const expirationTime = new Date(Date.now() + expiresIn * 1000);
-    Cookies.set("access_token", token, { expires: expirationTime });
+    Cookies.set("access_tokens", token, { expires: expirationTime });
 };
 
 // Get tokens from cookie when needed
 export const getAccessToken = () => {
-    return Cookies.get("access_token");
+    return Cookies.get("access_tokens");
 };
 
 // Remove token from cookie when logging out
 export const removeAccessToken = () => {
-    Cookies.remove("access_token");
+    Cookies.remove("access_tokens");
 };
 
 // Decode tokens
