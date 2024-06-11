@@ -11,6 +11,14 @@ const url = {
         DELETE: "course-online",
     },
 
+    CATEGORY: {
+        LIST: "any/category",
+        DETAIL: "category",
+        CREATE: "category",
+        EDIT: "category",
+        DELETE: "category",
+    },
+
     AUTH: {
         LOGIN: "auth/user/signip",
         CHANGE_PASSWORD: "user/change-password",
