@@ -36,6 +36,9 @@ import NotFound from "../components/pages/Other/NotFound";
 import BookingList from "../components/pages/Tutor/Booking/BookingList";
 import ByPackage from "../components/pages/Tutor/BookingDetail/ByPackage";
 import ByWeeks from "../components/pages/Tutor/BookingDetail/ByWeeks";
+import CategoryList from "../components/pages/Category/CategoryList";
+import CategoryEdit from "../components/pages/Category/CategoryEdit";
+import CategoryCreate from "../components/pages/Category/CategoryCreate";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
@@ -43,12 +46,20 @@ const privateRoutes = [
     { path: config.routes.course_online_detail, component: CourseDetail },
     { path: config.routes.course_online_create, component: CourseCreate },
     { path: config.routes.course_online_edit, component: CourseEdit },
+
+    // Category routes
+    { path: config.routes.category_list, component: CategoryList },
+    { path: config.routes.category_create, component: CategoryCreate },
+    { path: config.routes.category_edit, component: CategoryEdit },
+
     { path: config.routes.lesson_online, component: Lesson },
     { path: config.routes.lesson_online_create, component: LessonCreate },
     { path: config.routes.lesson_online_edit, component: LessonEdit },
+
     { path: config.routes.exam_online, component: ExamList },
     { path: config.routes.exam_online_create, component: ExamCreate },
     { path: config.routes.exam_online_edit, component: ExamEdit },
+
     { path: config.routes.test_online, component: TestList },
     { path: config.routes.test_online_create, component: ExamCreate },
     { path: config.routes.test_online_edit, component: ExamEdit },
@@ -56,15 +67,20 @@ const privateRoutes = [
     { path: config.routes.practical_exam, component: PracticalExam },
     { path: config.routes.entrance_test, component: EntranceTest },
     { path: config.routes.question_online, component: Question },
+
     { path: config.routes.timetable, component: Timetable },
+
     { path: config.routes.class_list, component: ClassList },
     { path: config.routes.class_create, component: ClassCreate },
     { path: config.routes.class_edit, component: ClassEdit },
     { path: config.routes.classroom, component: Classroom },
+
     { path: config.routes.device, component: Device },
+
     { path: config.routes.student_list, component: StudentList },
     { path: config.routes.student_create, component: StudentCreate },
     { path: config.routes.student_edit, component: StudentEdit },
+
     { path: config.routes.staff_list, component: StaffList },
     { path: config.routes.staff_create, component: StaffCreate },
     { path: config.routes.staff_edit, component: StaffEdit },

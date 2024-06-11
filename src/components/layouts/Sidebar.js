@@ -89,6 +89,15 @@ function Sidebar() {
                             </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
+                            <NavLink to={config.routes.category_list} className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-stream"></i>
+                                </span>
+                                <span className="pc-mtext">Categories</span>
+                            </NavLink>
+                        </li>
+
+                        <li className="pc-item pc-hasmenu">
                             <NavLink to={config.routes.lesson_online} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-book-open"></i>

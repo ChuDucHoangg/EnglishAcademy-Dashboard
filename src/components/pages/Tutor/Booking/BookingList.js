@@ -2,10 +2,10 @@ import Layout from "../../../layouts/index";
 import useAxiosGet from "../../../../hooks/useAxiosGet";
 import url from "../../../../services/url";
 import { getAccessToken } from "../../../../utils/auth";
-import Loading from "../../../layouts/Loading";
 import PackageTable from "../../../views/Tutor/Booking/PackageTable";
 import WeekTable from "../../../views/Tutor/Booking/WeekTable";
 import { Link } from "react-router-dom";
+import PencilLoader from "../../../layouts/PencilLoader";
 
 function BookingList() {
     // Call API
@@ -42,7 +42,6 @@ function BookingList() {
 
     return (
         <>
-            {bookingData.loading && <Loading />}
             <Layout title="Booking List">
                 <div className="col-xl-12">
                     <div className="card">
@@ -99,13 +98,18 @@ function BookingList() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="card-body border-bottom pb-0 table-border-style">
-                            <div className="tab-content" id="myTabContent">
-                                <PackageTable bookings={bookings} setColorStatus={setColorStatus} />
 
-                                <WeekTable bookings={bookings} setColorStatus={setColorStatus} />
+                        {bookingData.loading ? (
+                            <PencilLoader />
+                        ) : (
+                            <div className="card-body border-bottom pb-0 table-border-style">
+                                <div className="tab-content" id="myTabContent">
+                                    <PackageTable bookings={bookings} setColorStatus={setColorStatus} />
+
+                                    <WeekTable bookings={bookings} setColorStatus={setColorStatus} />
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </Layout>

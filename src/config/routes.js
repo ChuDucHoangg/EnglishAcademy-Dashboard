@@ -8,6 +8,12 @@ const routes = {
     course_online_edit: "/course-online/edit/:slug",
     // End routes Course Online
 
+    // Start routes Category
+    category_list: "/category-list",
+    category_create: "/category-create",
+    category_edit: "/category-edit/:slug",
+    // End routes Category
+
     // Start routes Lesson
     lesson_online: "/lesson-online",
     lesson_online_create: "/lesson-online/create",
