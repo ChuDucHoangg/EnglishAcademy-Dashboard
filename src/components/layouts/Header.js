@@ -29,13 +29,6 @@ function Header() {
     };
 
     const decodeToken = getDecodedToken();
-    let fullName = "";
-    let email = "";
-
-    if (decodeToken && decodeToken.Fullname && decodeToken.Email) {
-        fullName = decodeToken.Fullname;
-        email = decodeToken.Email;
-    }
 
     const handleLogout = () => {
         removeAccessToken();
@@ -198,8 +191,8 @@ function Header() {
                                                 <img src="../assets/images/user/avatar-2.jpg" alt="" className="user-avtar wid-35" />
                                             </div>
                                             <div className="flex-grow-1 ms-3">
-                                                <h6 className="mb-1">{fullName} 🖖</h6>
-                                                <span>{email}</span>
+                                                <h6 className="mb-1">{decodeToken?.Fullname || "Loading..."} 🖖</h6>
+                                                <span>{decodeToken?.Email || "Loading..."}</span>
                                             </div>
                                         </div>
                                         <hr className="border-secondary border-opacity-50" />

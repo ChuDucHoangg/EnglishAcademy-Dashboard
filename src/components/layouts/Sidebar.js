@@ -3,11 +3,6 @@ import config from "../../config/index";
 import { getDecodedToken, removeAccessToken } from "../../utils/auth";
 
 const decodeToken = getDecodedToken();
-let fullName = "";
-
-if (decodeToken && decodeToken.Fullname) {
-    fullName = decodeToken.Fullname;
-}
 
 const handleLogout = () => {
     removeAccessToken();
@@ -30,7 +25,7 @@ function Sidebar() {
                                     <img src="../assets/images/user/avatar-2.jpg" alt="" className="user-avtar wid-45 rounded-circle" />
                                 </div>
                                 <div className="flex-grow-1 ms-3 me-2">
-                                    <h6 className="mb-0">{fullName}</h6>
+                                    <h6 className="mb-0">{decodeToken?.Fullname || "Loading..."}</h6>
                                     <small>Administrator</small>
                                 </div>
                                 <a className="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse" href="#pc_sidebar_userlink">
