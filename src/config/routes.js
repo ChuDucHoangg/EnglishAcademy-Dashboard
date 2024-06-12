@@ -73,9 +73,9 @@ const routes = {
     // End routes Authentication
 
     // Start routes Tutor
-    tutor_booking_list: "/tutor/bookings",
-    booking_detail_package: "/tutor/booking-package/:bookingId",
-    booking_detail_weeks: "/tutor/booking-weeks/:bookingId",
+    booking_waiting_list: "/booking-waiting",
+    booking_waiting_package: "/booking-waiting/package/:bookingId",
+    booking_waiting_weeks: "/booking-waiting/weeks/:bookingId",
     // End routes Tutor
 
     // Start routes Other

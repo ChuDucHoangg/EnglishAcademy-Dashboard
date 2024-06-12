@@ -153,11 +153,11 @@ function Sidebar() {
                             <label>Tutor</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.tutor_booking_list} className="pc-link">
+                            <NavLink to={config.routes.booking_waiting_list} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-calendar-alt"></i>
                                 </span>
-                                <span className="pc-mtext">Bookings</span>
+                                <span className="pc-mtext">Booking Waiting</span>
                             </NavLink>
                         </li>
 
