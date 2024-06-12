@@ -60,17 +60,9 @@ function WeekTable({ bookings, setColorStatus }) {
                                             <td className="text-center">
                                                 <ul className="list-inline me-auto mb-0">
                                                     <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="View" data-bs-original-title="View">
-                                                        <Link to={`/tutor/booking-weeks/${booking.id}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
+                                                        <Link to={`/booking-waiting/weeks/${booking.id}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
                                                             <i className="ti ti-eye f-18"></i>
                                                         </Link>
-                                                    </li>
-                                                    <Link to="" className="avtar avtar-xs btn-link-success btn-pc-default">
-                                                        <i className="ti ti-edit-circle f-18"></i>
-                                                    </Link>
-                                                    <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="Delete" data-bs-original-title="Delete">
-                                                        <a href="#!" className="avtar avtar-xs btn-link-danger btn-pc-default">
-                                                            <i className="ti ti-trash f-18"></i>
-                                                        </a>
                                                     </li>
                                                 </ul>
                                             </td>

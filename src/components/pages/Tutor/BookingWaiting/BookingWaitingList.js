@@ -2,12 +2,12 @@ import Layout from "../../../layouts/index";
 import useAxiosGet from "../../../../hooks/useAxiosGet";
 import url from "../../../../services/url";
 import { getAccessToken } from "../../../../utils/auth";
-import PackageTable from "../../../views/Tutor/Booking/PackageTable";
-import WeekTable from "../../../views/Tutor/Booking/WeekTable";
+import PackageTable from "../../../views/Tutor/BookingWaiting/PackageTable";
+import WeekTable from "../../../views/Tutor/BookingWaiting/WeekTable";
 import { Link } from "react-router-dom";
 import PencilLoader from "../../../layouts/PencilLoader";
 
-function BookingList() {
+function BookingWaitingList() {
     // Call API
     const bookingData = useAxiosGet({
         path: url.TUTOR.BOOKING_WAITING,
@@ -42,12 +42,12 @@ function BookingList() {
 
     return (
         <>
-            <Layout title="Booking List">
+            <Layout title="Booking Waiting">
                 <div className="col-xl-12">
                     <div className="card">
                         <div className="card-body border-bottom pb-0 table-border-style">
                             <div className="d-flex align-items-center justify-content-between">
-                                <h5 className="mb-0">Booking List</h5>
+                                <h5 className="mb-0">Booking Waiting</h5>
                                 <div className="dropdown">
                                     <a className="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none" href="#!" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i className="ti ti-dots-vertical f-18"></i>
@@ -117,4 +117,4 @@ function BookingList() {
     );
 }
 
-export default BookingList;
+export default BookingWaitingList;

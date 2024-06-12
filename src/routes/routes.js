@@ -33,12 +33,12 @@ import Login from "../components/pages/Auth/Login";
 import ForgotPassword from "../components/pages/Auth/ForgotPassword";
 import ResetPassword from "../components/pages/Auth/ResetPassword";
 import NotFound from "../components/pages/Other/NotFound";
-import BookingList from "../components/pages/Tutor/Booking/BookingList";
-import ByPackage from "../components/pages/Tutor/BookingDetail/ByPackage";
-import ByWeeks from "../components/pages/Tutor/BookingDetail/ByWeeks";
 import CategoryList from "../components/pages/Category/CategoryList";
 import CategoryEdit from "../components/pages/Category/CategoryEdit";
 import CategoryCreate from "../components/pages/Category/CategoryCreate";
+import BookingWaitingList from "../components/pages/Tutor/BookingWaiting/BookingWaitingList";
+import ByPackage from "../components/pages/Tutor/BookingWaitingDetail/ByPackage";
+import ByWeeks from "../components/pages/Tutor/BookingWaitingDetail/ByWeeks";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
@@ -86,9 +86,9 @@ const privateRoutes = [
     { path: config.routes.staff_edit, component: StaffEdit },
     { path: config.routes.profile, component: ProfileWrap },
 
-    { path: config.routes.tutor_booking_list, component: BookingList },
-    { path: config.routes.booking_detail_package, component: ByPackage },
-    { path: config.routes.booking_detail_weeks, component: ByWeeks },
+    { path: config.routes.booking_waiting_list, component: BookingWaitingList },
+    { path: config.routes.booking_waiting_package, component: ByPackage },
+    { path: config.routes.booking_waiting_weeks, component: ByWeeks },
 
     { path: config.routes.not_found, component: NotFound },
 ];
