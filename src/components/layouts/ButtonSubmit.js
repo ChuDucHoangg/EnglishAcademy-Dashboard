@@ -1,6 +1,6 @@
 function ButtonSubmit({ submitting, handleEvent, value, className = "", style = {}, icon }) {
     return (
-        <button className={`btn lh-1 ${className}`} type="button" style={{ ...style }} disabled={submitting} onClick={!submitting ? handleEvent : null}>
+        <button className={`btn ${className}`} type="button" style={{ ...style }} disabled={submitting} onClick={!submitting ? handleEvent : null}>
             {submitting ? (
                 <>
                     <span className="spinner-border spinner-border-sm" role="status"></span> Submitting...

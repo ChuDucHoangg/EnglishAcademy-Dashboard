@@ -11,6 +11,14 @@ const url = {
         DELETE: "course-online",
     },
 
+    COURSE_OFFLINE: {
+        LIST: "course-offline",
+        DETAIL: "course-offline",
+        CREATE: "course-offline",
+        UPDATE: "course-offline",
+        DELETE: "course-offline",
+    },
+
     CATEGORY: {
         LIST: "any/category",
         DETAIL: "category",
@@ -29,16 +37,17 @@ const url = {
     },
 
     TUTOR: {
-        BOOKINGS: "any/booking",
         BOOKING_WAITING: "tutor/booking-waiting",
-        BOOKING_DETAIL_PACKAGE: "package-student/tutor",
-        BOOKING_DETAIL_WEEKS: "subscription/tutor",
+        BOOKING_WAITING_PACKAGE: "package-student/tutor",
+        BOOKING_WAITING_WEEKS: "subscription/tutor",
 
         BOOKING_CONFIRM_PACKAGE: "package-student/confirm",
         BOOKING_CANCEL_PACKAGE: "package-student/cancel",
 
         BOOKING_CONFIRM_WEEKS: "subscription/confirm",
         BOOKING_CANCEL_WEEKS: "subscription/cancel",
+
+        BOOKING_BY_TUTOR: "tutor/booking",
     },
 };
 export default url;

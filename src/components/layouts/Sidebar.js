@@ -84,6 +84,14 @@ function Sidebar() {
                             </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
+                            <NavLink to={config.routes.course_offline} className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-book-reader"></i>
+                                </span>
+                                <span className="pc-mtext">Course Offline</span>
+                            </NavLink>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
                             <NavLink to={config.routes.category_list} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-stream"></i>
@@ -151,6 +159,14 @@ function Sidebar() {
 
                         <li className="pc-item pc-caption">
                             <label>Tutor</label>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
+                            <NavLink to={config.routes.booking_list} className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-calendar-alt"></i>
+                                </span>
+                                <span className="pc-mtext">Booking</span>
+                            </NavLink>
                         </li>
                         <li className="pc-item pc-hasmenu">
                             <NavLink to={config.routes.booking_waiting_list} className="pc-link">

@@ -39,13 +39,26 @@ import CategoryCreate from "../components/pages/Category/CategoryCreate";
 import BookingWaitingList from "../components/pages/Tutor/BookingWaiting/BookingWaitingList";
 import ByPackage from "../components/pages/Tutor/BookingWaitingDetail/ByPackage";
 import ByWeeks from "../components/pages/Tutor/BookingWaitingDetail/ByWeeks";
+import BookingList from "../components/pages/Tutor/Booking/BookingList";
+import CourseOfflineList from "../components/pages/CourseOffline/CourseOfflineList";
+import CourseOfflineDetail from "../components/pages/CourseOffline/CourseOfflineDetail";
+import CourseOfflineEdit from "../components/pages/CourseOffline/CourseOfflineEdit";
+import CourseOfflineCreate from "../components/pages/CourseOffline/CourseOfflineCreate";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
+
+    // Course Online routes
     { path: config.routes.course_online, component: CourseList },
     { path: config.routes.course_online_detail, component: CourseDetail },
     { path: config.routes.course_online_create, component: CourseCreate },
     { path: config.routes.course_online_edit, component: CourseEdit },
+
+    // Course Offline routes
+    { path: config.routes.course_offline, component: CourseOfflineList },
+    { path: config.routes.course_offline_detail, component: CourseOfflineDetail },
+    { path: config.routes.course_offline_create, component: CourseOfflineCreate },
+    { path: config.routes.course_offline_edit, component: CourseOfflineEdit },
 
     // Category routes
     { path: config.routes.category_list, component: CategoryList },
@@ -89,6 +102,8 @@ const privateRoutes = [
     { path: config.routes.booking_waiting_list, component: BookingWaitingList },
     { path: config.routes.booking_waiting_package, component: ByPackage },
     { path: config.routes.booking_waiting_weeks, component: ByWeeks },
+
+    { path: config.routes.booking_list, component: BookingList },
 
     { path: config.routes.not_found, component: NotFound },
 ];
