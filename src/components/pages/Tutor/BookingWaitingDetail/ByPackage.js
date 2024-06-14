@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import NotFound from "../../Other/NotFound";
 import { useCallback, useEffect, useState } from "react";
+import { statusColor } from "../../../../utils/statusColor";
 function ByPackage() {
     const { bookingId } = useParams();
 
@@ -16,7 +17,7 @@ function ByPackage() {
 
     const loadData = useCallback(async () => {
         try {
-            const responseData = await api.get(url.TUTOR.BOOKING_DETAIL_PACKAGE + `/${bookingId}`, {
+            const responseData = await api.get(url.TUTOR.BOOKING_CANCEL_PACKAGE + `/${bookingId}`, {
                 headers: {
                     Authorization: `Bearer ${getAccessToken()}`,
                 },
@@ -31,27 +32,6 @@ function ByPackage() {
     useEffect(() => {
         loadData();
     }, [loadData]);
-
-    function setColorStatus(status) {
-        let color;
-        switch (status) {
-            case "pending":
-                color = "text-indigo-600";
-                break;
-            case "confirmed":
-                color = "text-blue-600";
-                break;
-            case "completed":
-                color = "text-cyan-600";
-                break;
-            case "cancelled":
-                color = "text-red-600";
-                break;
-            default:
-                break;
-        }
-        return color;
-    }
 
     const handleConfirmBooking = async () => {
         try {
@@ -198,7 +178,7 @@ function ByPackage() {
                                                     <div className="row">
                                                         <div className="col-md-6">
                                                             <p className="mb-1 text-muted">Status</p>
-                                                            <p className={`mb-0 ${setColorStatus(bookingDetail?.status)}`}>{bookingDetail?.status}</p>
+                                                            <p className={`mb-0 ${statusColor(bookingDetail?.status)}`}>{bookingDetail?.status}</p>
                                                         </div>
                                                         <div className="col-md-6">
                                                             <p className="mb-1 text-muted">Crated Date</p>

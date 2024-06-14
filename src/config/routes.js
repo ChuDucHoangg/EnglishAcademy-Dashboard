@@ -8,6 +8,13 @@ const routes = {
     course_online_edit: "/course-online/edit/:slug",
     // End routes Course Online
 
+    // Start routes Course Online
+    course_offline: "/course-offline",
+    course_offline_detail: "/course-offline/:slug",
+    course_offline_create: "/course-offline/create",
+    course_offline_edit: "/course-offline/edit/:slug",
+    // End routes Course Online
+
     // Start routes Category
     category_list: "/category-list",
     category_create: "/category-create",
@@ -73,6 +80,8 @@ const routes = {
     // End routes Authentication
 
     // Start routes Tutor
+    booking_list: "/booking",
+
     booking_waiting_list: "/booking-waiting",
     booking_waiting_package: "/booking-waiting/package/:bookingId",
     booking_waiting_weeks: "/booking-waiting/weeks/:bookingId",

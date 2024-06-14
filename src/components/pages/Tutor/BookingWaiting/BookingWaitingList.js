@@ -6,6 +6,7 @@ import PackageTable from "../../../views/Tutor/BookingWaiting/PackageTable";
 import WeekTable from "../../../views/Tutor/BookingWaiting/WeekTable";
 import { Link } from "react-router-dom";
 import PencilLoader from "../../../layouts/PencilLoader";
+import { statusColor } from "../../../../utils/statusColor";
 
 function BookingWaitingList() {
     // Call API
@@ -17,28 +18,6 @@ function BookingWaitingList() {
     });
 
     const bookings = bookingData.response || {};
-
-    // Set color according to status
-    function setColorStatus(status) {
-        let color;
-        switch (status) {
-            case "pending":
-                color = "badge bg-secondary";
-                break;
-            case "confirmed":
-                color = "badge bg-primary";
-                break;
-            case "completed":
-                color = "badge bg-success";
-                break;
-            case "cancelled":
-                color = "badge bg-danger";
-                break;
-            default:
-                break;
-        }
-        return color;
-    }
 
     return (
         <>
@@ -104,9 +83,9 @@ function BookingWaitingList() {
                         ) : (
                             <div className="card-body border-bottom pb-0 table-border-style">
                                 <div className="tab-content" id="myTabContent">
-                                    <PackageTable bookings={bookings} setColorStatus={setColorStatus} />
+                                    <PackageTable bookings={bookings} setColorStatus={statusColor} />
 
-                                    <WeekTable bookings={bookings} setColorStatus={setColorStatus} />
+                                    <WeekTable bookings={bookings} setColorStatus={statusColor} />
                                 </div>
                             </div>
                         )}
