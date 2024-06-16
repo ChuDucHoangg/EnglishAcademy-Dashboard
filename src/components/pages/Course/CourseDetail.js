@@ -16,15 +16,6 @@ import { useCallback } from "react";
 function CourseDetail() {
     const { slug } = useParams();
 
-    // const courseData = useAxiosGet({
-    //     path: url.COURSE.DETAIL + `/${slug}`,
-    //     headers: {
-    //         Authorization: `Bearer ${getAccessToken()}`,
-    //     },
-    // });
-
-    // const courseDetail = courseData.response || {};
-
     const [courseDetail, setCourseDetail] = useState([]);
 
     const loadData = useCallback(async () => {
@@ -42,13 +33,69 @@ function CourseDetail() {
 
     const topics = courseDetail.topicOnlineDetailList || [];
 
-    const handleDeleteItem = async (id) => {
+    const handleDeleteTopic = async (id) => {
         const data = [id];
-        console.log("Data:", data);
         try {
             const isConfirmed = await Swal.fire({
                 title: "Are you sure?",
-                text: "Are you sure you want to cancel?",
+                text: "Are you sure you want to delete?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "I'm sure",
+                reverseButtons: true,
+            });
+
+            if (isConfirmed.isConfirmed) {
+                const deleteRequest = await api.delete(url.TOPIC.DELETE, { data, headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                if (deleteRequest.status === 200) {
+                    toast.success("Deleted Successfully!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                    loadData();
+                }
+            }
+        } catch (error) {
+            if (error.response.status === 400) {
+                toast.error("The item cannot be deleted!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+            } else {
+                toast.error("Error! An error occurred. Please try again later!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+            }
+        }
+    };
+
+    const handleDeleteItem = async (id) => {
+        const data = [id];
+        try {
+            const isConfirmed = await Swal.fire({
+                title: "Are you sure?",
+                text: "Are you sure you want to delete?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -244,10 +291,9 @@ function CourseDetail() {
                                                         </ul>
                                                         <ul className="list-inline ms-auto mb-3">
                                                             <li className="list-inline-item">
-                                                                <div className="form-search">
-                                                                    <i className="ti ti-search"></i>
-                                                                    <input type="search" className="form-control" placeholder="Search Lesson" />
-                                                                </div>
+                                                                <Link to={`/course-online/topic-create/${courseDetail.id}`} className="btn btn-primary">
+                                                                    Create Topic
+                                                                </Link>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -278,12 +324,23 @@ function CourseDetail() {
                                                                                     aria-labelledby={`flush-heading${index}`}
                                                                                     data-bs-parent="#accordionFlushExample"
                                                                                 >
-                                                                                    <div className="text-end my-3">
+                                                                                    <div className="d-flex align-items-center justify-content-between my-3">
+                                                                                        <div>
+                                                                                            <Link
+                                                                                                to={`/course-online/topic-edit/${courseDetail.id}/${topic.slug}`}
+                                                                                                className="btn btn-icon btn-link-success"
+                                                                                            >
+                                                                                                <i className="ti ti-edit"></i>
+                                                                                            </Link>
+                                                                                            <button onClick={() => handleDeleteTopic(topic.id)} className="btn btn-icon btn-link-danger">
+                                                                                                <i className="ti ti-trash"></i>
+                                                                                            </button>
+                                                                                        </div>
                                                                                         <Link to={`/course-online/item-create/${courseDetail.slug}`} className="btn btn-primary ">
-                                                                                            Create Topic
+                                                                                            Create Item
                                                                                         </Link>
                                                                                     </div>
-                                                                                    <ul className="list-group list-group-flush mb-3">
+                                                                                    <ul className="list-group list-group-flush mb-3 border">
                                                                                         {topic.itemOnlineDTOList?.map((item, index) => (
                                                                                             <li className="list-group-item" key={index}>
                                                                                                 <div className="d-flex align-items-center">
@@ -319,9 +376,12 @@ function CourseDetail() {
                                                                                                                             </Link>
                                                                                                                         </li>
                                                                                                                         <li className="list-inline-item">
-                                                                                                                            <a href="!#" className="avtar avtar-s btn-link-secondary">
+                                                                                                                            <Link
+                                                                                                                                to={`/course-online/item-edit/${item.slug}`}
+                                                                                                                                className="avtar avtar-s btn-link-secondary"
+                                                                                                                            >
                                                                                                                                 <i className="ti ti-edit f-18"></i>
-                                                                                                                            </a>
+                                                                                                                            </Link>
                                                                                                                         </li>
                                                                                                                         <li className="list-inline-item">
                                                                                                                             <button

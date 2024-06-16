@@ -47,6 +47,9 @@ import CourseOfflineCreate from "../components/pages/CourseOffline/CourseOffline
 import ItemDetail from "../components/pages/Course/CourseItem/ItemDetail";
 import ItemCreate from "../components/pages/Course/CourseItem/ItemCreate";
 import ItemEdit from "../components/pages/Course/CourseItem/ItemEdit";
+import LessonBookingEdit from "../components/pages/LessonBooking/LessonBookingEdit";
+import CourseTopicCreate from "../components/pages/Course/CourseTopic/CourseTopicCreate";
+import CourseTopicEdit from "../components/pages/Course/CourseTopic/CourseTopicEdit";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
@@ -56,6 +59,9 @@ const privateRoutes = [
     { path: config.routes.course_online_detail, component: CourseDetail },
     { path: config.routes.course_online_create, component: CourseCreate },
     { path: config.routes.course_online_edit, component: CourseEdit },
+
+    { path: config.routes.course_online_topic_create, component: CourseTopicCreate },
+    { path: config.routes.course_online_topic_edit, component: CourseTopicEdit },
 
     { path: config.routes.course_online_item, component: ItemDetail },
     { path: config.routes.course_online_item_create, component: ItemCreate },
@@ -111,6 +117,7 @@ const privateRoutes = [
     { path: config.routes.booking_waiting_weeks, component: ByWeeks },
 
     { path: config.routes.booking_list, component: BookingList },
+    { path: config.routes.lesson_booking_edit, component: LessonBookingEdit },
 
     { path: config.routes.not_found, component: NotFound },
 ];

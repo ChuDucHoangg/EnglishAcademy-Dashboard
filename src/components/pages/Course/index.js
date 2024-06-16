@@ -237,7 +237,7 @@ function CourseList() {
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td>{item.price}$</td>
+                                                        <td>${item.price.toFixed(2)}</td>
                                                         <td>{item.language}</td>
                                                         <td>{item.trailer}</td>
                                                         <td>{item.description}</td>

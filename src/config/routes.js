@@ -7,6 +7,9 @@ const routes = {
     course_online_create: "/course-online/create",
     course_online_edit: "/course-online/edit/:slug",
 
+    course_online_topic_create: "/course-online/topic-create/:courseId",
+    course_online_topic_edit: "/course-online/topic-edit/:courseId/:topicSlug",
+
     course_online_item: "/course-online/item/:slug",
     course_online_item_create: "/course-online/item-create/:slug",
     course_online_item_edit: "/course-online/item-edit/:slug",
@@ -85,6 +88,7 @@ const routes = {
 
     // Start routes Tutor
     booking_list: "/booking",
+    lesson_booking_edit: "/lesson-booking/edit/:bookingId",
 
     booking_waiting_list: "/booking-waiting",
     booking_waiting_package: "/booking-waiting/package/:bookingId",

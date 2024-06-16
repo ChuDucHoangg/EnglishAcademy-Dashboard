@@ -84,6 +84,9 @@ function BookingList() {
                                                                     <Link to={``} className="avtar avtar-xs btn-link-secondary btn-pc-default">
                                                                         <i className="ti ti-eye f-18"></i>
                                                                     </Link>
+                                                                    <Link to={`/lesson-booking/edit/${booking.id}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
+                                                                        <i className="ti ti-edit f-18"></i>
+                                                                    </Link>
                                                                 </li>
                                                             </ul>
                                                         </td>
