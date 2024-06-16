@@ -5,10 +5,25 @@ const url = {
 
     COURSE: {
         LIST: "any/course-online",
-        DETAIL: "any/course-online/detail/{}",
+        DETAIL: "any/course-online/detail",
         CREATE: "course-online",
         UPDATE: "course-online",
         DELETE: "course-online",
+    },
+
+    COURSE_ITEM: {
+        CREATE: "item-online",
+        DETAIL: "any/item-online/get-by-slug",
+    },
+
+    TOPIC: {
+        DETAIL: "any/topic-online/get-by-slug",
+        CREATE: "item-online",
+    },
+
+    ITEM: {
+        DETAIL: "any/item-online/get-by-slug",
+        DELETE: "item-online",
     },
 
     COURSE_OFFLINE: {

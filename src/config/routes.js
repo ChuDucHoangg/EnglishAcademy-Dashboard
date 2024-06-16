@@ -6,6 +6,10 @@ const routes = {
     course_online_detail: "/course-online/detail/:slug",
     course_online_create: "/course-online/create",
     course_online_edit: "/course-online/edit/:slug",
+
+    course_online_item: "/course-online/item/:slug",
+    course_online_item_create: "/course-online/item-create/:slug",
+    course_online_item_edit: "/course-online/item-edit/:slug",
     // End routes Course Online
 
     // Start routes Course Online

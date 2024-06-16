@@ -44,6 +44,9 @@ import CourseOfflineList from "../components/pages/CourseOffline/CourseOfflineLi
 import CourseOfflineDetail from "../components/pages/CourseOffline/CourseOfflineDetail";
 import CourseOfflineEdit from "../components/pages/CourseOffline/CourseOfflineEdit";
 import CourseOfflineCreate from "../components/pages/CourseOffline/CourseOfflineCreate";
+import ItemDetail from "../components/pages/Course/CourseItem/ItemDetail";
+import ItemCreate from "../components/pages/Course/CourseItem/ItemCreate";
+import ItemEdit from "../components/pages/Course/CourseItem/ItemEdit";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
@@ -53,6 +56,10 @@ const privateRoutes = [
     { path: config.routes.course_online_detail, component: CourseDetail },
     { path: config.routes.course_online_create, component: CourseCreate },
     { path: config.routes.course_online_edit, component: CourseEdit },
+
+    { path: config.routes.course_online_item, component: ItemDetail },
+    { path: config.routes.course_online_item_create, component: ItemCreate },
+    { path: config.routes.course_online_item_edit, component: ItemEdit },
 
     // Course Offline routes
     { path: config.routes.course_offline, component: CourseOfflineList },
