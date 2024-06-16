@@ -24,6 +24,7 @@ const url = {
 
     ITEM: {
         DETAIL: "any/item-online/get-by-slug",
+        CREATE: "item-online",
         DELETE: "item-online",
     },
 

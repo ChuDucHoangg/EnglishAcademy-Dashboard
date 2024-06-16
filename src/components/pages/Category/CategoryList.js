@@ -10,6 +10,7 @@ import { getAccessToken } from "../../../utils/auth";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import ButtonSubmit from "../../layouts/ButtonSubmit";
+import BookLoading from "../../layouts/BookLoading";
 
 function CategoryList() {
     // const categoryData = useAxiosGet({
@@ -18,13 +19,19 @@ function CategoryList() {
     // const categories = categoryData.response || [];
 
     const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const loadData = async () => {
         try {
+            setLoading(true);
             const categoryResponse = await api.get(url.CATEGORY.LIST);
             setCategories(categoryResponse.data.data);
         } catch (error) {
             console.log(error);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
         }
     };
 
@@ -131,52 +138,56 @@ function CategoryList() {
                     <div className="card-body table-border-style">
                         <div className="table-responsive">
                             <div className="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-                                <div className="datatable-container">
-                                    <table className="table table-hover datatable-table" id="pc-dt-simple">
-                                        <thead>
-                                            <tr>
-                                                <th data-sortable="true">
-                                                    <div className="form-check custom-checkbox">
-                                                        <input type="checkbox" className="form-check-input" checked={selectAll} onChange={handleSelectAll} />
-                                                    </div>
-                                                </th>
-                                                <th data-sortable="true">Name</th>
-                                                <th data-sortable="true">Slug</th>
-                                                <th data-sortable="true">Created Date</th>
-                                                <th data-sortable="true">Created By</th>
-                                                <th data-sortable="true" className="text-center">
-                                                    Actions
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="orders">
-                                            {currentCategory.map((category) => (
-                                                <tr data-index="0" key={category.id}>
-                                                    <td>
-                                                        <div className="form-check custom-checkbox checkbox-primary">
-                                                            <input
-                                                                type="checkbox"
-                                                                className="form-check-input"
-                                                                checked={inputCheck.includes(category.id)}
-                                                                onChange={() => handleInputChange(category.id)}
-                                                            />
+                                {loading ? (
+                                    <BookLoading />
+                                ) : (
+                                    <div className="datatable-container">
+                                        <table className="table table-hover datatable-table" id="pc-dt-simple">
+                                            <thead>
+                                                <tr>
+                                                    <th data-sortable="true">
+                                                        <div className="form-check custom-checkbox">
+                                                            <input type="checkbox" className="form-check-input" checked={selectAll} onChange={handleSelectAll} />
                                                         </div>
-                                                    </td>
-
-                                                    <td>{category.name}</td>
-                                                    <td>{category.slug}</td>
-                                                    <td>{(category.createdDate && format(new Date(category.createdDate), "dd-MM-yyyy")) || "N/A"}</td>
-                                                    <td>{category.createdBy || "N/A"}</td>
-                                                    <td className="text-center">
-                                                        <Link to={`/category-edit/${category.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
-                                                            <i className="ti ti-edit-circle f-18"></i>
-                                                        </Link>
-                                                    </td>
+                                                    </th>
+                                                    <th data-sortable="true">Name</th>
+                                                    <th data-sortable="true">Slug</th>
+                                                    <th data-sortable="true">Created Date</th>
+                                                    <th data-sortable="true">Created By</th>
+                                                    <th data-sortable="true" className="text-center">
+                                                        Actions
+                                                    </th>
                                                 </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            </thead>
+                                            <tbody id="orders">
+                                                {currentCategory.map((category) => (
+                                                    <tr data-index="0" key={category.id}>
+                                                        <td>
+                                                            <div className="form-check custom-checkbox checkbox-primary">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    className="form-check-input"
+                                                                    checked={inputCheck.includes(category.id)}
+                                                                    onChange={() => handleInputChange(category.id)}
+                                                                />
+                                                            </div>
+                                                        </td>
+
+                                                        <td>{category.name}</td>
+                                                        <td>{category.slug}</td>
+                                                        <td>{(category.createdDate && format(new Date(category.createdDate), "dd-MM-yyyy")) || "N/A"}</td>
+                                                        <td>{category.createdBy || "N/A"}</td>
+                                                        <td className="text-center">
+                                                            <Link to={`/category-edit/${category.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
+                                                                <i className="ti ti-edit-circle f-18"></i>
+                                                            </Link>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                )}
                                 <div className="row">
                                     <div className="col-lg-3">
                                         <Pagination currentPage={currentPagePackage} totalPages={totalPagesPackage} onPageChange={handlePageChangePackage} />

@@ -45,6 +45,7 @@ function PackageTable({ bookings, setColorStatus }) {
                                         </th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     {currentBookingsPackage.map((booking, bookingIndex) => (
                                         <tr data-index={bookingIndex} key={bookingIndex}>
