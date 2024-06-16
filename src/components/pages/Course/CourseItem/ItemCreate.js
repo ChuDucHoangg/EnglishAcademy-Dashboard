@@ -128,7 +128,7 @@ function ItemCreate() {
 
         if (validateForm()) {
             try {
-                const createRequest = await api.post(url.TOPIC.CREATE, formData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                const createRequest = await api.post(url.ITEM.CREATE, formData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
 
                 if (createRequest.status === 200) {
                     toast.success("Created Item Successfully!", {

@@ -11,19 +11,26 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { formatLevelCourse } from "../../../utils/formatLevelCourse";
 import config from "../../../config";
+import BookLoading from "../../layouts/BookLoading";
 
 function CourseOfflineList() {
     const [inputCheck, setInputCheck] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
 
     const [courseOffline, setCourseOffline] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const loadData = async () => {
         try {
+            setLoading(true);
             const courseResponse = await api.get(url.COURSE_OFFLINE.LIST, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
             setCourseOffline(courseResponse.data.data);
         } catch (error) {
             console.log(error);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
         }
     };
 
@@ -132,86 +139,90 @@ function CourseOfflineList() {
                     </div>
 
                     <div className="card-body table-border-style">
-                        <div className="table-responsive">
-                            <div className="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-                                <div className="datatable-container">
-                                    <table className="table table-hover datatable-table" id="pc-dt-simple">
-                                        <thead>
-                                            <tr>
-                                                <th data-sortable="true">
-                                                    <div className="form-check custom-checkbox">
-                                                        <input type="checkbox" className="form-check-input" checked={selectAll} onChange={handleSelectAll} />
-                                                    </div>
-                                                </th>
-                                                <th data-sortable="true">Course Name</th>
-                                                <th data-sortable="true">Price</th>
-                                                <th data-sortable="true">LANGUAGE</th>
-                                                <th data-sortable="true">TRAILER</th>
-                                                <th data-sortable="true">DESCRIPTION</th>
-                                                <th data-sortable="true">Status</th>
-                                                <th data-sortable="true" className="text-center">
-                                                    Actions
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="orders">
-                                            {currentCourse.map((course) => (
-                                                <tr data-index="0" key={course.id}>
-                                                    <td>
-                                                        <div className="form-check custom-checkbox checkbox-primary">
-                                                            <input
-                                                                type="checkbox"
-                                                                className="form-check-input"
-                                                                checked={inputCheck.includes(course.id)}
-                                                                onChange={() => handleInputChange(course.id)}
-                                                            />
+                        {loading ? (
+                            <BookLoading />
+                        ) : (
+                            <div className="table-responsive">
+                                <div className="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                                    <div className="datatable-container">
+                                        <table className="table table-hover datatable-table" id="pc-dt-simple">
+                                            <thead>
+                                                <tr>
+                                                    <th data-sortable="true">
+                                                        <div className="form-check custom-checkbox">
+                                                            <input type="checkbox" className="form-check-input" checked={selectAll} onChange={handleSelectAll} />
                                                         </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <div className="row">
-                                                            <div className="col-auto">
-                                                                {/* /assets/images/graduation.png */}
-                                                                <img
-                                                                    src={course.image}
-                                                                    alt={course.name}
-                                                                    className="rounded-circle object-fit-cover"
-                                                                    onError={handleImageError}
-                                                                    width="40"
-                                                                    height="40"
+                                                    </th>
+                                                    <th data-sortable="true">Course Name</th>
+                                                    <th data-sortable="true">Price</th>
+                                                    <th data-sortable="true">LANGUAGE</th>
+                                                    <th data-sortable="true">TRAILER</th>
+                                                    <th data-sortable="true">DESCRIPTION</th>
+                                                    <th data-sortable="true">Status</th>
+                                                    <th data-sortable="true" className="text-center">
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="orders">
+                                                {currentCourse.map((course) => (
+                                                    <tr data-index="0" key={course.id}>
+                                                        <td>
+                                                            <div className="form-check custom-checkbox checkbox-primary">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    className="form-check-input"
+                                                                    checked={inputCheck.includes(course.id)}
+                                                                    onChange={() => handleInputChange(course.id)}
                                                                 />
                                                             </div>
-                                                            <div className="col">
-                                                                <h6 className="mb-0">{course.name}</h6>
-                                                                <p className="text-muted f-12 mb-0">{formatLevelCourse(course.level)}</p>
+                                                        </td>
+
+                                                        <td>
+                                                            <div className="row">
+                                                                <div className="col-auto">
+                                                                    {/* /assets/images/graduation.png */}
+                                                                    <img
+                                                                        src={course.image}
+                                                                        alt={course.name}
+                                                                        className="rounded-circle object-fit-cover"
+                                                                        onError={handleImageError}
+                                                                        width="40"
+                                                                        height="40"
+                                                                    />
+                                                                </div>
+                                                                <div className="col">
+                                                                    <h6 className="mb-0">{course.name}</h6>
+                                                                    <p className="text-muted f-12 mb-0">{formatLevelCourse(course.level)}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>${course.price.toFixed(2)}</td>
-                                                    <td>{course.language}</td>
-                                                    <td>{course.trailer}</td>
-                                                    <td>{course.description}</td>
-                                                    <td>{course.status}</td>
-                                                    <td className="text-center">
-                                                        <Link to={`/course-offline/${course.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
-                                                            <i className="ti ti-eye f-18"></i>
-                                                        </Link>
-                                                        <Link to={`/course-offline/edit/${course.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
-                                                            <i className="ti ti-edit-circle f-18"></i>
-                                                        </Link>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div className="row">
-                                    <div className="col-lg-3">
-                                        <Pagination currentPage={currentPagePackage} totalPages={totalPagesPackage} onPageChange={handlePageChangePackage} />
+                                                        </td>
+                                                        <td>${course.price.toFixed(2)}</td>
+                                                        <td>{course.language}</td>
+                                                        <td>{course.trailer}</td>
+                                                        <td>{course.description}</td>
+                                                        <td>{course.status}</td>
+                                                        <td className="text-center">
+                                                            <Link to={`/course-offline/${course.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
+                                                                <i className="ti ti-eye f-18"></i>
+                                                            </Link>
+                                                            <Link to={`/course-offline/edit/${course.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
+                                                                <i className="ti ti-edit-circle f-18"></i>
+                                                            </Link>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-lg-3">
+                                            <Pagination currentPage={currentPagePackage} totalPages={totalPagesPackage} onPageChange={handlePageChangePackage} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>

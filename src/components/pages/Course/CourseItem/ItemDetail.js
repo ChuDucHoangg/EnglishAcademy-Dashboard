@@ -21,7 +21,7 @@ function ItemDetail() {
                     <div className="card card h-100">
                         <div className="card-header d-flex align-items-center justify-content-between py-3">
                             <h5>Information</h5>
-                            <Link to="" className="btn btn-icon btn-link-secondary">
+                            <Link to={`/course-online/item-edit/${courseDetail.slug}`} className="btn btn-icon btn-link-secondary">
                                 <i class="ti ti-edit"></i>
                             </Link>
                         </div>

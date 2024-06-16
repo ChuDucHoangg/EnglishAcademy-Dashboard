@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import Layout from "../../../layouts/index";
-// import useAxiosGet from "../../../../hooks/useAxiosGet";
 import url from "../../../../services/url";
 import { getAccessToken } from "../../../../utils/auth";
 import { format } from "date-fns";
@@ -17,7 +16,7 @@ function ByPackage() {
 
     const loadData = useCallback(async () => {
         try {
-            const responseData = await api.get(url.TUTOR.BOOKING_CANCEL_PACKAGE + `/${bookingId}`, {
+            const responseData = await api.get(url.TUTOR.BOOKING_WAITING_PACKAGE + `/${bookingId}`, {
                 headers: {
                     Authorization: `Bearer ${getAccessToken()}`,
                 },

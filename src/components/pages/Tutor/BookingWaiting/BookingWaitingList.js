@@ -5,8 +5,8 @@ import { getAccessToken } from "../../../../utils/auth";
 import PackageTable from "../../../views/Tutor/BookingWaiting/PackageTable";
 import WeekTable from "../../../views/Tutor/BookingWaiting/WeekTable";
 import { Link } from "react-router-dom";
-import PencilLoader from "../../../layouts/PencilLoader";
 import { statusColor } from "../../../../utils/statusColor";
+import BookLoading from "../../../layouts/BookLoading";
 
 function BookingWaitingList() {
     // Call API
@@ -79,7 +79,7 @@ function BookingWaitingList() {
                         </div>
 
                         {bookingData.loading ? (
-                            <PencilLoader />
+                            <BookLoading />
                         ) : (
                             <div className="card-body border-bottom pb-0 table-border-style">
                                 <div className="tab-content" id="myTabContent">
