@@ -87,6 +87,8 @@ const routes = {
     // End routes Authentication
 
     // Start routes Tutor
+    tutor_registration: "/tutor/registration",
+
     booking_list: "/booking",
     lesson_booking_edit: "/lesson-booking/edit/:bookingId",
 

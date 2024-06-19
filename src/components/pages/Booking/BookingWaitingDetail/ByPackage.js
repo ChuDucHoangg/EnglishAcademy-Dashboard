@@ -9,15 +9,14 @@ import { toast } from "react-toastify";
 import NotFound from "../../Other/NotFound";
 import { useCallback, useEffect, useState } from "react";
 import { statusColor } from "../../../../utils/statusColor";
-
-function ByWeeks() {
+function ByPackage() {
     const { bookingId } = useParams();
 
     const [bookingDetail, setBookingDetail] = useState([]);
 
     const loadData = useCallback(async () => {
         try {
-            const responseData = await api.get(url.TUTOR.BOOKING_WAITING_WEEKS + `/${bookingId}`, {
+            const responseData = await api.get(url.TUTOR.BOOKING_WAITING_PACKAGE + `/${bookingId}`, {
                 headers: {
                     Authorization: `Bearer ${getAccessToken()}`,
                 },
@@ -47,7 +46,7 @@ function ByWeeks() {
             });
 
             if (isConfirmed.isConfirmed) {
-                const confirmRequest = await api.put(url.TUTOR.BOOKING_CONFIRM_WEEKS + `/${bookingId}`, null, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                const confirmRequest = await api.put(url.TUTOR.BOOKING_CONFIRM_PACKAGE + `/${bookingId}`, null, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
 
                 if (confirmRequest.status === 200) {
                     toast.success("Successfully confirmed!", {
@@ -91,7 +90,7 @@ function ByWeeks() {
             });
 
             if (isConfirmed.isConfirmed) {
-                const cancelRequest = await api.put(url.TUTOR.BOOKING_CANCEL_WEEKS + `/${bookingId}`, null, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                const cancelRequest = await api.put(url.TUTOR.BOOKING_CANCEL_PACKAGE + `/${bookingId}`, null, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
                 if (cancelRequest.status === 200) {
                     toast.success("Successfully cancelled!", {
                         position: "top-right",
@@ -125,7 +124,7 @@ function ByWeeks() {
             {bookingDetail.status === 404 ? (
                 <NotFound />
             ) : (
-                <Layout title="Booking Detail by Weeks">
+                <Layout title="Booking Detail by Package">
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="mail-wrapper">
@@ -157,8 +156,20 @@ function ByWeeks() {
                                                             <p className="mb-0">{bookingDetail?.studentName}</p>
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <p className="mb-1 text-muted">Total</p>
-                                                            <p className="mb-0">${bookingDetail?.price && bookingDetail?.price.toFixed(2)}</p>
+                                                            <p className="mb-1 text-muted">Package Name</p>
+                                                            <p className="mb-0">{bookingDetail?.packageName}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li className="list-group-item px-0">
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <p className="mb-1 text-muted">Number of Session</p>
+                                                            <p className="mb-0">{bookingDetail?.remainingSessions}</p>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <p className="mb-1 text-muted">Purchase Date</p>
+                                                            <p className="mb-0">{bookingDetail.purchaseDate && format(new Date(bookingDetail.purchaseDate), "dd-MM-yyyy")}</p>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -169,35 +180,22 @@ function ByWeeks() {
                                                             <p className={`mb-0 ${statusColor(bookingDetail?.status)}`}>{bookingDetail?.status}</p>
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <p className="mb-1 text-muted">Next Payment Date</p>
-                                                            <p className="mb-0">{bookingDetail.nextPaymentDate && format(new Date(bookingDetail.nextPaymentDate), "dd-MM-yyyy")}</p>
+                                                            <p className="mb-1 text-muted">Crated Date</p>
+                                                            <p className="mb-0">{bookingDetail?.createdDate || "N/A"}</p>
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li className="list-group-item px-0">
-                                                    <div className="row">
-                                                        <div className="col-md-6">
-                                                            <p className="mb-1 text-muted">Start Date</p>
-                                                            <p className="mb-0">{bookingDetail && bookingDetail?.startTime && format(new Date(bookingDetail?.startTime), "dd-MM-yyyy")}</p>
-                                                        </div>
-                                                        <div className="col-md-6">
-                                                            <p className="mb-1 text-muted">End Date</p>
-                                                            <p className="mb-0">{bookingDetail && bookingDetail?.endTime && format(new Date(bookingDetail?.endTime), "dd-MM-yyyy")}</p>
-                                                        </div>
-                                                    </div>
+
+                                                <li className="list-group-item px-0 pb-0">
+                                                    <p className="mb-1 text-muted">Lessons</p>
+                                                    <p>
+                                                        {bookingDetail?.lessonDays?.map((lesson, lessonIndex) => (
+                                                            <span key={lessonIndex} className="mb-2 d-block">
+                                                                {lessonIndex + 1}: {lesson.dayOfWeek}: {lesson.startTime} - {lesson.endTime}
+                                                            </span>
+                                                        ))}
+                                                    </p>
                                                 </li>
-                                                {bookingDetail?.lessonDays === 0 && (
-                                                    <li className="list-group-item px-0 pb-0">
-                                                        <p className="mb-1 text-muted">Lessons</p>
-                                                        <p>
-                                                            {bookingDetail?.lessonDays.map((lesson, lessonIndex) => (
-                                                                <span key={lessonIndex} className="mb-2 d-block">
-                                                                    {lessonIndex + 1}. {lesson.dayOfWeek}: {lesson.startTime} - {lesson.endTime}
-                                                                </span>
-                                                            ))}
-                                                        </p>
-                                                    </li>
-                                                )}
                                             </ul>
                                         </div>
                                     </div>
@@ -211,4 +209,4 @@ function ByWeeks() {
     );
 }
 
-export default ByWeeks;
+export default ByPackage;

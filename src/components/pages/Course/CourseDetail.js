@@ -325,96 +325,88 @@ function CourseDetail() {
                                                                                     aria-labelledby={`flush-heading${index}`}
                                                                                     data-bs-parent="#accordionFlushExample"
                                                                                 >
+                                                                                    <div className="d-flex align-items-center justify-content-between my-3">
+                                                                                        <div>
+                                                                                            <Link
+                                                                                                to={`/course-online/topic-edit/${courseDetail.id}/${topic.slug}`}
+                                                                                                className="btn btn-icon btn-link-success"
+                                                                                            >
+                                                                                                <i className="ti ti-edit"></i>
+                                                                                            </Link>
+                                                                                            <button onClick={() => handleDeleteTopic(topic.id)} className="btn btn-icon btn-link-danger">
+                                                                                                <i className="ti ti-trash"></i>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <Link
+                                                                                            to={`/course-online/item-create/${courseDetail.slug}`}
+                                                                                            className="btn btn-outline-primary d-flex align-items-center"
+                                                                                        >
+                                                                                            <i className="ti ti-plus"></i> Add Item
+                                                                                        </Link>
+                                                                                    </div>
                                                                                     {topic.itemOnlineDTOList.length === 0 ? (
                                                                                         <p className="text-warning px-4 pt-3">This item has no content.</p>
                                                                                     ) : (
-                                                                                        <>
-                                                                                            <div className="d-flex align-items-center justify-content-between my-3">
-                                                                                                <div>
-                                                                                                    <Link
-                                                                                                        to={`/course-online/topic-edit/${courseDetail.id}/${topic.slug}`}
-                                                                                                        className="btn btn-icon btn-link-success"
-                                                                                                    >
-                                                                                                        <i className="ti ti-edit"></i>
-                                                                                                    </Link>
-                                                                                                    <button onClick={() => handleDeleteTopic(topic.id)} className="btn btn-icon btn-link-danger">
-                                                                                                        <i className="ti ti-trash"></i>
-                                                                                                    </button>
-                                                                                                </div>
-                                                                                                <Link
-                                                                                                    to={`/course-online/item-create/${courseDetail.slug}`}
-                                                                                                    className="btn btn-outline-primary d-flex align-items-center"
-                                                                                                >
-                                                                                                    <i className="ti ti-plus"></i> Add Item
-                                                                                                </Link>
-                                                                                            </div>
-
-                                                                                            <ul className="list-group list-group-flush mb-3 border">
-                                                                                                {topic.itemOnlineDTOList?.map((item, index) => (
-                                                                                                    <li className="list-group-item" key={index}>
-                                                                                                        <div className="d-flex align-items-center">
-                                                                                                            <div className="flex-shrink-0">
-                                                                                                                <div
-                                                                                                                    className="avtar avtar-s border"
-                                                                                                                    data-bs-toggle="tooltip"
-                                                                                                                    data-bs-title="143 Posts"
-                                                                                                                >
-                                                                                                                    <span>
-                                                                                                                        {item.itemType === 0 && <i className="ti ti-player-play"></i>}
-                                                                                                                        {item.itemType === 1 && <i className="ti ti-help"></i>}
-                                                                                                                        {item.itemType === 2 && <i className="ti ti-hash"></i>}
-                                                                                                                    </span>
-                                                                                                                </div>
+                                                                                        <ul className="list-group list-group-flush mb-3 border">
+                                                                                            {topic.itemOnlineDTOList?.map((item, index) => (
+                                                                                                <li className="list-group-item" key={index}>
+                                                                                                    <div className="d-flex align-items-center">
+                                                                                                        <div className="flex-shrink-0">
+                                                                                                            <div className="avtar avtar-s border" data-bs-toggle="tooltip" data-bs-title="143 Posts">
+                                                                                                                <span>
+                                                                                                                    {item.itemType === 0 && <i className="ti ti-player-play"></i>}
+                                                                                                                    {item.itemType === 1 && <i className="ti ti-help"></i>}
+                                                                                                                    {item.itemType === 2 && <i className="ti ti-hash"></i>}
+                                                                                                                </span>
                                                                                                             </div>
-                                                                                                            <div className="flex-grow-1 ms-3">
-                                                                                                                <div className="row g-1">
-                                                                                                                    <div className="col-6">
-                                                                                                                        <h6 className="mb-0">{item.title}</h6>
-                                                                                                                        <p className="text-muted mb-0">
-                                                                                                                            <small>
-                                                                                                                                {(item.createdDate &&
-                                                                                                                                    format(new Date(item.createdDate), "dd-MM-yyyy")) ||
-                                                                                                                                    "N/A"}
-                                                                                                                            </small>
-                                                                                                                        </p>
-                                                                                                                    </div>
-                                                                                                                    <div className="col-6 text-end">
-                                                                                                                        <div className="mail-buttons">
-                                                                                                                            <ul className="list-inline mb-0">
-                                                                                                                                <li className="list-inline-item">
-                                                                                                                                    <Link
-                                                                                                                                        to={`/course-online/item/${item.slug}`}
-                                                                                                                                        className="avtar avtar-s btn-link-secondary"
-                                                                                                                                    >
-                                                                                                                                        <i className="ti ti-eye f-18"></i>
-                                                                                                                                    </Link>
-                                                                                                                                </li>
-                                                                                                                                <li className="list-inline-item">
-                                                                                                                                    <Link
-                                                                                                                                        to={`/course-online/item-edit/${item.slug}`}
-                                                                                                                                        className="avtar avtar-s btn-link-secondary"
-                                                                                                                                    >
-                                                                                                                                        <i className="ti ti-edit f-18"></i>
-                                                                                                                                    </Link>
-                                                                                                                                </li>
-                                                                                                                                <li className="list-inline-item">
-                                                                                                                                    <button
-                                                                                                                                        onClick={() => handleDeleteItem(item.id)}
-                                                                                                                                        className="avtar avtar-s btn-link-secondary"
-                                                                                                                                    >
-                                                                                                                                        <i className="ti ti-trash f-18"></i>
-                                                                                                                                    </button>
-                                                                                                                                </li>
-                                                                                                                            </ul>
-                                                                                                                        </div>
+                                                                                                        </div>
+                                                                                                        <div className="flex-grow-1 ms-3">
+                                                                                                            <div className="row g-1">
+                                                                                                                <div className="col-6">
+                                                                                                                    <h6 className="mb-0">{item.title}</h6>
+                                                                                                                    <p className="text-muted mb-0">
+                                                                                                                        <small>
+                                                                                                                            {(item.createdDate && format(new Date(item.createdDate), "dd-MM-yyyy")) ||
+                                                                                                                                "N/A"}
+                                                                                                                        </small>
+                                                                                                                    </p>
+                                                                                                                </div>
+                                                                                                                <div className="col-6 text-end">
+                                                                                                                    <div className="mail-buttons">
+                                                                                                                        <ul className="list-inline mb-0">
+                                                                                                                            <li className="list-inline-item">
+                                                                                                                                <Link
+                                                                                                                                    to={`/course-online/item/${item.slug}`}
+                                                                                                                                    className="avtar avtar-s btn-link-secondary"
+                                                                                                                                >
+                                                                                                                                    <i className="ti ti-eye f-18"></i>
+                                                                                                                                </Link>
+                                                                                                                            </li>
+                                                                                                                            <li className="list-inline-item">
+                                                                                                                                <Link
+                                                                                                                                    to={`/course-online/item-edit/${item.slug}`}
+                                                                                                                                    className="avtar avtar-s btn-link-secondary"
+                                                                                                                                >
+                                                                                                                                    <i className="ti ti-edit f-18"></i>
+                                                                                                                                </Link>
+                                                                                                                            </li>
+                                                                                                                            <li className="list-inline-item">
+                                                                                                                                <button
+                                                                                                                                    onClick={() => handleDeleteItem(item.id)}
+                                                                                                                                    className="avtar avtar-s btn-link-secondary"
+                                                                                                                                >
+                                                                                                                                    <i className="ti ti-trash f-18"></i>
+                                                                                                                                </button>
+                                                                                                                            </li>
+                                                                                                                        </ul>
                                                                                                                     </div>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         </div>
-                                                                                                    </li>
-                                                                                                ))}
-                                                                                            </ul>
-                                                                                        </>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                            ))}
+                                                                                        </ul>
                                                                                     )}
                                                                                 </div>
                                                                             </div>

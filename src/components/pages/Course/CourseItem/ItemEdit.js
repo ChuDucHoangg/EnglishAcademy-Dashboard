@@ -31,7 +31,6 @@ function ItemEdit() {
     });
 
     const topics = topicData.response || [];
-    const topic = topics?.topicOnlineDetailList;
 
     console.log("Topic: " + topics);
 
@@ -250,11 +249,11 @@ function ItemEdit() {
                                                 onChange={handleChange}
                                             >
                                                 <option value="">Choose Topic</option>
-                                                {topic?.map((topic, index) => (
+                                                {/* {topic?.map((topic, index) => (
                                                     <option value={topic.id} key={index}>
                                                         {topic.name}
                                                     </option>
-                                                ))}
+                                                ))} */}
                                             </select>
                                             {formErrors.topicOnlineId && <p className="invalid-feedback">{formErrors.topicOnlineId}</p>}
                                         </div>

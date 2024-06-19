@@ -36,10 +36,9 @@ import NotFound from "../components/pages/Other/NotFound";
 import CategoryList from "../components/pages/Category/CategoryList";
 import CategoryEdit from "../components/pages/Category/CategoryEdit";
 import CategoryCreate from "../components/pages/Category/CategoryCreate";
-import BookingWaitingList from "../components/pages/Tutor/BookingWaiting/BookingWaitingList";
-import ByPackage from "../components/pages/Tutor/BookingWaitingDetail/ByPackage";
-import ByWeeks from "../components/pages/Tutor/BookingWaitingDetail/ByWeeks";
-import BookingList from "../components/pages/Tutor/Booking/BookingList";
+import BookingWaitingList from "../components/pages/Booking/BookingWaiting/BookingWaitingList";
+import ByPackage from "../components/pages/Booking/BookingWaitingDetail/ByPackage";
+import ByWeeks from "../components/pages/Booking/BookingWaitingDetail/ByWeeks";
 import CourseOfflineList from "../components/pages/CourseOffline/CourseOfflineList";
 import CourseOfflineDetail from "../components/pages/CourseOffline/CourseOfflineDetail";
 import CourseOfflineEdit from "../components/pages/CourseOffline/CourseOfflineEdit";
@@ -50,6 +49,8 @@ import ItemEdit from "../components/pages/Course/CourseItem/ItemEdit";
 import LessonBookingEdit from "../components/pages/LessonBooking/LessonBookingEdit";
 import CourseTopicCreate from "../components/pages/Course/CourseTopic/CourseTopicCreate";
 import CourseTopicEdit from "../components/pages/Course/CourseTopic/CourseTopicEdit";
+import TutorRegistration from "../components/pages/Tutor/TutorRegistration";
+import BookingList from "../components/pages/Booking/BookingList";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
@@ -111,6 +112,8 @@ const privateRoutes = [
     { path: config.routes.staff_create, component: StaffCreate },
     { path: config.routes.staff_edit, component: StaffEdit },
     { path: config.routes.profile, component: ProfileWrap },
+
+    { path: config.routes.tutor_registration, component: TutorRegistration },
 
     { path: config.routes.booking_waiting_list, component: BookingWaitingList },
     { path: config.routes.booking_waiting_package, component: ByPackage },

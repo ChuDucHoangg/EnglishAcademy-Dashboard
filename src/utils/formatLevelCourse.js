@@ -2,15 +2,19 @@ export function levelCourse() {
     const levelCourse = [
         {
             level: 0,
+            title: "Basic",
         },
         {
             level: 1,
+            title: "Intermediate",
         },
         {
             level: 2,
+            title: "Advanced",
         },
         {
             level: 3,
+            title: "Expert",
         },
     ];
 

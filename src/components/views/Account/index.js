@@ -4,6 +4,7 @@ import { getAccessToken } from "../../../utils/auth";
 import Swal from "sweetalert2";
 import api from "../../../services/api";
 import { toast } from "react-toastify";
+import { format, differenceInYears } from "date-fns";
 
 function Account() {
     const [info, setInfo] = useState({});
@@ -11,6 +12,7 @@ function Account() {
     const [isEditing, setIsEditing] = useState(false);
     const [editedInfo, setEditedInfo] = useState({});
     const [phoneError, setPhoneError] = useState("");
+    const [dobError, setDobError] = useState("");
 
     const userData = async () => {
         try {
@@ -50,6 +52,7 @@ function Account() {
         setEditButtonVisible(true);
         setEditedInfo({ ...info });
         setPhoneError("");
+        setDobError("");
     };
 
     const validatePhoneNumber = (phone) => {
@@ -68,9 +71,29 @@ function Account() {
         }
     };
 
+    const validateDob = (dob) => {
+        const today = new Date();
+        const selectedDate = new Date(dob);
+        const age = differenceInYears(today, selectedDate);
+
+        if (selectedDate > today) {
+            return "Birthdate cannot be in the future.";
+        } else if (age < 10) {
+            return "You must be at least 10 years old.";
+        }
+        return "";
+    };
+
+    const handleDobChange = (e) => {
+        const { value } = e.target;
+        const error = validateDob(value);
+        setEditedInfo({ ...editedInfo, dob: value });
+        setDobError(error);
+    };
+
     const handleSaveClick = async () => {
-        if (phoneError) {
-            toast.error(phoneError, {
+        if (phoneError || dobError) {
+            toast.error(phoneError || dobError, {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -186,14 +209,12 @@ function Account() {
                                             <p className="mb-1 text-muted">Birthday</p>
                                             <p className="mb-0">
                                                 {isEditing ? (
-                                                    <input
-                                                        type="date"
-                                                        className="form-control form-control-sm"
-                                                        value={editedInfo.dob || ""}
-                                                        onChange={(e) => setEditedInfo({ ...editedInfo, dob: e.target.value })}
-                                                    />
+                                                    <>
+                                                        <input type="date" className="form-control form-control-sm" value={editedInfo.dob || ""} onChange={handleDobChange} />
+                                                        {dobError && <span className="text-danger">{dobError}</span>}
+                                                    </>
                                                 ) : (
-                                                    editedInfo.dob || "N/A"
+                                                    (editedInfo.dob && format(new Date(editedInfo.dob), "dd-MM-yyyy")) || "N/A"
                                                 )}
                                             </p>
                                         </div>
@@ -230,98 +251,49 @@ function Account() {
                     </div>
                 </div>
                 <div className="col-lg-4 col-xxl-3">
-                    {/* <div className="card">
-                        <div className="card-body position-relative">
-                            <div className="position-absolute end-0 top-0 p-3">
-                                <span className="badge bg-primary">Pro</span>
-                            </div>
-                            <div className="text-center mt-3">
-                                <div className="chat-avtar d-inline-flex mx-auto">
-                                    <img className="rounded-circle img-fluid wid-70" src="../assets/images/user/avatar-5.jpg" alt="" />
-                                </div>
-                                <h5 className="mb-0">Anshan H.</h5>
-                                <p className="text-muted text-sm">Project Manager</p>
-                                <hr className="my-3 border border-secondary-subtle" />
-                                <div className="row g-3">
-                                    <div className="col-4">
-                                        <h5 className="mb-0">86</h5>
-                                        <small className="text-muted">Post</small>
-                                    </div>
-                                    <div className="col-4 border border-top-0 border-bottom-0">
-                                        <h5 className="mb-0">40</h5>
-                                        <small className="text-muted">Project</small>
-                                    </div>
-                                    <div className="col-4">
-                                        <h5 className="mb-0">4.5K</h5>
-                                        <small className="text-muted">Members</small>
-                                    </div>
-                                </div>
-                                <hr className="my-3 border border-secondary-subtle" />
-                                <div className="d-inline-flex align-items-center justify-content-start w-100 mb-3">
-                                    <i className="ti ti-mail me-2"></i>
-                                    <p className="mb-0">anshan@gmail.com</p>
-                                </div>
-                                <div className="d-inline-flex align-items-center justify-content-start w-100 mb-3">
-                                    <i className="ti ti-phone me-2"></i>
-                                    <p className="mb-0">(+1-876) 8654 239 581</p>
-                                </div>
-                                <div className="d-inline-flex align-items-center justify-content-start w-100 mb-3">
-                                    <i className="ti ti-map-pin me-2"></i>
-                                    <p className="mb-0">New York</p>
-                                </div>
-                                <div className="d-inline-flex align-items-center justify-content-start w-100">
-                                    <i className="ti ti-link me-2"></i>
-                                    <a href="#!" className="link-primary">
-                                        <p className="mb-0">https://anshan.dh.url</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
-
-                    <div class="card">
-                        <div class="card-header">
+                    <div className="card">
+                        <div className="card-header">
                             <h5>Social Network</h5>
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="flex-grow-1 me-3">
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0">
-                                            <div class="avtar avtar-xs btn-light-twitter">
-                                                <i class="fab fa-twitter f-16"></i>
+                        <div className="card-body">
+                            <div className="d-flex align-items-center mb-2">
+                                <div className="flex-grow-1 me-3">
+                                    <div className="d-flex align-items-center">
+                                        <div className="flex-shrink-0">
+                                            <div className="avtar avtar-xs btn-light-twitter">
+                                                <i className="fab fa-twitter f-16"></i>
                                             </div>
                                         </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <h6 class="mb-0">Twitter</h6>
+                                        <div className="flex-grow-1 ms-3">
+                                            <h6 className="mb-0">Twitter</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="flex-grow-1 me-3">
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0">
-                                            <div class="avtar avtar-xs btn-light-facebook">
-                                                <i class="fab fa-facebook-f f-16"></i>
+                            <div className="d-flex align-items-center mb-2">
+                                <div className="flex-grow-1 me-3">
+                                    <div className="d-flex align-items-center">
+                                        <div className="flex-shrink-0">
+                                            <div className="avtar avtar-xs btn-light-facebook">
+                                                <i className="fab fa-facebook-f f-16"></i>
                                             </div>
                                         </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <h6 class="mb-0">Facebook</h6>
+                                        <div className="flex-grow-1 ms-3">
+                                            <h6 className="mb-0">Facebook</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1 me-3">
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0">
-                                            <div class="avtar avtar-xs btn-light-linkedin">
-                                                <i class="fab fa-linkedin-in f-16"></i>
+                            <div className="d-flex align-items-center">
+                                <div className="flex-grow-1 me-3">
+                                    <div className="d-flex align-items-center">
+                                        <div className="flex-shrink-0">
+                                            <div className="avtar avtar-xs btn-light-linkedin">
+                                                <i className="fab fa-linkedin-in f-16"></i>
                                             </div>
                                         </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <h6 class="mb-0">Linkedin</h6>
+                                        <div className="flex-grow-1 ms-3">
+                                            <h6 className="mb-0">Linkedin</h6>
                                         </div>
                                     </div>
                                 </div>
