@@ -34,6 +34,7 @@ function CourseTopicEdit() {
     useEffect(() => {
         if (topic) {
             setFormData({
+                id: topic.id || "",
                 name: topic.name || "",
                 orderTop: topic.orderTop || "",
                 courseOnlineId: parseInt(courseId),
@@ -73,12 +74,12 @@ function CourseTopicEdit() {
         return valid;
     };
 
-    const handleCreate = async (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault();
 
         if (validateForm()) {
             try {
-                const createRequest = await api.post(url.TOPIC.CREATE, formData);
+                const createRequest = await api.put(url.TOPIC.UPDATE, formData);
 
                 if (createRequest.status === 200) {
                     toast.success("Created Item Successfully!", {
@@ -119,7 +120,7 @@ function CourseTopicEdit() {
                 <div className="col-xl-12">
                     <div className="card">
                         <div className="card-body">
-                            <form onSubmit={handleCreate}>
+                            <form onSubmit={handleUpdate}>
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group">
@@ -156,7 +157,7 @@ function CourseTopicEdit() {
                                     </div>
 
                                     <div className="text-end col-md-12">
-                                        <ButtonSubmit className="btn-primary" value="Update Topic" handleEvent={handleCreate} />
+                                        <ButtonSubmit className="btn-primary" value="Update Topic" handleEvent={handleUpdate} />
                                     </div>
                                 </div>
                             </form>

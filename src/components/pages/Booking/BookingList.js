@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import Layout from "../../../layouts";
-import useAxiosGet from "../../../../hooks/useAxiosGet";
-import url from "../../../../services/url";
-import { getAccessToken } from "../../../../utils/auth";
-import { statusColor } from "../../../../utils/statusColor";
-import BookLoading from "../../../layouts/BookLoading";
+import Layout from "../../layouts";
+import useAxiosGet from "../../../hooks/useAxiosGet";
+import url from "../../../services/url";
+import BookLoading from "../../layouts/BookLoading";
+import { statusColor } from "../../../utils/statusColor";
+import { getAccessToken } from "../../../utils/auth";
 
 function BookingList() {
     const bookingData = useAxiosGet({

@@ -100,16 +100,16 @@ function Sidebar() {
                             </NavLink>
                         </li>
 
-                        <li className="pc-item pc-hasmenu">
+                        {/* <li className="pc-item pc-hasmenu">
                             <NavLink to={config.routes.lesson_online} className="pc-link">
                                 <span className="pc-micon">
                                     <i className="fas fa-book-open"></i>
                                 </span>
                                 <span className="pc-mtext">Lesson</span>
                             </NavLink>
-                        </li>
+                        </li> */}
 
-                        <li className="pc-item pc-caption">
+                        {/* <li className="pc-item pc-caption">
                             <label>Exam & Test</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
@@ -143,9 +143,9 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Question</span>
                             </NavLink>
-                        </li>
+                        </li> */}
 
-                        <li className="pc-item pc-caption">
+                        {/* <li className="pc-item pc-caption">
                             <label>Timetable</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
@@ -155,7 +155,7 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Timetable</span>
                             </NavLink>
-                        </li>
+                        </li> */}
 
                         <li className="pc-item pc-caption">
                             <label>Tutor</label>
@@ -177,7 +177,16 @@ function Sidebar() {
                             </NavLink>
                         </li>
 
-                        <li className="pc-item pc-caption">
+                        <li className="pc-item pc-hasmenu">
+                            <NavLink to={config.routes.tutor_registration} className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-user-edit"></i>
+                                </span>
+                                <span className="pc-mtext">Tutor Registration</span>
+                            </NavLink>
+                        </li>
+
+                        {/* <li className="pc-item pc-caption">
                             <label>Class & Room</label>
                         </li>
                         <li className="pc-item pc-hasmenu">
@@ -227,7 +236,7 @@ function Sidebar() {
                                 </span>
                                 <span className="pc-mtext">Staff</span>
                             </NavLink>
-                        </li>
+                        </li> */}
 
                         <li className="pc-item pc-caption">
                             <label>Information</label>

@@ -31170,6 +31170,10 @@ div.dataTables_wrapper div.dt-row {
   }
   
 
+  .user-upload .img-avtar-upload {
+    opacity: 1;
+  }
+
 /**  =====================
   36. Customizer css end
 ==========================  **/

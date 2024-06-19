@@ -19,6 +19,7 @@ const url = {
     TOPIC: {
         DETAIL: "any/topic-online/get-by-slug",
         CREATE: "any/topic-online",
+        UPDATE: "any/topic-online",
         DELETE: "any/topic-online",
     },
 
@@ -54,6 +55,8 @@ const url = {
     },
 
     TUTOR: {
+        TUTOR_REGISTRATION: "any/tutor/hello",
+
         BOOKING_WAITING: "tutor/booking-waiting",
         BOOKING_WAITING_PACKAGE: "package-student/tutor",
         BOOKING_WAITING_WEEKS: "subscription/tutor",
