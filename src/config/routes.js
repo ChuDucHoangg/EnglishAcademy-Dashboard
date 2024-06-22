@@ -90,6 +90,8 @@ const routes = {
     tutor_registration: "/tutor/registration",
 
     booking_list: "/booking",
+    booking_detail: "/booking/:bookingId",
+    lesson_booking_create: "/lesson-booking",
     lesson_booking_edit: "/lesson-booking/edit/:bookingId",
 
     booking_waiting_list: "/booking-waiting",

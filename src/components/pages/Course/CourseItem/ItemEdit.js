@@ -1,15 +1,18 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../../layouts";
 import useAxiosGet from "../../../../hooks/useAxiosGet";
 import url from "../../../../services/url";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { getAccessToken } from "../../../../utils/auth";
 import ReactPlayer from "react-player";
 import api from "../../../../services/api";
 import { toast } from "react-toastify";
+import ButtonSubmit from "../../../layouts/ButtonSubmit";
+import NotFound from "../../Other/NotFound";
 
 function ItemEdit() {
     const { slug } = useParams();
+    const navigate = useNavigate();
 
     const itemType = [
         {
@@ -26,15 +29,6 @@ function ItemEdit() {
         },
     ];
 
-    const topicData = useAxiosGet({
-        path: url.COURSE.DETAIL + `/${slug}`,
-    });
-
-    const topics = topicData.response || [];
-
-    console.log("Topic: " + topics);
-
-    // eslint-disable-next-line no-unused-vars
     const [duration, setDuration] = useState(0);
 
     const handleDuration = (duration) => {
@@ -73,6 +67,27 @@ function ItemEdit() {
     });
 
     const itemDetail = useMemo(() => itemData.response || {}, [itemData.response]);
+    const [courseSlug, setCourseSlug] = useState(null);
+    const [courseDetail, setCourseDetail] = useState({});
+
+    useEffect(() => {
+        if (itemDetail.courseSlug) {
+            setCourseSlug(itemDetail.courseSlug);
+        }
+    }, [itemDetail]);
+
+    const loadData = useCallback(async () => {
+        try {
+            const courseResponse = await api.get(url.COURSE.DETAIL + `/${courseSlug}`);
+            setCourseDetail(courseResponse.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [courseSlug]);
+
+    useEffect(() => {
+        loadData();
+    }, [loadData]);
 
     useEffect(() => {
         if (itemDetail) {
@@ -91,7 +106,19 @@ function ItemEdit() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        // setFormData({ ...formData, [name]: value });
+
+        let convertedValue = value;
+
+        if (name === "itemType" || name === "orderTop" || name === "topicOnlineId") {
+            convertedValue = value ? parseInt(value, 10) : null;
+        }
+
+        setFormData({
+            ...formData,
+            [name]: convertedValue,
+        });
+
         setFormErrors({ ...formErrors, [name]: "" });
     };
 
@@ -149,7 +176,7 @@ function ItemEdit() {
 
         if (validateForm()) {
             try {
-                const updateRequest = await api.put(url.ITEM.UPDATE + `/${formData.id}`, formData, {
+                const updateRequest = await api.put(url.ITEM.UPDATE, formData, {
                     headers: { Authorization: `Bearer ${getAccessToken()}` },
                 });
 
@@ -164,6 +191,8 @@ function ItemEdit() {
                         progress: undefined,
                         theme: "colored",
                     });
+
+                    navigate(`/course-online/detail/${courseSlug}`);
                 }
             } catch (error) {
                 toast.error("Error! An error occurred. Please try again later!", {
@@ -180,134 +209,136 @@ function ItemEdit() {
         }
     };
 
-    return (
-        <Layout title="Item Edit">
-            <div className="row">
-                <div className="col-sm-12">
-                    <div className="card">
-                        <div className="card-body">
-                            <form onSubmit={handleSubmit}>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className="form-label">Title</label>
-                                            <input
-                                                type="text"
-                                                name="title"
-                                                value={formData.title}
-                                                className={`form-control ${formErrors.title ? "is-invalid" : ""}`}
-                                                placeholder="Enter Title"
-                                                onChange={handleChange}
-                                            />
-                                            {formErrors.title && <p className="invalid-feedback">{formErrors.title}</p>}
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="form-label">Duration</label>
-                                            <input
-                                                type="text"
-                                                name="duration"
-                                                value={formData.duration}
-                                                className={`form-control ${formErrors.duration ? "is-invalid" : ""}`}
-                                                onChange={handleChange}
-                                            />
-                                            {formErrors.duration && <p className="invalid-feedback">{formErrors.duration}</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className="form-label">Path URL</label>
-                                            <input
-                                                type="text"
-                                                name="pathUrl"
-                                                className={`form-control ${formErrors.pathUrl ? "is-invalid" : ""}`}
-                                                placeholder="Enter Path URL"
-                                                value={formData.pathUrl}
-                                                onChange={handleChange}
-                                            />
-                                            {formErrors.pathUrl && <p className="invalid-feedback">{formErrors.pathUrl}</p>}
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="form-label">Item Type</label>
-                                            <select name="itemType" className={`form-control ${formErrors.itemType ? "is-invalid" : ""}`} value={formData.itemType} onChange={handleChange}>
-                                                <option value="">Choose Type</option>
-                                                {itemType.map((item, index) => (
-                                                    <option value={item.type} key={index}>
-                                                        {item.name}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                            {formErrors.itemType && <p className="invalid-feedback">{formErrors.itemType}</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className="form-label">Topic</label>
-                                            <select
-                                                name="topicOnlineId"
-                                                value={formData.topicOnlineId}
-                                                className={`form-control ${formErrors.topicOnlineId ? "is-invalid" : ""}`}
-                                                onChange={handleChange}
-                                            >
-                                                <option value="">Choose Topic</option>
-                                                {/* {topic?.map((topic, index) => (
-                                                    <option value={topic.id} key={index}>
-                                                        {topic.name}
-                                                    </option>
-                                                ))} */}
-                                            </select>
-                                            {formErrors.topicOnlineId && <p className="invalid-feedback">{formErrors.topicOnlineId}</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label className="form-label">Order Top</label>
-                                            <input
-                                                type="number"
-                                                name="orderTop"
-                                                value={formData.orderTop}
-                                                className={`form-control ${formErrors.orderTop ? "is-invalid" : ""}`}
-                                                onChange={handleChange}
-                                            />
-                                            {formErrors.orderTop && <p className="invalid-feedback">{formErrors.orderTop}</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-9">
-                                        <div className="form-group">
-                                            <label className="form-label">Content</label>
-                                            <textarea
-                                                name="content"
-                                                value={formData.content}
-                                                className={`form-control ${formErrors.content ? "is-invalid" : ""}`}
-                                                cols="30"
-                                                rows="3"
-                                                onChange={handleChange}
-                                            ></textarea>
-                                            {formErrors.content && <p className="invalid-feedback">{formErrors.content}</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-3 mt-auto">
-                                        <div className="text-end btn-page">
-                                            <button className="btn btn-primary" type="submit">
-                                                <span className="d-flex align-items-center justify-content-center">
-                                                    <i className="ti ti-plus"></i>Update This Item
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
+    const topicCourse = courseDetail.topicOnlineDetailList || [];
 
-                                    <div className="col-md-6">
-                                        <div className="mb-3">
-                                            <label className="text-label form-label">Preview Trailer</label>
-                                            {formData.pathUrl && <ReactPlayer url={formData.pathUrl} onDuration={handleDuration} />}
+    return (
+        <>
+            {itemData.errorStatus === 404 ? (
+                <NotFound />
+            ) : (
+                <Layout title="Item Edit">
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="form-group">
+                                                <label className="form-label">Title</label>
+                                                <input
+                                                    type="text"
+                                                    name="title"
+                                                    value={formData.title}
+                                                    className={`form-control ${formErrors.title ? "is-invalid" : ""}`}
+                                                    placeholder="Enter Title"
+                                                    onChange={handleChange}
+                                                />
+                                                {formErrors.title && <p className="invalid-feedback">{formErrors.title}</p>}
+                                            </div>
+                                            <div className="form-group">
+                                                <label className="form-label">Duration</label>
+                                                <input
+                                                    type="text"
+                                                    name="duration"
+                                                    value={formData.duration || duration}
+                                                    className={`form-control ${formErrors.duration ? "is-invalid" : ""}`}
+                                                    onChange={handleChange}
+                                                />
+                                                {formErrors.duration && <p className="invalid-feedback">{formErrors.duration}</p>}
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="form-group">
+                                                <label className="form-label">Path URL</label>
+                                                <input
+                                                    type="text"
+                                                    name="pathUrl"
+                                                    className={`form-control ${formErrors.pathUrl ? "is-invalid" : ""}`}
+                                                    placeholder="Enter Path URL"
+                                                    value={formData.pathUrl}
+                                                    onChange={handleChange}
+                                                />
+                                                {formErrors.pathUrl && <p className="invalid-feedback">{formErrors.pathUrl}</p>}
+                                            </div>
+                                            <div className="form-group">
+                                                <label className="form-label">Item Type</label>
+                                                <select name="itemType" className={`form-control ${formErrors.itemType ? "is-invalid" : ""}`} value={formData.itemType} onChange={handleChange}>
+                                                    <option value="">Choose Type</option>
+                                                    {itemType.map((item, index) => (
+                                                        <option value={item.type} key={index}>
+                                                            {item.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                                {formErrors.itemType && <p className="invalid-feedback">{formErrors.itemType}</p>}
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="form-group">
+                                                <label className="form-label">Topic</label>
+                                                <select
+                                                    name="topicOnlineId"
+                                                    value={formData.topicOnlineId}
+                                                    className={`form-control ${formErrors.topicOnlineId ? "is-invalid" : ""}`}
+                                                    onChange={handleChange}
+                                                >
+                                                    <option value="">Choose Type</option>
+                                                    {topicCourse?.map((topic, index) => (
+                                                        <option value={topic.id} key={index}>
+                                                            {topic.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                                {formErrors.topicOnlineId && <p className="invalid-feedback">{formErrors.topicOnlineId}</p>}
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="form-group">
+                                                <label className="form-label">Order Top</label>
+                                                <input
+                                                    type="number"
+                                                    name="orderTop"
+                                                    value={formData.orderTop}
+                                                    className={`form-control ${formErrors.orderTop ? "is-invalid" : ""}`}
+                                                    onChange={handleChange}
+                                                />
+                                                {formErrors.orderTop && <p className="invalid-feedback">{formErrors.orderTop}</p>}
+                                            </div>
+                                        </div>
+                                        <div className="col-md-9">
+                                            <div className="form-group">
+                                                <label className="form-label">Content</label>
+                                                <textarea
+                                                    name="content"
+                                                    value={formData.content}
+                                                    className={`form-control ${formErrors.content ? "is-invalid" : ""}`}
+                                                    cols="30"
+                                                    rows="3"
+                                                    onChange={handleChange}
+                                                ></textarea>
+                                                {formErrors.content && <p className="invalid-feedback">{formErrors.content}</p>}
+                                            </div>
+                                        </div>
+                                        <div className="col-md-3 mt-auto">
+                                            <div className="text-end btn-page">
+                                                <ButtonSubmit value="Update This Item" valueSubmit="Updating..." className="btn-primary" icon="ti ti-plus" handleEvent={handleSubmit} />
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-6">
+                                            <div className="mb-3">
+                                                <label className="text-label form-label">Preview Trailer</label>
+                                                {formData.pathUrl && <ReactPlayer url={formData.pathUrl} onDuration={handleDuration} />}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </Layout>
+                </Layout>
+            )}
+        </>
     );
 }
 
