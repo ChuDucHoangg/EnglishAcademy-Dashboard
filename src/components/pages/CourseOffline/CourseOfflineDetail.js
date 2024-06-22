@@ -5,6 +5,7 @@ import { getAccessToken } from "../../../utils/auth";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { format } from "date-fns";
+import CourseOfflineSubject from "../../views/CourseOffline/Subject";
 
 function CourseOfflineDetail() {
     const { slug } = useParams();
@@ -17,6 +18,8 @@ function CourseOfflineDetail() {
     });
 
     const courseDetail = courseOfflineData.response || {};
+
+    const subjects = courseDetail.subjectList || [];
 
     return (
         <Layout title="Course Offline Detail">
@@ -151,7 +154,7 @@ function CourseOfflineDetail() {
                                                         <ul className="nav nav-tabs profile-tabs" id="myTab" role="tablist">
                                                             <li className="nav-item" role="presentation">
                                                                 <a className="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="!#profile-1" role="tab" aria-selected="true">
-                                                                    <i className="ti ti-user me-2"></i>Lesson
+                                                                    <i className="ti ti-user me-2"></i>Subject
                                                                 </a>
                                                             </li>
                                                             <li className="nav-item" role="presentation">
@@ -173,75 +176,7 @@ function CourseOfflineDetail() {
                                                 <div className="card-body scroll-block">
                                                     <div className="tab-content">
                                                         <div className="tab-pane active show" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
-                                                            <table className="table table-borderless mb-0 mail-table">
-                                                                <tbody>
-                                                                    <tr className="unread">
-                                                                        <td>
-                                                                            <div className="d-flex align-items-center">
-                                                                                <div className="form-check form-check-inline m-0 pc-icon-checkbox">
-                                                                                    <input className="form-check-input" type="checkbox" />
-                                                                                    <i className="material-icons-two-tone pc-icon-uncheck"></i>
-                                                                                    <i className="material-icons-two-tone text-primary pc-icon-check"></i>
-                                                                                </div>
-                                                                                <div className="form-check form-check-inline my-0 mx-3 pc-icon-checkbox">
-                                                                                    <input className="form-check-input" type="checkbox" />
-                                                                                    <i className="material-icons-two-tone pc-icon-uncheck"></i>
-                                                                                    <i className="material-icons-two-tone text-warning pc-icon-check"></i>
-                                                                                </div>
-                                                                                <div className="form-check form-check-inline m-0 pc-icon-checkbox">
-                                                                                    <input className="form-check-input" type="checkbox" />
-                                                                                    <i className="material-icons-two-tone pc-icon-uncheck"></i>
-                                                                                    <i className="material-icons-two-tone text-secondary pc-icon-check"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div className="d-flex align-items-center">
-                                                                                <img src="../assets/images/user/avatar-1.jpg" alt="user" className="img-user rounded-circle" />
-                                                                                <h6 className="mb-0 ms-2 text-truncate">Barney Thea</h6>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div className="d-flex w-100 align-items-center">
-                                                                                <div className="flex-grow-1 position-relative">
-                                                                                    <p className="mb-0 mail-text text-truncate">
-                                                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                                                                        standard dummy text ever since the 1500s.been the industry's standard dummy text ever since the 1500s.
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td></td>
-                                                                        <td className="mail-option">
-                                                                            12 Jul 22 08:23 AM
-                                                                            <div className="mail-buttons">
-                                                                                <ul className="list-inline mb-0">
-                                                                                    <li className="list-inline-item">
-                                                                                        <a href="!#" className="avtar avtar-s btn-link-secondary">
-                                                                                            <i className="ti ti-archive f-18"></i>
-                                                                                        </a>
-                                                                                    </li>
-                                                                                    <li className="list-inline-item">
-                                                                                        <a href="!#" className="avtar avtar-s btn-link-secondary">
-                                                                                            <i className="ti ti-mail f-18"></i>
-                                                                                        </a>
-                                                                                    </li>
-                                                                                    <li className="list-inline-item">
-                                                                                        <a href="!#" className="avtar avtar-s btn-link-secondary">
-                                                                                            <i className="ti ti-trash f-18"></i>
-                                                                                        </a>
-                                                                                    </li>
-                                                                                    <li className="list-inline-item">
-                                                                                        <a href="!#" className="avtar avtar-s btn-link-secondary">
-                                                                                            <i className="ti ti-eye-off f-18"></i>
-                                                                                        </a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
+                                                            <CourseOfflineSubject subjects={subjects} />
                                                         </div>
                                                     </div>
                                                 </div>

@@ -31,7 +31,7 @@ const url = {
 
     COURSE_OFFLINE: {
         LIST: "course-offline",
-        DETAIL: "course-offline",
+        DETAIL: "course-offline/user/detail",
         CREATE: "course-offline",
         UPDATE: "course-offline",
         DELETE: "course-offline",

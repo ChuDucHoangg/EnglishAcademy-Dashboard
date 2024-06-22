@@ -15,6 +15,7 @@ export const getAccessToken = () => {
 // Remove token from cookie when logging out
 export const removeAccessToken = () => {
     Cookies.remove("access_tokens");
+    sessionStorage.removeItem("first_visit");
 };
 
 // Decode tokens
