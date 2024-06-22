@@ -146,7 +146,7 @@ function Login() {
                                 </Link>
                             </div>
                             <div className="d-grid mt-4">
-                                <ButtonSubmit value="Login" valueSubmit="Login.." handleEvent={handleLogin} className="btn-primary" submitting={submitting} />
+                                <ButtonSubmit value="Login" valueSubmit="Login..." handleEvent={handleLogin} className="btn-primary" submitting={submitting} />
                             </div>
                             <div className="saprator my-3">
                                 <span>OR</span>

@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import NotFound from "../../Other/NotFound";
 import { useCallback, useEffect, useState } from "react";
 import { statusColor } from "../../../../utils/statusColor";
+import ButtonSubmit from "../../../layouts/ButtonSubmit";
+
 function ByPackage() {
     const { bookingId } = useParams();
 
@@ -119,6 +121,104 @@ function ByPackage() {
         }
     };
 
+    const [submitting, setSubmitting] = useState(false);
+
+    const [formData, setFormData] = useState({
+        bookingId: parseInt(bookingId),
+        startTime: "",
+        endTime: "",
+    });
+
+    const [formErrors, setFormErrors] = useState({
+        bookingId: parseInt(bookingId),
+        startTime: "",
+        endTime: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        const currentDate = new Date();
+        const selectedDate = new Date(value);
+
+        if (selectedDate < currentDate) {
+            setFormErrors({
+                ...formErrors,
+                [name]: "The selected date cannot be after the current date.",
+            });
+        } else {
+            setFormErrors({
+                ...formErrors,
+                [name]: "",
+            });
+
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
+        }
+    };
+
+    const validateForm = () => {
+        let valid = true;
+        const newErrors = {};
+        const currentDate = new Date();
+
+        if (formData.startTime === "") {
+            newErrors.startTime = "Please enter a topic start time.";
+            valid = false;
+        } else if (new Date(formData.startTime) < currentDate) {
+            newErrors.startTime = "The selected start time cannot be before the current date.";
+            valid = false;
+        }
+
+        if (formData.endTime === "") {
+            newErrors.endTime = "Please enter a topic end time.";
+            valid = false;
+        } else if (new Date(formData.endTime) < currentDate) {
+            newErrors.endTime = "The selected end time cannot be before the current date.";
+            valid = false;
+        } else if (new Date(formData.endTime) - new Date(formData.startTime) < 2 * 60 * 60 * 1000) {
+            newErrors.endTime = "The end time cannot be more than 2 hours after the start time.";
+            valid = false;
+        } else if (new Date(formData.endTime) - new Date(formData.startTime) >= 2 * 61 * 60 * 1000) {
+            newErrors.endTime = "The end time cannot be less than 2 hours after the start time.";
+            valid = false;
+        }
+
+        setFormErrors(newErrors);
+        return valid;
+    };
+
+    const handleCreateLesson = async (e) => {
+        e.preventDefault();
+
+        if (validateForm()) {
+            try {
+                setSubmitting(true);
+                const createRequest = await api.post(url.LESSON_BOOKING.CREATE, formData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                if (createRequest.status === 200) {
+                    toast.success("Created successful study sessions!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+
+                    setFormData({ bookingId: parseInt(bookingId), startTime: "", endTime: "" });
+                }
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setSubmitting(false);
+            }
+        }
+    };
+
     return (
         <>
             {bookingDetail.status === 404 ? (
@@ -147,6 +247,71 @@ function ByPackage() {
                                                             </div>
                                                         </div>
                                                     </li>
+                                                )}
+
+                                                {bookingDetail?.status === "confirmed" && (
+                                                    <div className="text-end">
+                                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createLesson">
+                                                            <i className="ti ti-plus"></i> Create Lesson
+                                                        </button>
+
+                                                        <div id="createLesson" className="modal fade" tabIndex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div className="modal-dialog modal-dialog-centered" role="document">
+                                                                <div className="modal-content">
+                                                                    <div className="modal-header">
+                                                                        <h5 className="modal-title" id="exampleModalCenterTitle">
+                                                                            Create Lesson
+                                                                        </h5>
+                                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div className="modal-body">
+                                                                        <div className="row">
+                                                                            <div className="col-12">
+                                                                                <div className="form-group text-start">
+                                                                                    <label className="form-label" htmlFor="start-time">
+                                                                                        Start Time
+                                                                                    </label>
+
+                                                                                    <input
+                                                                                        type="datetime-local"
+                                                                                        id="start-time"
+                                                                                        name="startTime"
+                                                                                        className={`form-control ${formErrors.startTime ? "is-invalid" : ""}`}
+                                                                                        onChange={handleChange}
+                                                                                        value={formData.startTime}
+                                                                                    />
+                                                                                    {formErrors.startTime && <p className="invalid-feedback">{formErrors.startTime}</p>}
+                                                                                </div>
+
+                                                                                <div className="form-group text-start">
+                                                                                    <label className="form-label" htmlFor="end-time">
+                                                                                        End Time
+                                                                                    </label>
+
+                                                                                    <input
+                                                                                        type="datetime-local"
+                                                                                        id="end-time"
+                                                                                        name="endTime"
+                                                                                        className={`form-control ${formErrors.endTime ? "is-invalid" : ""}`}
+                                                                                        onChange={handleChange}
+                                                                                        value={formData.endTime}
+                                                                                    />
+                                                                                    {formErrors.endTime && <p className="invalid-feedback">{formErrors.endTime}</p>}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="modal-footer">
+                                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+                                                                            Close
+                                                                        </button>
+
+                                                                        <ButtonSubmit value="Save changes" className="btn-primary" submitting={submitting} handleEvent={handleCreateLesson} />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 )}
 
                                                 <li className="list-group-item px-0 pt-3">

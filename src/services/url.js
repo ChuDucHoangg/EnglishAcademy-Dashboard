@@ -26,6 +26,7 @@ const url = {
     ITEM: {
         DETAIL: "any/item-online/get-by-slug",
         CREATE: "item-online",
+        UPDATE: "item-online",
         DELETE: "item-online",
     },
 
@@ -68,8 +69,13 @@ const url = {
         BOOKING_CANCEL_WEEKS: "subscription/cancel",
 
         BOOKING_BY_TUTOR: "tutor/booking",
+        BOOKING_DETAIL: "user/booking",
 
         BOOKING_ROOM: "lession-booking",
+    },
+
+    LESSON_BOOKING: {
+        CREATE: "lession-booking",
     },
 };
 export default url;

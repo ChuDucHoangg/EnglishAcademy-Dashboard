@@ -51,6 +51,7 @@ import CourseTopicCreate from "../components/pages/Course/CourseTopic/CourseTopi
 import CourseTopicEdit from "../components/pages/Course/CourseTopic/CourseTopicEdit";
 import TutorRegistration from "../components/pages/Tutor/TutorRegistration";
 import BookingList from "../components/pages/Booking/BookingList";
+import BookingDetail from "../components/pages/Booking/BookingDetail";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
@@ -120,6 +121,7 @@ const privateRoutes = [
     { path: config.routes.booking_waiting_weeks, component: ByWeeks },
 
     { path: config.routes.booking_list, component: BookingList },
+    { path: config.routes.booking_detail, component: BookingDetail },
     { path: config.routes.lesson_booking_edit, component: LessonBookingEdit },
 
     { path: config.routes.not_found, component: NotFound },
