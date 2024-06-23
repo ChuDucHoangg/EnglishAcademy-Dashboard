@@ -57,10 +57,19 @@ const routes = {
     // End routes Timetable
 
     // Start routes Class
-    class_list: "/classes",
-    class_create: "/class/create",
-    class_edit: "/class/edit/:slug",
-    classroom: "/classroom",
+    class_list: "/class",
+    class_course_list: "/class/:classId",
+    class_course_detail: "/class/:classId/detail/:courseSlug",
+
+    class_course_subject_list: "/class/:classId/subject/:courseSlug",
+    class_course_slot_list: "/class/:classId/subject/:courseSlug",
+
+    class_course_slot_detail: "/class/:classId/slot/:slug",
+
+    class_course_slot_create: "/class/:classId/:slug/item-slot/create",
+    class_course_slot_edit: "/class/:classId/:slug/item-slot/edit/:itemSlug",
+
+    class_course_slot_answer: "/class/:classId/answer/:slug",
     // End routes Class
 
     // Start routes Device
@@ -98,6 +107,14 @@ const routes = {
     booking_waiting_package: "/booking-waiting/package/:bookingId",
     booking_waiting_weeks: "/booking-waiting/weeks/:bookingId",
     // End routes Tutor
+
+    // Start routes Subject
+    subject_create: "/subject/create/:courseId",
+    // End routes Subject
+
+    // Start routes Meeting
+    meeting: "/room/:roomId",
+    // End routes Meeting
 
     // Start routes Other
     not_found: "*",

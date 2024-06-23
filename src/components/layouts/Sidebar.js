@@ -186,6 +186,18 @@ function Sidebar() {
                             </NavLink>
                         </li>
 
+                        <li className="pc-item pc-caption">
+                            <label>Class</label>
+                        </li>
+                        <li className="pc-item pc-hasmenu">
+                            <NavLink to={config.routes.class_list} className="pc-link">
+                                <span className="pc-micon">
+                                    <i className="fas fa-door-open"></i>
+                                </span>
+                                <span className="pc-mtext">Class</span>
+                            </NavLink>
+                        </li>
+
                         {/* <li className="pc-item pc-caption">
                             <label>Class & Room</label>
                         </li>

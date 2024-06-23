@@ -77,5 +77,21 @@ const url = {
     LESSON_BOOKING: {
         CREATE: "lession-booking",
     },
+
+    SUBJECT: {
+        CREATE: "subject",
+    },
+
+    CLASS: {
+        LIST: "classes/by-teacher",
+        COURSE_BY_CLASS: "course-offline/user/get-by-class",
+        COURSE_DETAIL_BY_CLASS: "course-offline/user/detail",
+        COURSE_SUBJECT_LIST_BY_CLASS: "subject/detail/user",
+        COURSE_SLOT_DETAIL_BY_CLASS: "item-slot/user",
+
+        COURSE_ITEM_SLOT_CREATE: "item-slot",
+        COURSE_ITEM_SLOT_EDIT: "item-slot",
+        COURSE_ITEM_SLOT_DELETE: "item-slot",
+    },
 };
 export default url;
