@@ -17,9 +17,6 @@ import PracticalExam from "../components/pages/Test/PracticalExam/index";
 import EntranceTest from "../components/pages/Test/EntranceTest/index";
 import Question from "../components/pages/Question/index";
 import Timetable from "../components/pages/Timetable/index";
-import ClassList from "../components/pages/Class/index";
-import ClassCreate from "../components/pages/Class/CourseCreate";
-import ClassEdit from "../components/pages/Class/CourseEdit";
 import Device from "../components/pages/Device/index";
 import Classroom from "../components/pages/Classroom/index";
 import StudentList from "../components/pages/Student/index";
@@ -52,6 +49,16 @@ import CourseTopicEdit from "../components/pages/Course/CourseTopic/CourseTopicE
 import TutorRegistration from "../components/pages/Tutor/TutorRegistration";
 import BookingList from "../components/pages/Booking/BookingList";
 import BookingDetail from "../components/pages/Booking/BookingDetail";
+import SubjectCreate from "../components/pages/CourseOffline/Subject/SubjectCreate";
+import Meeting from "../components/pages/Room/Meeting";
+import ClassList from "../components/pages/Classes/ClassList";
+import ClassCourseList from "../components/pages/Classes/ClassCourse/ClassCourseList";
+import ClassCourseDetail from "../components/pages/Classes/ClassCourse/ClassCourseDetail";
+import ClassCourseSubject from "../components/pages/Classes/ClassCourseSubject/ClassCourseSubjectList";
+import ClassCourseSlotDetail from "../components/pages/Classes/ClassCourseSlot/ClassCourseSlotDetail";
+import ClassCourseSlotAnswer from "../components/pages/Classes/ClassCourseSlot/ClassCourseSlotAnswer";
+import ClassCourseSlotCreate from "../components/pages/Classes/ClassCourseSlot/ClassCourseSlotCreate";
+import ClassCourseSlotEdit from "../components/pages/Classes/ClassCourseSlot/ClassCourseSlotEdit";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
@@ -80,6 +87,17 @@ const privateRoutes = [
     { path: config.routes.category_create, component: CategoryCreate },
     { path: config.routes.category_edit, component: CategoryEdit },
 
+    // Class routes
+    { path: config.routes.class_list, component: ClassList },
+    { path: config.routes.class_course_list, component: ClassCourseList },
+    { path: config.routes.class_course_detail, component: ClassCourseDetail },
+    { path: config.routes.class_course_subject_list, component: ClassCourseSubject },
+
+    { path: config.routes.class_course_slot_detail, component: ClassCourseSlotDetail },
+    { path: config.routes.class_course_slot_create, component: ClassCourseSlotCreate },
+    { path: config.routes.class_course_slot_edit, component: ClassCourseSlotEdit },
+    { path: config.routes.class_course_slot_answer, component: ClassCourseSlotAnswer },
+
     { path: config.routes.lesson_online, component: Lesson },
     { path: config.routes.lesson_online_create, component: LessonCreate },
     { path: config.routes.lesson_online_edit, component: LessonEdit },
@@ -98,9 +116,6 @@ const privateRoutes = [
 
     { path: config.routes.timetable, component: Timetable },
 
-    { path: config.routes.class_list, component: ClassList },
-    { path: config.routes.class_create, component: ClassCreate },
-    { path: config.routes.class_edit, component: ClassEdit },
     { path: config.routes.classroom, component: Classroom },
 
     { path: config.routes.device, component: Device },
@@ -123,6 +138,10 @@ const privateRoutes = [
     { path: config.routes.booking_list, component: BookingList },
     { path: config.routes.booking_detail, component: BookingDetail },
     { path: config.routes.lesson_booking_edit, component: LessonBookingEdit },
+
+    { path: config.routes.subject_create, component: SubjectCreate },
+
+    { path: config.routes.meeting, component: Meeting },
 
     { path: config.routes.not_found, component: NotFound },
 ];

@@ -2,7 +2,7 @@ import Layout from "../../layouts";
 import useAxiosGet from "../../../hooks/useAxiosGet";
 import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { format } from "date-fns";
 import CourseOfflineSubject from "../../views/CourseOffline/Subject";
@@ -148,8 +148,8 @@ function CourseOfflineDetail() {
                                 <div className="card-body">
                                     <div className="tab-content" id="nav-tabContent">
                                         <div className="tab-pane fade show active" id="list-mail-1" role="tabpanel" aria-labelledby="list-mailtab-1">
-                                            <div className="card table-card">
-                                                <div className="card-body py-0 px-2">
+                                            <div className="table-card">
+                                                <div className="py-0 px-2">
                                                     <div className="d-sm-flex align-items-center">
                                                         <ul className="nav nav-tabs profile-tabs" id="myTab" role="tablist">
                                                             <li className="nav-item" role="presentation">
@@ -159,15 +159,19 @@ function CourseOfflineDetail() {
                                                             </li>
                                                             <li className="nav-item" role="presentation">
                                                                 <a className="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="!#profile-2" role="tab" aria-selected="false" tabIndex="-1">
-                                                                    <i className="ti ti-file-text me-2"></i>Quiz
+                                                                    <i className="ti ti-file-text me-2"></i>Exam
                                                                 </a>
                                                             </li>
                                                         </ul>
                                                         <ul className="list-inline ms-auto mb-3">
                                                             <li className="list-inline-item">
+                                                                <Link className="btn btn-link-primary">View All</Link>
+                                                            </li>
+                                                            <li className="list-inline-item">
                                                                 <div className="form-search">
-                                                                    <i className="ti ti-search"></i>
-                                                                    <input type="search" className="form-control" placeholder="Search Lesson" />
+                                                                    <Link to={`/subject/create/${courseDetail.id}`} className="btn btn-outline-primary">
+                                                                        Create Subject
+                                                                    </Link>
                                                                 </div>
                                                             </li>
                                                         </ul>

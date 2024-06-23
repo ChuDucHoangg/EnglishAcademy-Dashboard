@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 function CourseOfflineSubject({ subjects }) {
     return (
-        <div className="row mt-4">
-            {subjects.map((subject, index) => (
-                <div className="col-sm-6" key={index}>
+        <div className="row">
+            {subjects?.map((subject, index) => (
+                <div className="col-sm-6 mt-4" key={index}>
                     <div className="card border">
                         <div className="card-header p-3">
                             <div className="d-flex align-items-start">
