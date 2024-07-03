@@ -59,7 +59,7 @@ function PackageTable({ bookings, setColorStatus }) {
                                             <td className="text-center">
                                                 <ul className="list-inline me-auto mb-0">
                                                     <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="View" data-bs-original-title="View">
-                                                        <Link to={`/booking-waiting/package/${booking.id}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
+                                                        <Link to={`/booking-waiting/package/${booking.id}`} className="btn btn-icon btn-light-success">
                                                             <i className="ti ti-eye f-18"></i>
                                                         </Link>
                                                     </li>

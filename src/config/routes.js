@@ -56,21 +56,17 @@ const routes = {
     timetable: "/timetable",
     // End routes Timetable
 
-    // Start routes Class
-    class_list: "/class",
-    class_course_list: "/class/:classId",
-    class_course_detail: "/class/:classId/detail/:courseSlug",
-
-    class_course_subject_list: "/class/:classId/subject/:courseSlug",
-    class_course_slot_list: "/class/:classId/subject/:courseSlug",
-
-    class_course_slot_detail: "/class/:classId/slot/:slug",
-
-    class_course_slot_create: "/class/:classId/:slug/item-slot/create",
-    class_course_slot_edit: "/class/:classId/:slug/item-slot/edit/:itemSlug",
-
-    class_course_slot_answer: "/class/:classId/answer/:slug",
-    // End routes Class
+    // Start routes Class Teacher
+    class_list_teacher: "/teacher/class",
+    class_course_list_teacher: "/teacher/class/:classId",
+    class_course_detail_teacher: "/teacher/class/:classId/detail/:courseSlug",
+    class_course_subject_list_teacher: "/teacher/class/:classId/subject/:courseSlug",
+    class_course_slot_list_teacher: "/teacher/class/:classId/subject/:courseSlug",
+    class_course_slot_detail_teacher: "/teacher/class/:classId/slot/:slug",
+    class_course_slot_create_teacher: "/teacher/class/:classId/:slug/item-slot/create",
+    class_course_slot_edit_teacher: "/teacher/class/:classId/:slug/item-slot/edit/:itemSlug",
+    class_course_slot_answer_teacher: "/teacher/class/:classId/answer/:slug",
+    // End routes Class Teacher
 
     // Start routes Device
     device: "/device",

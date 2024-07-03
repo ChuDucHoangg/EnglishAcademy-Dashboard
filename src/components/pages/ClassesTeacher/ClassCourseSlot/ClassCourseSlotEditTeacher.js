@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Layout from "../../../layouts/index";
 import { useNavigate, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
@@ -12,8 +12,8 @@ import api from "../../../../services/api";
 import { toast } from "react-toastify";
 import NotFound from "../../Other/NotFound";
 
-function ClassCourseSlotCreate() {
-    const { classId, slug } = useParams();
+function ClassCourseSlotEditTeacher() {
+    const { classId, slug, itemSlug } = useParams();
 
     const navigate = useNavigate();
 
@@ -32,19 +32,8 @@ function ClassCourseSlotCreate() {
         },
     ];
 
-    const subjectData = useAxiosGet({
-        path: url.CLASS.COURSE_SUBJECT_LIST_BY_CLASS + `/${slug}/${classId}`,
-        headers: {
-            Authorization: `Bearer ${getAccessToken()}`,
-        },
-    });
-
-    const subjects = subjectData.response || {};
-    const slot = subjects?.slotResponseDetailList;
-
-    const [submitting, setSubmitting] = useState(false);
-
     const [formData, setFormData] = useState({
+        id: null,
         title: "",
         content: "",
         itemType: "",
@@ -57,6 +46,53 @@ function ClassCourseSlotCreate() {
     });
 
     const [formErrors, setFormErrors] = useState({});
+
+    const slotData = useAxiosGet({
+        path: url.CLASS.COURSE_SLOT_DETAIL_BY_CLASS + `/${itemSlug}/${classId}`,
+        headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+        },
+    });
+
+    const subjectData = useAxiosGet({
+        path: url.CLASS.COURSE_SUBJECT_LIST_BY_CLASS + `/${slug}/${classId}`,
+        headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+        },
+    });
+
+    const subjects = subjectData.response || {};
+    const slot = subjects.slotResponseDetailList;
+
+    const [submitting, setSubmitting] = useState(false);
+
+    const slotDetail = useMemo(() => slotData.response || {}, [slotData.response]);
+
+    // Function to format date-time string
+    const formatDateTime = (dateTimeString) => {
+        const date = new Date(dateTimeString);
+        return date.toISOString().slice(0, 19); // "yyyy-MM-ddThh:mm:ss"
+    };
+
+    useEffect(() => {
+        if (slotDetail && slotDetail.startDate && slotDetail.endDate) {
+            const formattedStartDate = formatDateTime(slotDetail.startDate);
+            const formattedEndDate = formatDateTime(slotDetail.endDate);
+
+            setFormData({
+                id: slotDetail.id || null,
+                title: slotDetail.title || "",
+                content: slotDetail.content || "",
+                itemType: slotDetail.itemType || "",
+                startDate: formattedStartDate,
+                endDate: formattedEndDate,
+                orderTop: slotDetail.orderTop || "",
+                classId: parseInt(classId),
+                slotId: slotDetail.slotId || "",
+                pathUrl: slotDetail.pathUrl || "",
+            });
+        }
+    }, [slotDetail, classId]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -139,9 +175,9 @@ function ClassCourseSlotCreate() {
         if (validateForm()) {
             try {
                 setSubmitting(true);
-                const createRequest = await api.post(url.CLASS.COURSE_ITEM_SLOT_CREATE, formData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                const createRequest = await api.put(url.CLASS.COURSE_ITEM_SLOT_EDIT, formData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
                 if (createRequest.status === 200) {
-                    toast.success("Created successful!", {
+                    toast.success("Updated successful!", {
                         position: "top-right",
                         autoClose: 3000,
                         hideProgressBar: false,
@@ -153,6 +189,7 @@ function ClassCourseSlotCreate() {
                     });
 
                     setFormData({
+                        id: "",
                         title: "",
                         content: "",
                         itemType: "",
@@ -186,10 +223,10 @@ function ClassCourseSlotCreate() {
 
     return (
         <>
-            {subjectData.errorStatus === 404 ? (
+            {slotData.errorStatus === 404 ? (
                 <NotFound />
             ) : (
-                <Layout title="Item Slot Create">
+                <Layout title="Item Slot Update">
                     <div className="col-sm-12">
                         <div className="card">
                             <div className="card-body">
@@ -231,14 +268,14 @@ function ClassCourseSlotCreate() {
                                                     <div className="form-group">
                                                         <label className="form-label">Slot</label>
                                                         <select name="slotId" className={`form-control ${formErrors.slotId ? "is-invalid" : ""}`} onChange={handleChange} value={formData.slotId}>
-                                                            <option value="">Choose Slot</option>
-                                                            {slot?.map((item, index) => (
-                                                                <option value={item.id} key={index}>
-                                                                    {item.name}
+                                                            <option value="">Choose Item Type</option>
+                                                            {slot?.map((slot, index) => (
+                                                                <option value={slot.id} key={index}>
+                                                                    {slot.name}
                                                                 </option>
                                                             ))}
                                                         </select>
-                                                        {formErrors.slotId && <p className="invalid-feedback">{formErrors.slotId}</p>}
+                                                        {formErrors.itemType && <p className="invalid-feedback">{formErrors.itemType}</p>}
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6">
@@ -315,8 +352,8 @@ function ClassCourseSlotCreate() {
                                             </div>
                                             <div className="text-end btn-page">
                                                 <ButtonSubmit
-                                                    value="Create Item Slot"
-                                                    valueSubmit="Creating..."
+                                                    value="Update Item Slot"
+                                                    valueSubmit="Updating..."
                                                     submitting={submitting}
                                                     handleEvent={handleSubmit}
                                                     icon="ti ti-plus"
@@ -335,4 +372,4 @@ function ClassCourseSlotCreate() {
     );
 }
 
-export default ClassCourseSlotCreate;
+export default ClassCourseSlotEditTeacher;

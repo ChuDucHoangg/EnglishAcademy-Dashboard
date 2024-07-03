@@ -7,7 +7,7 @@ import { formatLevelCourse } from "../../../../utils/formatLevelCourse";
 import Pagination from "../../../layouts/Pagination";
 import { useState } from "react";
 
-function ClassCourseList() {
+function ClassCourseListTeacher() {
     const { classId } = useParams();
 
     const courseData = useAxiosGet({
@@ -118,7 +118,7 @@ function ClassCourseList() {
                                             <td className="text-center">
                                                 <ul className="list-inline me-auto mb-0">
                                                     <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
-                                                        <Link to={`/class/${classId}/detail/${course.slug}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
+                                                        <Link to={`/teacher/class/${classId}/detail/${course.slug}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
                                                             <i className="fas fa-door-open f-18"></i>
                                                         </Link>
                                                     </li>
@@ -141,4 +141,4 @@ function ClassCourseList() {
     );
 }
 
-export default ClassCourseList;
+export default ClassCourseListTeacher;

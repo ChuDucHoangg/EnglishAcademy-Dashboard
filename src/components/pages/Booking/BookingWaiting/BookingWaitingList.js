@@ -3,8 +3,7 @@ import useAxiosGet from "../../../../hooks/useAxiosGet";
 import url from "../../../../services/url";
 import { getAccessToken } from "../../../../utils/auth";
 import PackageTable from "../../../views/Tutor/BookingWaiting/PackageTable";
-import WeekTable from "../../../views/Tutor/BookingWaiting/WeekTable";
-import { Link } from "react-router-dom";
+
 import { statusColor } from "../../../../utils/statusColor";
 import BookLoading from "../../../layouts/BookLoading";
 
@@ -24,7 +23,7 @@ function BookingWaitingList() {
             <Layout title="Booking Waiting">
                 <div className="col-xl-12">
                     <div className="card">
-                        <div className="card-body border-bottom pb-0 table-border-style">
+                        {/* <div className="card-body border-bottom pb-0 table-border-style">
                             <div className="d-flex align-items-center justify-content-between">
                                 <h5 className="mb-0">Booking Waiting</h5>
                                 <div className="dropdown">
@@ -76,16 +75,16 @@ function BookingWaitingList() {
                                     </button>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
 
                         {bookingData.loading ? (
                             <BookLoading />
                         ) : (
-                            <div className="card-body border-bottom pb-0 table-border-style">
+                            <div className="card-body pb-0 table-border-style">
                                 <div className="tab-content" id="myTabContent">
                                     <PackageTable bookings={bookings} setColorStatus={statusColor} />
 
-                                    <WeekTable bookings={bookings} setColorStatus={statusColor} />
+                                    {/* <WeekTable bookings={bookings} setColorStatus={statusColor} /> */}
                                 </div>
                             </div>
                         )}

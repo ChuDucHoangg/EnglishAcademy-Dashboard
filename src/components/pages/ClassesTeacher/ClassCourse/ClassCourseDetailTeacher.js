@@ -6,7 +6,7 @@ import { getAccessToken } from "../../../../utils/auth";
 import { useState } from "react";
 import Pagination from "../../../layouts/Pagination";
 
-function ClassCourseDetail() {
+function ClassCourseDetailTeacher() {
     const { classId, courseSlug } = useParams();
 
     const courseData = useAxiosGet({
@@ -85,7 +85,7 @@ function ClassCourseDetail() {
                                                         <i className="ti ti-cloud-upload"></i> {subject.createdBy || "N/A"}
                                                     </li>
                                                 </ul>
-                                                <Link to={`/class/${classId}/subject/${subject.slug}`} className="btn btn-sm btn-outline-primary">
+                                                <Link to={`/teacher/class/${classId}/subject/${subject.slug}`} className="btn btn-sm btn-outline-primary">
                                                     View
                                                 </Link>
                                             </div>
@@ -104,4 +104,4 @@ function ClassCourseDetail() {
     );
 }
 
-export default ClassCourseDetail;
+export default ClassCourseDetailTeacher;
