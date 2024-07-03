@@ -7,10 +7,8 @@ import { format } from "date-fns";
 import ReactPlayer from "react-player";
 import AnswerStudent from "../../../views/Classes/AnswerStudent";
 
-function ClassCourseSlotDetail() {
+function ClassCourseSlotDetailTeacher() {
     const { classId, slug } = useParams();
-
-    console.log(slug);
 
     const slotData = useAxiosGet({
         path: url.CLASS.COURSE_SLOT_DETAIL_BY_CLASS + `/${slug}/${classId}`,
@@ -122,7 +120,7 @@ function ClassCourseSlotDetail() {
                     <div className="card-header">
                         <div className="d-flex align-items-center justify-content-between">
                             <h5>Answer Student</h5>
-                            <Link to={`/class/${classId}/answer/${slug}`}>View All</Link>
+                            <Link to={`/teacher/class/${classId}/answer/${slug}`}>View All</Link>
                         </div>
                     </div>
                     <div className="card-body">
@@ -136,4 +134,4 @@ function ClassCourseSlotDetail() {
     );
 }
 
-export default ClassCourseSlotDetail;
+export default ClassCourseSlotDetailTeacher;

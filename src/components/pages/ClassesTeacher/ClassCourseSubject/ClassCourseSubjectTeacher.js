@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import ButtonSubmit from "../../../layouts/ButtonSubmit";
 
-function ClassCourseSubject() {
+function ClassCourseSubjectTeacher() {
     const { classId, courseSlug } = useParams();
 
     const subjectData = useAxiosGet({
@@ -73,7 +73,7 @@ function ClassCourseSubject() {
                             </div>
                             <div className="datatable-dropdown">
                                 <div className="d-flex align-items-center gap-3">
-                                    <Link to={`/class/${classId}/${courseSlug}/item-slot/create`} className="btn btn-outline-primary d-flex align-items-center justify-content-end">
+                                    <Link to={`/teacher/class/${classId}/${courseSlug}/item-slot/create`} className="btn btn-outline-primary d-flex align-items-center justify-content-end">
                                         <i className="ti ti-plus"></i>Create Slot
                                     </Link>
                                 </div>
@@ -110,7 +110,7 @@ function ClassCourseSubject() {
                                                 subject.itemSlotResponseList.map((slot, slotIndex) => (
                                                     <div className="py-2" key={slotIndex}>
                                                         <div className="d-flex align-items-center justify-content-between">
-                                                            <Link to={`/class/${classId}/slot/${slot.slug}`}>
+                                                            <Link to={`/teacher/class/${classId}/slot/${slot.slug}`}>
                                                                 <div className="d-flex align-items-center">
                                                                     <div className="flex-shrink-0">
                                                                         <div className="avtar avtar-s border" data-bs-toggle="tooltip">
@@ -142,7 +142,7 @@ function ClassCourseSubject() {
                                                                     valueSubmit=""
                                                                     handleEvent={() => handleDeleteSlot(slot.id)}
                                                                 />
-                                                                <Link to={`/class/${classId}/${courseSlug}/item-slot/edit/${slot.slug}`} className="btn btn-icon btn-light-info">
+                                                                <Link to={`/teacher/class/${classId}/${courseSlug}/item-slot/edit/${slot.slug}`} className="btn btn-icon btn-light-info">
                                                                     <i className="ti ti-edit"></i>
                                                                 </Link>
                                                             </div>
@@ -177,7 +177,7 @@ function ClassCourseSubject() {
                                         data-bs-parent="#accordionFlushExample"
                                     >
                                         <div className="accordion-body">
-                                            <Link to={`/class/${classId}/subject-test/${subject.slug}`} className="text-secondary d-block">
+                                            <Link to={`/teacher/class/${classId}/subject-test/${subject.slug}`} className="text-secondary d-block">
                                                 <i className="fas fa-file-signature"></i>
                                                 {subject.title}
                                             </Link>
@@ -193,4 +193,4 @@ function ClassCourseSubject() {
     );
 }
 
-export default ClassCourseSubject;
+export default ClassCourseSubjectTeacher;

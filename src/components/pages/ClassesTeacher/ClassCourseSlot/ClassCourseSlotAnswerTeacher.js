@@ -7,7 +7,7 @@ import AnswerStudent from "../../../views/Classes/AnswerStudent";
 import Pagination from "../../../layouts/Pagination";
 import { useState } from "react";
 
-function ClassCourseSlotAnswer() {
+function ClassCourseSlotAnswerTeacher() {
     const { classId, slug } = useParams();
 
     const slotData = useAxiosGet({
@@ -52,4 +52,4 @@ function ClassCourseSlotAnswer() {
     );
 }
 
-export default ClassCourseSlotAnswer;
+export default ClassCourseSlotAnswerTeacher;

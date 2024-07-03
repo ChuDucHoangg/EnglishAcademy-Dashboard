@@ -51,14 +51,14 @@ import BookingList from "../components/pages/Booking/BookingList";
 import BookingDetail from "../components/pages/Booking/BookingDetail";
 import SubjectCreate from "../components/pages/CourseOffline/Subject/SubjectCreate";
 import Meeting from "../components/pages/Room/Meeting";
-import ClassList from "../components/pages/Classes/ClassList";
-import ClassCourseList from "../components/pages/Classes/ClassCourse/ClassCourseList";
-import ClassCourseDetail from "../components/pages/Classes/ClassCourse/ClassCourseDetail";
-import ClassCourseSubject from "../components/pages/Classes/ClassCourseSubject/ClassCourseSubjectList";
-import ClassCourseSlotDetail from "../components/pages/Classes/ClassCourseSlot/ClassCourseSlotDetail";
-import ClassCourseSlotAnswer from "../components/pages/Classes/ClassCourseSlot/ClassCourseSlotAnswer";
-import ClassCourseSlotCreate from "../components/pages/Classes/ClassCourseSlot/ClassCourseSlotCreate";
-import ClassCourseSlotEdit from "../components/pages/Classes/ClassCourseSlot/ClassCourseSlotEdit";
+import ClassListTeacher from "../components/pages/ClassesTeacher/ClassListTeacher";
+import ClassCourseListTeacher from "../components/pages/ClassesTeacher/ClassCourse/ClassCourseListTeacher";
+import ClassCourseDetailTeacher from "../components/pages/ClassesTeacher/ClassCourse/ClassCourseDetailTeacher";
+import ClassCourseSubjectTeacher from "../components/pages/ClassesTeacher/ClassCourseSubject/ClassCourseSubjectTeacher";
+import ClassCourseSlotDetailTeacher from "../components/pages/ClassesTeacher/ClassCourseSlot/ClassCourseSlotDetailTeacher";
+import ClassCourseSlotCreateTeacher from "../components/pages/ClassesTeacher/ClassCourseSlot/ClassCourseSlotCreate";
+import ClassCourseSlotEditTeacher from "../components/pages/ClassesTeacher/ClassCourseSlot/ClassCourseSlotEditTeacher";
+import ClassCourseSlotAnswerTeacher from "../components/pages/ClassesTeacher/ClassCourseSlot/ClassCourseSlotAnswerTeacher";
 
 const privateRoutes = [
     { path: config.routes.dashboard, component: Dashboard },
@@ -87,17 +87,37 @@ const privateRoutes = [
     { path: config.routes.category_create, component: CategoryCreate },
     { path: config.routes.category_edit, component: CategoryEdit },
 
-    // Class routes
-    { path: config.routes.class_list, component: ClassList },
-    { path: config.routes.class_course_list, component: ClassCourseList },
-    { path: config.routes.class_course_detail, component: ClassCourseDetail },
-    { path: config.routes.class_course_subject_list, component: ClassCourseSubject },
+    // Class routes by Teacher
+    { path: config.routes.class_list_teacher, component: ClassListTeacher },
+    { path: config.routes.class_course_list_teacher, component: ClassCourseListTeacher },
+    { path: config.routes.class_course_detail_teacher, component: ClassCourseDetailTeacher },
+    { path: config.routes.class_course_subject_list_teacher, component: ClassCourseSubjectTeacher },
 
-    { path: config.routes.class_course_slot_detail, component: ClassCourseSlotDetail },
-    { path: config.routes.class_course_slot_create, component: ClassCourseSlotCreate },
-    { path: config.routes.class_course_slot_edit, component: ClassCourseSlotEdit },
-    { path: config.routes.class_course_slot_answer, component: ClassCourseSlotAnswer },
+    { path: config.routes.class_course_slot_detail_teacher, component: ClassCourseSlotDetailTeacher },
+    { path: config.routes.class_course_slot_create_teacher, component: ClassCourseSlotCreateTeacher },
+    { path: config.routes.class_course_slot_edit_teacher, component: ClassCourseSlotEditTeacher },
+    { path: config.routes.class_course_slot_answer_teacher, component: ClassCourseSlotAnswerTeacher },
 
+    // Tutor routes
+    { path: config.routes.tutor_registration, component: TutorRegistration },
+
+    // Booking routes
+    { path: config.routes.booking_waiting_list, component: BookingWaitingList },
+    { path: config.routes.booking_waiting_package, component: ByPackage },
+    { path: config.routes.booking_waiting_weeks, component: ByWeeks },
+
+    { path: config.routes.booking_list, component: BookingList },
+    { path: config.routes.booking_detail, component: BookingDetail },
+    { path: config.routes.lesson_booking_edit, component: LessonBookingEdit },
+
+    { path: config.routes.subject_create, component: SubjectCreate },
+
+    // Meeting routes
+    { path: config.routes.meeting, component: Meeting },
+
+    { path: config.routes.not_found, component: NotFound },
+
+    // Routes Unused
     { path: config.routes.lesson_online, component: Lesson },
     { path: config.routes.lesson_online_create, component: LessonCreate },
     { path: config.routes.lesson_online_edit, component: LessonEdit },
@@ -128,22 +148,6 @@ const privateRoutes = [
     { path: config.routes.staff_create, component: StaffCreate },
     { path: config.routes.staff_edit, component: StaffEdit },
     { path: config.routes.profile, component: ProfileWrap },
-
-    { path: config.routes.tutor_registration, component: TutorRegistration },
-
-    { path: config.routes.booking_waiting_list, component: BookingWaitingList },
-    { path: config.routes.booking_waiting_package, component: ByPackage },
-    { path: config.routes.booking_waiting_weeks, component: ByWeeks },
-
-    { path: config.routes.booking_list, component: BookingList },
-    { path: config.routes.booking_detail, component: BookingDetail },
-    { path: config.routes.lesson_booking_edit, component: LessonBookingEdit },
-
-    { path: config.routes.subject_create, component: SubjectCreate },
-
-    { path: config.routes.meeting, component: Meeting },
-
-    { path: config.routes.not_found, component: NotFound },
 ];
 
 const authenticationRoutes = [

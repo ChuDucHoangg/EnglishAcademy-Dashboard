@@ -8,6 +8,79 @@ const handleLogout = () => {
     removeAccessToken();
 };
 
+const sidebarItem = [
+    {
+        label: "Dashboard",
+        items: [
+            {
+                title: "Dashboard",
+                path: config.routes.dashboard,
+                icon: "far fa-chart-bar",
+            },
+        ],
+    },
+    {
+        label: "Course & Lesson",
+        items: [
+            {
+                title: "Course Online",
+                path: config.routes.course_online,
+                icon: "fas fa-book-reader",
+            },
+            {
+                title: "Course Offline",
+                path: config.routes.course_offline,
+                icon: "fas fa-book-reader",
+            },
+            {
+                title: "Categories",
+                path: config.routes.category_list,
+                icon: "fas fa-stream",
+            },
+        ],
+    },
+    {
+        label: "Teacher & Tutor",
+        items: [
+            {
+                title: "Booking",
+                path: config.routes.booking_list,
+                icon: "fas fa-calendar-alt",
+            },
+            {
+                title: "Booking Waiting",
+                path: config.routes.booking_waiting_list,
+                icon: "fas fa-calendar-alt",
+            },
+            {
+                title: "Tutor Registration",
+                path: config.routes.tutor_registration,
+                icon: "fas fa-user-edit",
+            },
+        ],
+    },
+    {
+        label: "Class",
+        items: [
+            {
+                title: "Class",
+                path: config.routes.class_list_teacher,
+                icon: "fas fa-door-open",
+            },
+        ],
+    },
+    {
+        label: "Information",
+        items: [
+            {
+                title: "Profile",
+                path: config.routes.profile,
+                icon: "fas fa-user-shield",
+            },
+        ],
+    },
+];
+
 function Sidebar() {
     return (
         <nav className="pc-sidebar">
@@ -58,145 +131,23 @@ function Sidebar() {
                     </div>
 
                     <ul className="pc-navbar">
-                        <li className="pc-item pc-caption">
-                            <label>Dashboard</label>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.dashboard} className="pc-link">
-                                <span className="pc-micon">
-                                    <svg className="pc-icon">
-                                        <use xlinkHref="#custom-status-up"></use>
-                                    </svg>
-                                </span>
-                                <span className="pc-mtext">Dashboard</span>
-                            </NavLink>
-                        </li>
-
-                        <li className="pc-item pc-caption">
-                            <label>Course & Lesson</label>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.course_online} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-book-reader"></i>
-                                </span>
-                                <span className="pc-mtext">Course Online</span>
-                            </NavLink>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.course_offline} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-book-reader"></i>
-                                </span>
-                                <span className="pc-mtext">Course Offline</span>
-                            </NavLink>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.category_list} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-stream"></i>
-                                </span>
-                                <span className="pc-mtext">Categories</span>
-                            </NavLink>
-                        </li>
-
-                        {/* <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.lesson_online} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-book-open"></i>
-                                </span>
-                                <span className="pc-mtext">Lesson</span>
-                            </NavLink>
-                        </li> */}
-
-                        {/* <li className="pc-item pc-caption">
-                            <label>Exam & Test</label>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.exam_online} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-scroll"></i>
-                                </span>
-                                <span className="pc-mtext">Exam</span>
-                            </NavLink>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.test_online} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-edit"></i>
-                                </span>
-                                <span className="pc-mtext">Test</span>
-                            </NavLink>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.entrance_test} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-inbox"></i>
-                                </span>
-                                <span className="pc-mtext">Entrance Test</span>
-                            </NavLink>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.question_online} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-info-circle"></i>
-                                </span>
-                                <span className="pc-mtext">Question</span>
-                            </NavLink>
-                        </li> */}
-
-                        {/* <li className="pc-item pc-caption">
-                            <label>Timetable</label>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.timetable} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-calendar-alt"></i>
-                                </span>
-                                <span className="pc-mtext">Timetable</span>
-                            </NavLink>
-                        </li> */}
-
-                        <li className="pc-item pc-caption">
-                            <label>Tutor</label>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.booking_list} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-calendar-alt"></i>
-                                </span>
-                                <span className="pc-mtext">Booking</span>
-                            </NavLink>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.booking_waiting_list} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-calendar-alt"></i>
-                                </span>
-                                <span className="pc-mtext">Booking Waiting</span>
-                            </NavLink>
-                        </li>
-
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.tutor_registration} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-user-edit"></i>
-                                </span>
-                                <span className="pc-mtext">Tutor Registration</span>
-                            </NavLink>
-                        </li>
-
-                        <li className="pc-item pc-caption">
-                            <label>Class</label>
-                        </li>
-                        <li className="pc-item pc-hasmenu">
-                            <NavLink to={config.routes.class_list} className="pc-link">
-                                <span className="pc-micon">
-                                    <i className="fas fa-door-open"></i>
-                                </span>
-                                <span className="pc-mtext">Class</span>
-                            </NavLink>
-                        </li>
+                        {sidebarItem.map((menu, index) => (
+                            <div className="menu-wrap mt-3" key={index}>
+                                <li className="pc-item pc-caption">
+                                    <label>{menu.label}</label>
+                                </li>
+                                {menu.items.map((item, index) => (
+                                    <li className="pc-item pc-hasmenu" key={index}>
+                                        <NavLink to={item.path} className="pc-link">
+                                            <span className="pc-micon">
+                                                <i className={item.icon}></i>
+                                            </span>
+                                            <span className="pc-mtext">{item.title}</span>
+                                        </NavLink>
+                                    </li>
+                                ))}
+                            </div>
+                        ))}
 
                         {/* <li className="pc-item pc-caption">
                             <label>Class & Room</label>
@@ -249,23 +200,6 @@ function Sidebar() {
                                 <span className="pc-mtext">Staff</span>
                             </NavLink>
                         </li> */}
-
-                        <li className="pc-item pc-caption">
-                            <label>Information</label>
-                            <svg className="pc-icon">
-                                <use xlinkHref="#custom-user-square"></use>
-                            </svg>
-                        </li>
-                        <li className="pc-item">
-                            <NavLink to={config.routes.profile} className="pc-link">
-                                <span className="pc-micon">
-                                    <svg className="pc-icon">
-                                        <use xlinkHref="#custom-user-square"></use>
-                                    </svg>
-                                </span>
-                                <span className="pc-mtext">Profile</span>
-                            </NavLink>
-                        </li>
                     </ul>
                 </div>
             </div>
