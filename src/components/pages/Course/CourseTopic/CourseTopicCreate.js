@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Layout from "../../../layouts";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ButtonSubmit from "../../../layouts/ButtonSubmit";
 import api from "../../../../services/api";
 import url from "../../../../services/url";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 function CourseTopicCreate() {
     const { courseId } = useParams();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -77,6 +78,8 @@ function CourseTopicCreate() {
                         orderTop: "",
                         courseOnlineId: "",
                     });
+
+                    navigate(-1);
                 }
             } catch (error) {
                 toast.error("Error! An error occurred. Please try again later!", {

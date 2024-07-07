@@ -80,7 +80,11 @@ function CourseEdit() {
             };
             reader.readAsDataURL(files[0]);
         } else {
-            setFormData({ ...formData, [name]: value });
+            let convertedValue = value;
+            if (name === "level") {
+                convertedValue = value ? parseInt(value, 10) : "";
+            }
+            setFormData({ ...formData, [name]: convertedValue });
             setFormErrors({ ...formErrors, [name]: "" });
         }
     };

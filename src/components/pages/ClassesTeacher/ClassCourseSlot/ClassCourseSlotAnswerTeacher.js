@@ -6,6 +6,7 @@ import { getAccessToken } from "../../../../utils/auth";
 import AnswerStudent from "../../../views/Classes/AnswerStudent";
 import Pagination from "../../../layouts/Pagination";
 import { useState } from "react";
+import Loading from "../../../layouts/Loading";
 
 function ClassCourseSlotAnswerTeacher() {
     const { classId, slug } = useParams();
@@ -34,21 +35,27 @@ function ClassCourseSlotAnswerTeacher() {
         setCurrentPage(pageNumber);
     };
     return (
-        <Layout title={`Answer ${slotDetail.title || "Loading..."}`}>
-            <div className="col-xl-12">
-                <div className="card">
-                    <div className="card-body">
-                        {currentAnswer?.map((answer, index) => (
-                            <AnswerStudent answer={answer} key={index} />
-                        ))}
-                    </div>
+        <>
+            {slotData.loading ? (
+                <Loading />
+            ) : (
+                <Layout title={`Answer ${slotDetail.title || "Loading..."}`}>
+                    <div className="col-xl-12">
+                        <div className="card">
+                            <div className="card-body">
+                                {currentAnswer?.map((answer, index) => (
+                                    <AnswerStudent answer={answer} key={index} />
+                                ))}
+                            </div>
 
-                    <div className="px-3">
-                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+                            <div className="px-3">
+                                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </Layout>
+                </Layout>
+            )}
+        </>
     );
 }
 
