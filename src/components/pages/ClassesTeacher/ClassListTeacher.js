@@ -5,6 +5,7 @@ import { getAccessToken } from "../../../utils/auth";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Pagination from "../../layouts/Pagination";
+import Loading from "../../layouts/Loading";
 
 function ClassListTeacher() {
     const classData = useAxiosGet({
@@ -38,59 +39,65 @@ function ClassListTeacher() {
     };
 
     return (
-        <Layout title="Class List">
-            <div className="col-xl-12">
-                <div className="card">
-                    <div className="card-header text-start">
-                        <div className="row">
-                            <div className="col-lg-4">
-                                <input className="datatable-input" placeholder="Search..." type="search" value={searchQuery} onChange={handleSearch} />
+        <>
+            {classData.loading ? (
+                <Loading />
+            ) : (
+                <Layout title="Class List">
+                    <div className="col-xl-12">
+                        <div className="card">
+                            <div className="card-header text-start">
+                                <div className="row">
+                                    <div className="col-lg-4">
+                                        <input className="datatable-input" placeholder="Search..." type="search" value={searchQuery} onChange={handleSearch} />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="card-body table-border-style">
-                        <div className="table-responsive">
-                            <div className="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-                                <div className="datatable-container">
-                                    <table className="table table-hover datatable-table" id="pc-dt-simple">
-                                        <thead>
-                                            <tr>
-                                                <th data-sortable="true">No.</th>
-                                                <th data-sortable="true">Class Name</th>
-                                                <th data-sortable="true">Room</th>
-                                                <th data-sortable="true" className="text-center">
-                                                    Actions
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="orders">
-                                            {currentClass.map((cl, index) => (
-                                                <tr key={index}>
-                                                    <td>{index + 1}</td>
-                                                    <td>{cl.name}</td>
-                                                    <td>{cl.roomName}</td>
-                                                    <td className="text-center">
-                                                        <Link to={`/teacher/class/${cl.id}`} className="btn btn-icon btn-light-success">
-                                                            <i className="ti ti-eye"></i>
-                                                        </Link>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                            <div className="card-body table-border-style">
+                                <div className="table-responsive">
+                                    <div className="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                                        <div className="datatable-container">
+                                            <table className="table table-hover datatable-table" id="pc-dt-simple">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-sortable="true">No.</th>
+                                                        <th data-sortable="true">Class Name</th>
+                                                        <th data-sortable="true">Room</th>
+                                                        <th data-sortable="true" className="text-center">
+                                                            Actions
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="orders">
+                                                    {currentClass.map((cl, index) => (
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{cl.name}</td>
+                                                            <td>{cl.roomName}</td>
+                                                            <td className="text-center">
+                                                                <Link to={`/teacher/class/${cl.id}`} className="btn btn-icon btn-light-success">
+                                                                    <i className="ti ti-eye"></i>
+                                                                </Link>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-lg-3">
+                                    <Pagination currentPage={currentPagePackage} totalPages={totalPagesPackage} onPageChange={handlePageChangePackage} />
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div className="row">
-                        <div className="col-lg-3">
-                            <Pagination currentPage={currentPagePackage} totalPages={totalPagesPackage} onPageChange={handlePageChangePackage} />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </Layout>
+                </Layout>
+            )}
+        </>
     );
 }
 

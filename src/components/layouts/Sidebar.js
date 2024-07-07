@@ -63,7 +63,7 @@ const sidebarItem = [
         label: "Class",
         items: [
             {
-                title: "Class",
+                title: "Class (Teacher)",
                 path: config.routes.class_list_teacher,
                 icon: "fas fa-door-open",
             },
