@@ -1,5 +1,7 @@
 const routes = {
     dashboard: "/",
+    dashboard_teacher: "/dashboard-teacher",
+    dashboard_admissions: "/dashboard-admissions",
 
     // Start routes Course Online
     course_online: "/course-online",

@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import config from "../../config/index";
-import { getDecodedToken, removeAccessToken } from "../../utils/auth";
+import { getDecodedToken, getRole, removeAccessToken } from "../../utils/auth";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 
 const decodeToken = getDecodedToken();
 
@@ -81,6 +82,8 @@ const sidebarItem = [
     },
 ];
 
+const userRole = getRole();
+
 function Sidebar() {
     return (
         <nav className="pc-sidebar">
@@ -99,7 +102,7 @@ function Sidebar() {
                                 </div>
                                 <div className="flex-grow-1 ms-3 me-2">
                                     <h6 className="mb-0">{decodeToken?.Fullname || "Loading..."}</h6>
-                                    <small>Administrator</small>
+                                    <small>{capitalizeFirstLetter(userRole)}</small>
                                 </div>
                                 <a className="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse" href="#pc_sidebar_userlink">
                                     <svg className="pc-icon">

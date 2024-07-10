@@ -53,3 +53,16 @@ export const isLoggedIn = () => {
     }
     return false;
 };
+
+export const getRole = () => {
+    const decodeToken = getDecodedToken();
+    let accountRole = "";
+
+    if (decodeToken && decodeToken.Role && decodeToken.Role.length > 0 && decodeToken.Role[0].authority) {
+        accountRole = decodeToken.Role[0].authority;
+    } else {
+        console.error("Role not found in token");
+    }
+
+    return accountRole;
+};

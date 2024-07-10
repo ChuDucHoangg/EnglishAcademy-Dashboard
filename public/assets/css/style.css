@@ -31177,6 +31177,14 @@ div.dataTables_wrapper div.dt-row {
 .i8ct3MPKG0I8SA9qfu6m > p {
     margin-bottom: 0;
 }
+.dash-icon {
+    max-width: 50px;
+    max-width: 50px;
+    object-fit: cover;
+}
+.cursor-copy {
+    cursor: copy;
+}
 /**  =====================
   36. Customizer css end
 ==========================  **/

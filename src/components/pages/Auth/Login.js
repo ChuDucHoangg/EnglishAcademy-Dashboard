@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { setAccessToken } from "../../../utils/auth";
+import { getDecodedToken, removeAccessToken, setAccessToken } from "../../../utils/auth";
 import api from "../../../services/api";
 import url from "../../../services/url";
 import ButtonSubmit from "../../layouts/ButtonSubmit";
@@ -57,6 +57,7 @@ function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+
         if (validateForm()) {
             try {
                 setSubmitting(true);
@@ -66,13 +67,25 @@ function Login() {
                     const token = loginRequest.data.token;
                     setAccessToken(token);
 
-                    const redirectPath = localStorage.getItem("redirect_path");
-                    if (redirectPath) {
-                        navigate(`${redirectPath}`);
-                        localStorage.removeItem("redirect_path");
-                    } else {
-                        navigate("/");
+                    const decodeToken = getDecodedToken();
+                    let accountRole = decodeToken.Role[0].authority;
+
+                    let redirectUrl = "";
+                    if (accountRole === "ADMIN" || accountRole === "TRAINERS") {
+                        redirectUrl = "/";
+                    } else if (accountRole === "TEACHER") {
+                        redirectUrl = "/dashboard-teacher";
+                    } else if (accountRole === "ADMISSIONS") {
+                        redirectUrl = "/dashboard-admissions";
+                    } else if (accountRole === "") {
+                        removeAccessToken();
+                        setFormErrors({
+                            email: "Invalid email or password.",
+                            password: "Invalid email or password.",
+                        });
                     }
+
+                    navigate(redirectUrl);
                 } else {
                     setFormErrors({
                         email: "Invalid email or password.",

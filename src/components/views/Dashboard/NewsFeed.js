@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 import config from "../../../config";
+import { useEffect } from "react";
 
 function NewsFeed() {
+    useEffect(() => {
+        const newsModal = sessionStorage.getItem("first_visit");
+
+        if (!newsModal) {
+            const myModal = new window.bootstrap.Modal(document.getElementById("newsModal"));
+            myModal.show();
+            sessionStorage.setItem("first_visit", "false");
+        }
+    });
+
     const closeModal = () => {
         const myModal = new window.bootstrap.Modal(document.getElementById("newsModal"));
         myModal.close();
