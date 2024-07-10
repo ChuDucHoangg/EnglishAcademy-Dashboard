@@ -59,9 +59,14 @@ import ClassCourseSlotDetailTeacher from "../components/pages/ClassesTeacher/Cla
 import ClassCourseSlotCreateTeacher from "../components/pages/ClassesTeacher/ClassCourseSlot/ClassCourseSlotCreate";
 import ClassCourseSlotEditTeacher from "../components/pages/ClassesTeacher/ClassCourseSlot/ClassCourseSlotEditTeacher";
 import ClassCourseSlotAnswerTeacher from "../components/pages/ClassesTeacher/ClassCourseSlot/ClassCourseSlotAnswerTeacher";
+import DashboardTeacher from "../components/pages/Dashboard/DashboardTeacher";
+import DashboardAdmissions from "../components/pages/Dashboard/DashboardAdmissions";
 
 const privateRoutes = [
+    // Dashboard routes
     { path: config.routes.dashboard, component: Dashboard },
+    { path: config.routes.dashboard_teacher, component: DashboardTeacher },
+    { path: config.routes.dashboard_admissions, component: DashboardAdmissions },
 
     // Course Online routes
     { path: config.routes.course_online, component: CourseList },

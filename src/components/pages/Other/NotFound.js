@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom";
+import { getDecodedToken } from "../../../utils/auth";
 
 function NotFound() {
+    const decodeToken = getDecodedToken();
+    let accountRole = "";
+
+    if (decodeToken && decodeToken.Role && decodeToken.Role[0].authority) {
+        accountRole = decodeToken.Role[0].authority;
+    } else {
+        console.error("Role not found in token");
+    }
+
+    let redirectUrl = "/";
+
+    if (accountRole === "ADMIN") {
+        redirectUrl = "/";
+    } else if (accountRole === "USER") {
+        redirectUrl = "/dashboard-teacher";
+    }
+
     return (
         <div className="maintenance-block">
             <div className="container">
@@ -19,7 +37,7 @@ function NotFound() {
                                         The page you are looking was moved, removed,
                                         <br /> renamed, or might never exist!
                                     </p>
-                                    <Link to="/" className="btn btn-primary mb-3">
+                                    <Link to={redirectUrl} className="btn btn-primary mb-3">
                                         Go to home
                                     </Link>
                                 </div>

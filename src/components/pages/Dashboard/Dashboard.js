@@ -1,21 +1,13 @@
-import { useEffect } from "react";
+import useCheckRole from "../../../hooks/useCheckRole";
 import Layout from "../../layouts/index";
 import NewsFeed from "../../views/Dashboard/NewsFeed";
 
 function Dashboard() {
-    useEffect(() => {
-        const newsModal = sessionStorage.getItem("first_visit");
-
-        if (!newsModal) {
-            const myModal = new window.bootstrap.Modal(document.getElementById("newsModal"));
-            myModal.show();
-            sessionStorage.setItem("first_visit", "false");
-        }
-    });
+    useCheckRole();
 
     return (
-        <Layout title="Dashboard">
-            <>
+        <>
+            <Layout title="Dashboard">
                 <div className="col-md-6 col-xxl-3">
                     <div className="card">
                         <div className="card-body">
@@ -971,10 +963,10 @@ function Dashboard() {
                         </div>
                     </div>
                 </div>
-            </>
 
-            <NewsFeed />
-        </Layout>
+                <NewsFeed />
+            </Layout>
+        </>
     );
 }
 

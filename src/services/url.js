@@ -93,5 +93,14 @@ const url = {
         COURSE_ITEM_SLOT_EDIT: "item-slot",
         COURSE_ITEM_SLOT_DELETE: "item-slot",
     },
+
+    DASHBOARD_TEACHER: {
+        TOTAL_CLASS: "classes/by-teacher/count",
+        COUNT_STUDENT_STUDYING: "tutor/get-count-student-studing",
+    },
+
+    DASHBOARD_TRAINER: {
+        POTENTIAL_CUSTOMER: "potential-customer",
+    },
 };
 export default url;
