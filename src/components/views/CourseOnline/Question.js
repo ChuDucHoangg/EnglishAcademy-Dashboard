@@ -4,7 +4,7 @@ import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
 import Swal from "sweetalert2";
 import EditQuestion from "./EditQuestion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Question({ courseDetail, questions, questionIndex, loadData }) {
     const handleDeleteQuestion = async (id) => {
@@ -54,13 +54,6 @@ function Question({ courseDetail, questions, questionIndex, loadData }) {
     };
 
     const [questionId, setQuestionId] = useState(null);
-
-    useEffect(() => {
-        if (questionId !== null) {
-            // Actions to perform after questionId update, if any
-            // For example, you might want to programmatically open the modal here if it's not opening automatically
-        }
-    }, [questionId]);
 
     return (
         <div className="bg-gray-100 p-3 rounded-3 mb-3">

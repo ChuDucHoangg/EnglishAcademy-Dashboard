@@ -40,62 +40,30 @@ function EditQuestion({ id, courseDetail, loadData }) {
         orderTop: null,
     });
 
-    // useEffect(() => {
-    //     if (questionDetail && courseDetail.id) {
-    //         setFormData({
-    //             id: questionDetail.id,
-    //             title: questionDetail.title || "",
-    //             answer1: questionDetail.answer1 || "",
-    //             answer2: questionDetail.answer2 || "",
-    //             answer3: questionDetail.answer3 || "",
-    //             answer4: questionDetail.answer4 || "",
-    //             answerCorrect: questionDetail.answerCorrect || "",
-    //             orderTop: questionDetail.orderTop || null,
-    //             itemOnlineId: courseDetail.id,
-    //         });
-    //     }
-    // }, [questionDetail, id, courseDetail.id]);
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-
-    //     let convertedValue = value;
-    //     if (name === "orderTop") {
-    //         convertedValue = value ? parseInt(value, 10) : null;
-    //     }
-
-    //     setFormData((prevFormData) => ({
-    //         ...prevFormData,
-    //         [name]: convertedValue,
-    //     }));
-    // };
-
     useEffect(() => {
         if (questionDetail && courseDetail.id) {
-            // Check for data availability
-            const initialFormData = {
-                title: questionDetail.title || "", // Default to empty string if undefined
+            setFormData({
+                id: questionDetail.id,
+                title: questionDetail.title || "",
                 answer1: questionDetail.answer1 || "",
                 answer2: questionDetail.answer2 || "",
                 answer3: questionDetail.answer3 || "",
                 answer4: questionDetail.answer4 || "",
                 answerCorrect: questionDetail.answerCorrect || "",
-                orderTop: questionDetail.orderTop || null, // Assuming orderTop can be null
-                // Add any other fields from questionDetail that need to be included in formData
-            };
-
-            setFormData(initialFormData);
+                orderTop: questionDetail.orderTop || null,
+                itemOnlineId: courseDetail.id,
+            });
         }
-    }, [questionDetail, id, courseDetail.id]); // Dependency array
+    }, [questionDetail, id, courseDetail.id]);
 
-    // Corrected handleChange function to properly handle setting the value of 'orderTop' input
     const handleChange = (e) => {
         const { name, value } = e.target;
+
         let convertedValue = value;
         if (name === "orderTop") {
-            // Ensure that empty string is converted to null for 'orderTop'
-            convertedValue = value === "" ? null : parseInt(value, 10);
+            convertedValue = value ? parseInt(value, 10) : null;
         }
+
         setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: convertedValue,
