@@ -11,6 +11,13 @@ const url = {
         DELETE: "course-online",
     },
 
+    QUESTION_ITEM_ONLINE: {
+        CREATE: "question-item-online",
+        UPDATE: "question-item-online",
+        DETAIL: "question-item-online",
+        DELETE: "question-item-online/item-online",
+    },
+
     COURSE_ITEM: {
         CREATE: "item-online",
         DETAIL: "any/item-online/get-by-slug",
