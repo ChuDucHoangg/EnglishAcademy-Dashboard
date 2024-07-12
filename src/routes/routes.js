@@ -5,20 +5,7 @@ import CourseList from "../components/pages/Course/index";
 import CourseDetail from "../components/pages/Course/CourseDetail";
 import CourseCreate from "../components/pages/Course/CourseCreate";
 import CourseEdit from "../components/pages/Course/CourseEdit";
-import Lesson from "../components/pages/Lesson/index";
-import LessonCreate from "../components/pages/Lesson/LessonCreate";
-import LessonEdit from "../components/pages/Lesson/LessonEdit";
-import ExamList from "../components/pages/Exam/index";
-import ExamCreate from "../components/pages/Exam/ExamCreate";
-import ExamEdit from "../components/pages/Exam/ExamEdit";
-import TestList from "../components/pages/Test/index";
-import MultipleChoice from "../components/pages/Test/MultipleChoice/index";
-import PracticalExam from "../components/pages/Test/PracticalExam/index";
-import EntranceTest from "../components/pages/Test/EntranceTest/index";
-import Question from "../components/pages/Question/index";
 import Timetable from "../components/pages/Timetable/index";
-import Device from "../components/pages/Device/index";
-import Classroom from "../components/pages/Classroom/index";
 import StudentList from "../components/pages/Student/index";
 import StudentCreate from "../components/pages/Student/StudentCreate";
 import StudentEdit from "../components/pages/Student/StudentEdit";
@@ -122,28 +109,7 @@ const privateRoutes = [
 
     { path: config.routes.not_found, component: NotFound },
 
-    // Routes Unused
-    { path: config.routes.lesson_online, component: Lesson },
-    { path: config.routes.lesson_online_create, component: LessonCreate },
-    { path: config.routes.lesson_online_edit, component: LessonEdit },
-
-    { path: config.routes.exam_online, component: ExamList },
-    { path: config.routes.exam_online_create, component: ExamCreate },
-    { path: config.routes.exam_online_edit, component: ExamEdit },
-
-    { path: config.routes.test_online, component: TestList },
-    { path: config.routes.test_online_create, component: ExamCreate },
-    { path: config.routes.test_online_edit, component: ExamEdit },
-    { path: config.routes.multiple_choice, component: MultipleChoice },
-    { path: config.routes.practical_exam, component: PracticalExam },
-    { path: config.routes.entrance_test, component: EntranceTest },
-    { path: config.routes.question_online, component: Question },
-
     { path: config.routes.timetable, component: Timetable },
-
-    { path: config.routes.classroom, component: Classroom },
-
-    { path: config.routes.device, component: Device },
 
     { path: config.routes.student_list, component: StudentList },
     { path: config.routes.student_create, component: StudentCreate },
