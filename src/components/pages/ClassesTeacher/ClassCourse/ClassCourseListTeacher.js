@@ -59,31 +59,6 @@ function ClassCourseListTeacher() {
                                 </div>
                             </div>
                             <div className="card-body">
-                                <div className="table-card">
-                                    <div className="py-0 px-2">
-                                        <div className="d-sm-flex align-items-center">
-                                            <ul className="nav nav-tabs profile-tabs" id="myTab" role="tablist">
-                                                <li className="nav-item" role="presentation">
-                                                    <a className="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="!#profile-1" role="tab" aria-selected="true">
-                                                        <i className="fas fa-file-signature me-2"></i> Lesson
-                                                    </a>
-                                                </li>
-                                                <li className="nav-item" role="presentation">
-                                                    <a className="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="!#profile-2" role="tab" aria-selected="false" tabIndex="-1">
-                                                        <i className="ti ti-file-text me-2"></i>Test Lesson
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <ul className="list-inline ms-auto mb-3">
-                                                <li className="list-inline-item">
-                                                    {/* <Link to={`/course-online/topic-create/${courseDetail.id}`} className="btn btn-primary">
-                                                Add Topic
-                                            </Link> */}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div className="datatable-container">
                                     <table className="table table-hover datatable-table" id="pc-dt-simple">
                                         <thead>
