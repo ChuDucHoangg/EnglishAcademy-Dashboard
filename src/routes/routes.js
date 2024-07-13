@@ -48,6 +48,9 @@ import ClassCourseSlotEditTeacher from "../components/pages/ClassesTeacher/Class
 import ClassCourseSlotAnswerTeacher from "../components/pages/ClassesTeacher/ClassCourseSlot/ClassCourseSlotAnswerTeacher";
 import DashboardTeacher from "../components/pages/Dashboard/DashboardTeacher";
 import DashboardAdmissions from "../components/pages/Dashboard/DashboardAdmissions";
+import EntranceTest from "../components/pages/EntranceTest";
+import EntranceTestDetail from "../components/pages/EntranceTest/EntranceTestDetail";
+import EntranceTestCreate from "../components/pages/EntranceTest/EntranceTestCreate";
 
 const privateRoutes = [
     // Dashboard routes
@@ -119,6 +122,11 @@ const privateRoutes = [
     { path: config.routes.staff_create, component: StaffCreate },
     { path: config.routes.staff_edit, component: StaffEdit },
     { path: config.routes.profile, component: ProfileWrap },
+
+    // Entrance Test routes
+    { path: config.routes.entrance_test, component: EntranceTest },
+    { path: config.routes.entrance_test_detail, component: EntranceTestDetail },
+    { path: config.routes.entrance_test_create, component: EntranceTestCreate },
 ];
 
 const authenticationRoutes = [

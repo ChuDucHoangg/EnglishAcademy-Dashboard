@@ -41,6 +41,16 @@ const sidebarItem = [
         ],
     },
     {
+        label: "Entrance Test",
+        items: [
+            {
+                title: "Entrance Test",
+                path: config.routes.entrance_test,
+                icon: "fas fa-window-restore",
+            },
+        ],
+    },
+    {
         label: "Teacher & Tutor",
         items: [
             {
