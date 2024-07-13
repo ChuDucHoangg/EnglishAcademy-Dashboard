@@ -148,20 +148,18 @@ function CourseOfflineList() {
                                         <table className="table table-hover datatable-table" id="pc-dt-simple">
                                             <thead>
                                                 <tr>
-                                                    <th data-sortable="true">
+                                                    <th>
                                                         <div className="form-check custom-checkbox">
                                                             <input type="checkbox" className="form-check-input" checked={selectAll} onChange={handleSelectAll} />
                                                         </div>
                                                     </th>
-                                                    <th data-sortable="true">Course Name</th>
-                                                    <th data-sortable="true">Price</th>
-                                                    <th data-sortable="true">LANGUAGE</th>
-                                                    <th data-sortable="true">TRAILER</th>
-                                                    <th data-sortable="true">DESCRIPTION</th>
-                                                    <th data-sortable="true">Status</th>
-                                                    <th data-sortable="true" className="text-center">
-                                                        Actions
-                                                    </th>
+                                                    <th>Course Name</th>
+                                                    <th>Price</th>
+                                                    <th>Language</th>
+                                                    <th>Description</th>
+                                                    <th>Status</th>
+                                                    <th>Created By</th>
+                                                    <th className="text-center">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="orders">
@@ -181,7 +179,6 @@ function CourseOfflineList() {
                                                         <td>
                                                             <div className="row">
                                                                 <div className="col-auto">
-                                                                    {/* /assets/images/graduation.png */}
                                                                     <img
                                                                         src={course.image}
                                                                         alt={course.name}
@@ -199,9 +196,9 @@ function CourseOfflineList() {
                                                         </td>
                                                         <td>${course.price.toFixed(2)}</td>
                                                         <td>{course.language}</td>
-                                                        <td>{course.trailer}</td>
                                                         <td>{course.description}</td>
                                                         <td>{course.status}</td>
+                                                        <td>{course.createdBy || "N/A"}</td>
                                                         <td className="text-center">
                                                             <Link to={`/course-offline/${course.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
                                                                 <i className="ti ti-eye f-18"></i>

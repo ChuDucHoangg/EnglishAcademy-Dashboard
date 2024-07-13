@@ -147,6 +147,63 @@ function CourseDetail() {
         }
     };
 
+    const handleDeleteTest = async (id) => {
+        const data = [id];
+        try {
+            const isConfirmed = await Swal.fire({
+                title: "Are you sure?",
+                text: "Are you sure you want to delete?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "I'm sure",
+                reverseButtons: true,
+            });
+
+            if (isConfirmed.isConfirmed) {
+                const deleteRequest = await api.delete(url.TEST_ONLINE.DELETE, { data, headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                if (deleteRequest.status === 200) {
+                    toast.success("Deleted Successfully!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                    loadData();
+                }
+            }
+        } catch (error) {
+            if (error.response.status === 400) {
+                toast.error("The item cannot be deleted!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+            } else {
+                toast.error("Error! An error occurred. Please try again later!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
+            }
+        }
+    };
+
     return (
         <Layout title="Course  Detail">
             <div className="row">
@@ -428,6 +485,12 @@ function CourseDetail() {
                                                                         aria-labelledby={`flush-heading2${index}`}
                                                                         data-bs-parent="#accordionFlush2"
                                                                     >
+                                                                        <div className="d-flex align-items-center justify-content-between my-3">
+                                                                            <div></div>
+                                                                            <Link to={`/test-online/create/${topic.id}`} className="btn btn-outline-primary d-flex align-items-center">
+                                                                                <i className="ti ti-plus"></i> Add New Test
+                                                                            </Link>
+                                                                        </div>
                                                                         {topic.testOnlineDTOList.length === 0 ? (
                                                                             <p className="text-warning px-4 pt-3">This item has no content.</p>
                                                                         ) : (
@@ -456,9 +519,15 @@ function CourseDetail() {
                                                                                                 <Link to="" className="avtar avtar-xs btn-link-success btn-pc-default">
                                                                                                     <i className="ti ti-eye f-18"></i>
                                                                                                 </Link>
-                                                                                                <a className="avtar avtar-xs btn-link-success btn-pc-default" href="/category-edit/ielts">
+                                                                                                <Link to="" className="avtar avtar-xs btn-link-success btn-pc-default">
                                                                                                     <i className="ti ti-edit-circle f-18"></i>
-                                                                                                </a>
+                                                                                                </Link>
+                                                                                                <button
+                                                                                                    onClick={() => handleDeleteTest(item.id)}
+                                                                                                    className="avtar avtar-xs btn-link-danger btn-pc-default"
+                                                                                                >
+                                                                                                    <i className="ti ti-trash f-18"></i>
+                                                                                                </button>
                                                                                             </td>
                                                                                         </tr>
                                                                                     ))}

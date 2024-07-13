@@ -5,11 +5,8 @@ import url from "../../../services/url";
 import BookLoading from "../../layouts/BookLoading";
 import { statusColor } from "../../../utils/statusColor";
 import { getAccessToken } from "../../../utils/auth";
-import useCheckRole from "../../../hooks/useCheckRole";
 
 function BookingList() {
-    useCheckRole();
-
     const bookingData = useAxiosGet({
         path: url.TUTOR.BOOKING_BY_TUTOR,
         headers: {

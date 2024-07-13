@@ -6,9 +6,9 @@ const url = {
     COURSE: {
         LIST: "any/course-online",
         DETAIL: "any/course-online/detail",
-        CREATE: "course-online",
-        UPDATE: "course-online",
-        DELETE: "course-online",
+        CREATE: "any/course-online",
+        UPDATE: "any/course-online",
+        DELETE: "any/course-online",
     },
 
     QUESTION_ITEM_ONLINE: {
@@ -114,6 +114,15 @@ const url = {
         LIST: "test-input",
         CREATE: "test-input",
         DETAIL: "test-input/detail",
+    },
+
+    TEST_ONLINE: {
+        CREATE: "test-online/create",
+        DELETE: "test-online/delete",
+    },
+
+    TEST_OFFLINE: {
+        CREATE: "test-offline/file",
     },
 };
 export default url;

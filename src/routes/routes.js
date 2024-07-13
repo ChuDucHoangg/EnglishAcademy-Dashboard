@@ -51,6 +51,8 @@ import DashboardAdmissions from "../components/pages/Dashboard/DashboardAdmissio
 import EntranceTest from "../components/pages/EntranceTest";
 import EntranceTestDetail from "../components/pages/EntranceTest/EntranceTestDetail";
 import EntranceTestCreate from "../components/pages/EntranceTest/EntranceTestCreate";
+import TestOnlineCreate from "../components/pages/TestOnline/TestOnlineCreate";
+import QuestionEdit from "../components/pages/Course/Quiz/QuestionEdit";
 
 const privateRoutes = [
     // Dashboard routes
@@ -63,6 +65,10 @@ const privateRoutes = [
     { path: config.routes.course_online_detail, component: CourseDetail },
     { path: config.routes.course_online_create, component: CourseCreate },
     { path: config.routes.course_online_edit, component: CourseEdit },
+    { path: config.routes.course_online_question_item_edit, component: QuestionEdit },
+
+    // Test Online routes
+    { path: config.routes.test_online_create, component: TestOnlineCreate },
 
     { path: config.routes.course_online_topic_create, component: CourseTopicCreate },
     { path: config.routes.course_online_topic_edit, component: CourseTopicEdit },
