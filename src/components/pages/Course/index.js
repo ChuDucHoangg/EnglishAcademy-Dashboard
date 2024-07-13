@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Layout from "../../layouts";
 import { useEffect, useState } from "react";
 import url from "../../../services/url";
@@ -84,15 +84,31 @@ function CourseList() {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: 3000,
                     });
-                    // console.log("data:", deleteResponse.data);
-                } else {
                 }
             } catch (error) {
-                toast.error("Failed to delete data!", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: 3000,
-                });
-                console.error("Failed to delete promotions:", error);
+                if (error.response.status === 400) {
+                    toast.error("The course cannot be deleted!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                } else {
+                    toast.error("Error! An error occurred. Please try again later!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                }
             }
         }
     };
@@ -133,6 +149,7 @@ function CourseList() {
     const indexOfLastContent = currentPage * contentsPerPage;
     const indexOfFirstContent = indexOfLastContent - contentsPerPage;
     const currentContents = filteredCourses.slice(indexOfFirstContent, indexOfLastContent);
+
     return (
         <Layout title="Course Online List">
             <div className="col-xl-12">
@@ -156,27 +173,14 @@ function CourseList() {
                             </div>
                         </div>
                     </div>
-                    <div className="row" style={{ marginTop: "20px" }}>
-                        <div className="col-lg-5"></div>
-                        <div className="col-lg-1 text-end">
-                            <NavLink onClick={handleDeleteData}>
-                                <button type="button" className={`btn btn-danger ${isDeleteVisible ? "" : "d-none"}`}>
-                                    <i className="ti ti-trash"></i>
-                                </button>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-4 text-end">
+                    <div className="datatable-dropdown mt-3 px-3">
+                        <div className="d-flex align-items-center justify-content-end gap-3">
+                            <button onClick={handleDeleteData} type="button" className={`btn btn-danger ${isDeleteVisible ? "" : "d-none"}`}>
+                                <i className="ti ti-trash"></i> Delete
+                            </button>
                             <Link to={config.routes.course_online_create} className="btn btn-primary d-flex align-items-center justify-content-center">
                                 <i className="ti ti-plus"></i> Add New Course Online
                             </Link>
-                        </div>
-                        <div className="col-lg-2">
-                            <NavLink to="/course-online-delete-at">
-                                <button type="button" className="btn btn-warning d-flex align-items-center justify-content-center">
-                                    <i className="ti ti-trash"></i>
-                                    Deleted List
-                                </button>
-                            </NavLink>
                         </div>
                     </div>
                     <div className="card-body table-border-style">
@@ -186,8 +190,7 @@ function CourseList() {
                                     <table className="table table-hover datatable-table" id="pc-dt-simple">
                                         <thead>
                                             <tr>
-                                                <th data-sortable="true">
-                                                    {" "}
+                                                <th>
                                                     <div className="form-check custom-checkbox">
                                                         <input
                                                             type="checkbox"
@@ -200,15 +203,13 @@ function CourseList() {
                                                         />
                                                     </div>
                                                 </th>
-                                                <th data-sortable="true">Course Name</th>
-                                                <th data-sortable="true">Price</th>
-                                                <th data-sortable="true">Language</th>
-                                                <th data-sortable="true">Trailer</th>
-                                                <th data-sortable="true">Description</th>
-                                                <th data-sortable="true">Status</th>
-                                                <th data-sortable="true" className="text-center">
-                                                    Actions
-                                                </th>
+                                                <th>Course Name</th>
+                                                <th>Price</th>
+                                                <th>Language</th>
+                                                <th>Description</th>
+                                                <th>Status</th>
+                                                <th>Created By</th>
+                                                <th className="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody id="orders">
@@ -239,9 +240,9 @@ function CourseList() {
                                                         </td>
                                                         <td>${item.price.toFixed(2)}</td>
                                                         <td>{item.language}</td>
-                                                        <td>{item.trailer}</td>
                                                         <td>{item.description}</td>
                                                         <td>{item.status}</td>
+                                                        <td>{item.createdBy || "N/A"}</td>
                                                         <td className="text-center">
                                                             <ul className="list-inline me-auto mb-0">
                                                                 <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="View" data-bs-original-title="View">
@@ -262,27 +263,29 @@ function CourseList() {
                                 </div>
                                 <div className="row">
                                     <div className="col-lg-3">
-                                        <nav>
-                                            <ul className="pagination pagination-gutter pagination-primary no-bg">
-                                                <li className={`page-item page-indicator ${currentPage === 1 ? "disabled" : ""}`}>
-                                                    <button className="page-link" onClick={handlePrevPage}>
-                                                        «
-                                                    </button>
-                                                </li>
-                                                {Array.from({ length: totalPages }).map((_, index) => (
-                                                    <li key={index} className={`page-item ${currentPage === index + 1 ? "active" : ""}`}>
-                                                        <button className="page-link" onClick={() => handlePageChange(index + 1)}>
-                                                            {index + 1}
+                                        {totalPages <= 0 && (
+                                            <nav>
+                                                <ul className="pagination pagination-gutter pagination-primary no-bg">
+                                                    <li className={`page-item page-indicator ${currentPage === 1 ? "disabled" : ""}`}>
+                                                        <button className="page-link" onClick={handlePrevPage}>
+                                                            «
                                                         </button>
                                                     </li>
-                                                ))}
-                                                <li className={`page-item page-indicator ${currentPage === totalPages ? "disabled" : ""}`}>
-                                                    <button className="page-link" onClick={handleNextPage}>
-                                                        »
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                                                    {Array.from({ length: totalPages }).map((_, index) => (
+                                                        <li key={index} className={`page-item ${currentPage === index + 1 ? "active" : ""}`}>
+                                                            <button className="page-link" onClick={() => handlePageChange(index + 1)}>
+                                                                {index + 1}
+                                                            </button>
+                                                        </li>
+                                                    ))}
+                                                    <li className={`page-item page-indicator ${currentPage === totalPages ? "disabled" : ""}`}>
+                                                        <button className="page-link" onClick={handleNextPage}>
+                                                            »
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        )}
                                     </div>
                                 </div>
                             </div>

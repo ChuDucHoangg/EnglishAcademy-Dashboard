@@ -88,8 +88,14 @@ function ClassCourseSubjectTeacher() {
                                     </div>
                                     <div className="datatable-dropdown">
                                         <div className="d-flex align-items-center gap-3">
+                                            {subjects?.testOfflineResponseList?.length === 0 && (
+                                                <Link to={``} className="btn btn-outline-secondary d-flex align-items-center justify-content-end">
+                                                    <i className="fas fa-file-signature"></i> Create Final Exam
+                                                </Link>
+                                            )}
+
                                             <Link to={`/teacher/class/${classId}/${courseSlug}/item-slot/create`} className="btn btn-outline-primary d-flex align-items-center justify-content-end">
-                                                <i className="ti ti-plus"></i>Create Slot
+                                                <i className="ti ti-plus"></i> Create Slot
                                             </Link>
                                         </div>
                                     </div>

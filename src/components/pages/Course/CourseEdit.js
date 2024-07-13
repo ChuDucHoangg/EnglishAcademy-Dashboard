@@ -27,6 +27,13 @@ function CourseEdit() {
         },
     });
 
+    // Call API categories
+    const categoriesData = useAxiosGet({
+        path: url.CATEGORY.LIST,
+    });
+
+    const categories = categoriesData.response || [];
+
     const courseDetail = useMemo(() => courseData.response || {}, [courseData.response]);
 
     useEffect(() => {
@@ -40,13 +47,14 @@ function CourseEdit() {
                 level: courseDetail.level || "",
                 language: courseDetail.language || "",
                 trailer: courseDetail.trailer || "",
+                categoryId: courseDetail.categoryId || null,
             });
             setVideoUrl(courseDetail.trailer || "");
         }
     }, [courseDetail]);
 
     const [formData, setFormData] = useState({
-        id: courseDetail.id,
+        id: null,
         name: "",
         image: null,
         price: "",
@@ -54,6 +62,7 @@ function CourseEdit() {
         level: "",
         language: "",
         trailer: "",
+        categoryId: null,
     });
 
     const [formErrors, setFormErrors] = useState({
@@ -64,34 +73,41 @@ function CourseEdit() {
         level: "",
         language: "",
         trailer: "",
+        categoryId: "",
     });
 
     const [videoUrl, setVideoUrl] = useState("");
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
-        if (name === "image" && files.length > 0) {
-            setFormData({ ...formData, image: files[0] });
-            setFormErrors({ ...formErrors, [name]: "https://www.shutterstock.com/image-vector/3d-web-vector-illustrations-online-600nw-2152289507.jpg" });
+        let newValue = value;
 
+        if (name === "level" || name === "categoryId") {
+            newValue = value ? parseInt(value, 10) : "";
+        }
+
+        if (name === "image" && files.length > 0) {
             const reader = new FileReader();
             reader.onload = () => {
                 document.getElementById("imgPreview").src = reader.result;
+                setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    image: reader.result,
+                }));
             };
             reader.readAsDataURL(files[0]);
         } else {
-            let convertedValue = value;
-            if (name === "level") {
-                convertedValue = value ? parseInt(value, 10) : "";
-            }
-            setFormData({ ...formData, [name]: convertedValue });
-            setFormErrors({ ...formErrors, [name]: "" });
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                [name]: newValue,
+            }));
         }
     };
 
     const validateForm = () => {
         let valid = true;
         const newErrors = {};
+
         if (!formData.name) {
             newErrors.name = "Please enter name.";
             valid = false;
@@ -122,6 +138,10 @@ function CourseEdit() {
             newErrors.language = "Please enter language";
             valid = false;
         }
+        if (formData.categoryId === null || formData.categoryId === "") {
+            newErrors.categoryId = "Please choose category.";
+            valid = false;
+        }
         if (formData.trailer === "") {
             newErrors.trailer = "Please enter trailer";
             valid = false;
@@ -135,10 +155,10 @@ function CourseEdit() {
         if (validateForm()) {
             try {
                 setSubmitting(true);
-                const createRequest = await api.put(url.COURSE.UPDATE, formData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                const createRequest = await api.put(url.COURSE.UPDATE, formData);
 
                 if (createRequest.status === 200) {
-                    navigate(config.routes.course_offline);
+                    navigate(config.routes.course_online);
 
                     setFormData({
                         id: null,
@@ -149,6 +169,7 @@ function CourseEdit() {
                         level: "",
                         language: "",
                         trailer: "",
+                        categoryId: null,
                     });
 
                     toast.success("Course Offline updated successfully!", {
@@ -188,122 +209,133 @@ function CourseEdit() {
                     <div className="col-sm-12">
                         <div className="card">
                             <div className="card-body">
-                                <form onSubmit={handleCreateCourse}>
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="form-group">
-                                                <label className="form-label">Course Name</label>
-                                                <input
-                                                    type="text"
-                                                    name="name"
-                                                    className={`form-control ${formErrors.name ? "is-invalid" : ""}`}
-                                                    value={formData.name}
-                                                    onChange={handleChange}
-                                                    placeholder="Enter Course Name"
-                                                    autoFocus
-                                                />
-                                                {formErrors.name && <p className="invalid-feedback">{formErrors.name}</p>}
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label className="form-label">Language</label>
-                                                <input
-                                                    type="text"
-                                                    name="language"
-                                                    className={`form-control ${formErrors.language ? "is-invalid" : ""}`}
-                                                    value={formData.language}
-                                                    onChange={handleChange}
-                                                    placeholder="Enter Course Language"
-                                                />
-                                                {formErrors.language && <p className="invalid-feedback">{formErrors.language}</p>}
-                                            </div>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="form-group">
+                                            <label className="form-label">Course Name</label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                className={`form-control ${formErrors.name ? "is-invalid" : ""}`}
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                                placeholder="Enter Course Name"
+                                                autoFocus
+                                            />
+                                            {formErrors.name && <p className="invalid-feedback">{formErrors.name}</p>}
                                         </div>
 
-                                        <div className="col-md-6">
-                                            <div className="form-group">
-                                                <label className="form-label">Image</label>
-                                                <input type="file" name="image" className={`form-control ${formErrors.image ? "is-invalid" : ""}`} accept=".jpg, .png, .etc" onChange={handleChange} />
-                                                {formErrors.image && <p className="invalid-feedback">{formErrors.image}</p>}
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label className="form-label">Price</label>
-                                                <input
-                                                    type="number"
-                                                    name="price"
-                                                    className={`form-control ${formErrors.price ? "is-invalid" : ""}`}
-                                                    value={formData.price}
-                                                    onChange={handleChange}
-                                                    placeholder="Enter Course Price"
-                                                />
-                                                {formErrors.price && <p className="invalid-feedback">{formErrors.price}</p>}
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-6">
-                                            <div className="form-group">
-                                                <label className="form-label">Level</label>
-                                                <select name="level" className={`form-control ${formErrors.level ? "is-invalid" : ""}`} value={formData.level} onChange={handleChange}>
-                                                    <option value="">Choose Level</option>
-                                                    {levels.map((level, index) => (
-                                                        <option value={level.level} key={index}>
-                                                            {formatLevelCourse(level.level)}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                                {formErrors.level && <p className="invalid-feedback">{formErrors.level}</p>}
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label className="form-label">Description</label>
-                                                <textarea
-                                                    name="description"
-                                                    className={`form-control ${formErrors.description ? "is-invalid" : ""}`}
-                                                    value={formData.description}
-                                                    onChange={handleChange}
-                                                    rows="3"
-                                                ></textarea>
-                                                {formErrors.description && <p className="invalid-feedback">{formErrors.description}</p>}
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-6">
-                                            <div className="form-group">
-                                                <label className="form-label">Trailer</label>
-                                                <input
-                                                    type="text"
-                                                    name="trailer"
-                                                    className={`form-control ${formErrors.trailer ? "is-invalid" : ""}`}
-                                                    value={formData.trailer}
-                                                    onChange={(e) => {
-                                                        setVideoUrl(e.target.value);
-                                                        setFormData({ ...formData, trailer: e.target.value });
-                                                    }}
-                                                    placeholder="Please enter YouTube video URL"
-                                                />
-                                                {formErrors.trailer && <p className="invalid-feedback">{formErrors.trailer}</p>}
-                                            </div>
-
-                                            <div className="text-end btn-page mb-0 mt-5">
-                                                <ButtonSubmit className="btn-primary" value="Update This Course" icon="ti ti-edit" submitting={submitting} handleEvent={handleCreateCourse} />
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-6">
-                                            <div className="mb-3">
-                                                <label className="text-label form-label">Preview course image</label>
-                                                {formData.image && <img id="imgPreview" src={formData.image} alt="Preview" style={{ width: "100%", height: "200px", objectFit: "cover" }} />}
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-6">
-                                            <div className="mb-3">
-                                                <label className="text-label form-label">Preview Trailer</label>
-                                                {videoUrl && <ReactPlayer url={videoUrl} width="100%" height="200px" controls />}
-                                            </div>
+                                        <div className="form-group">
+                                            <label className="form-label">Language</label>
+                                            <input
+                                                type="text"
+                                                name="language"
+                                                className={`form-control ${formErrors.language ? "is-invalid" : ""}`}
+                                                value={formData.language}
+                                                onChange={handleChange}
+                                                placeholder="Enter Course Language"
+                                            />
+                                            {formErrors.language && <p className="invalid-feedback">{formErrors.language}</p>}
                                         </div>
                                     </div>
-                                </form>
+
+                                    <div className="col-md-6">
+                                        <div className="form-group">
+                                            <label className="form-label">Image</label>
+                                            <input type="file" name="image" className={`form-control ${formErrors.image ? "is-invalid" : ""}`} accept=".jpg, .png, .etc" onChange={handleChange} />
+                                            {formErrors.image && <p className="invalid-feedback">{formErrors.image}</p>}
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="form-label">Price</label>
+                                            <input
+                                                type="number"
+                                                name="price"
+                                                className={`form-control ${formErrors.price ? "is-invalid" : ""}`}
+                                                value={formData.price}
+                                                onChange={handleChange}
+                                                placeholder="Enter Course Price"
+                                            />
+                                            {formErrors.price && <p className="invalid-feedback">{formErrors.price}</p>}
+                                        </div>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <div className="form-group">
+                                            <label className="form-label">Level</label>
+                                            <select name="level" className={`form-control ${formErrors.level ? "is-invalid" : ""}`} value={formData.level} onChange={handleChange}>
+                                                <option value="">Choose Level</option>
+                                                {levels.map((level, index) => (
+                                                    <option value={level.level} key={index}>
+                                                        {formatLevelCourse(level.level)}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            {formErrors.level && <p className="invalid-feedback">{formErrors.level}</p>}
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="form-label">Description</label>
+                                            <textarea
+                                                name="description"
+                                                className={`form-control ${formErrors.description ? "is-invalid" : ""}`}
+                                                value={formData.description}
+                                                onChange={handleChange}
+                                                rows="3"
+                                            ></textarea>
+                                            {formErrors.description && <p className="invalid-feedback">{formErrors.description}</p>}
+                                        </div>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <div className="form-group">
+                                            <label className="form-label">Trailer</label>
+                                            <input
+                                                type="text"
+                                                name="trailer"
+                                                className={`form-control ${formErrors.trailer ? "is-invalid" : ""}`}
+                                                value={formData.trailer}
+                                                onChange={(e) => {
+                                                    setVideoUrl(e.target.value);
+                                                    setFormData({ ...formData, trailer: e.target.value });
+                                                }}
+                                                placeholder="Please enter YouTube video URL"
+                                            />
+                                            {formErrors.trailer && <p className="invalid-feedback">{formErrors.trailer}</p>}
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label className="form-label">Category</label>
+                                            <select name="categoryId" className={`form-control ${formErrors.categoryId ? "is-invalid" : ""}`} value={formData.categoryId || ""} onChange={handleChange}>
+                                                <option value="">Please choose category</option>
+                                                {categories.map((category) => (
+                                                    <option value={category.id} key={category.id}>
+                                                        {category.name}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            {formErrors.categoryId && <div className="invalid-feedback">{formErrors.categoryId}</div>}
+                                        </div>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <div className="mb-3">
+                                            <label className="text-label form-label">Preview course image</label>
+                                            {formData.image && <img id="imgPreview" src={formData.image} alt="Preview" style={{ width: "100%", height: "200px", objectFit: "cover" }} />}
+                                        </div>
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <div className="mb-3">
+                                            <label className="text-label form-label">Preview Trailer</label>
+                                            {videoUrl && <ReactPlayer url={videoUrl} width="100%" height="200px" controls />}
+                                        </div>
+                                    </div>
+
+                                    <div className="text-end ">
+                                        <ButtonSubmit className="btn-primary" value="Update This Course" icon="ti ti-edit" submitting={submitting} handleEvent={handleCreateCourse} />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

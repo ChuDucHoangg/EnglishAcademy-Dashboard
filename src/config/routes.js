@@ -15,8 +15,13 @@ const routes = {
     course_online_item: "/course-online/item/:slug",
     course_online_item_create: "/course-online/item-create/:slug",
     course_online_item_edit: "/course-online/item-edit/:slug",
-
+    course_online_question_item_edit: "/course-online/question-item-edit/:itemOnlineId/:id",
     // End routes Course Online
+
+    // Start routes Test Online
+    test_online_create: "/test-online/create/:topicId",
+    test_online_edit: "/test-online/edit/:topicId",
+    // End routes Test Online
 
     // Start routes Course Online
     course_offline: "/course-offline",

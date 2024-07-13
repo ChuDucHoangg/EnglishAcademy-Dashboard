@@ -3,8 +3,7 @@ import api from "../../../services/api";
 import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
 import Swal from "sweetalert2";
-import EditQuestion from "./EditQuestion";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Question({ courseDetail, questions, questionIndex, loadData }) {
     const handleDeleteQuestion = async (id) => {
@@ -53,8 +52,6 @@ function Question({ courseDetail, questions, questionIndex, loadData }) {
         }
     };
 
-    const [questionId, setQuestionId] = useState(null);
-
     return (
         <div className="bg-gray-100 p-3 rounded-3 mb-3">
             <div className="d-flex align-items-center justify-content-between">
@@ -63,11 +60,9 @@ function Question({ courseDetail, questions, questionIndex, loadData }) {
                 </h4>
 
                 <div className="d-flex align-items-center">
-                    <button className="btn btn-icon btn-link-secondary" onClick={() => setQuestionId(questions.id)} data-bs-toggle="modal" data-bs-target="#editQuestionModal" data-bs-whatever="@mdo">
+                    <Link to={`/course-online/question-item-edit/${courseDetail.id}/${questions.id}`} className="btn btn-icon btn-link-secondary">
                         <i className="ti ti-edit"></i>
-                    </button>
-
-                    <EditQuestion courseDetail={courseDetail} loadData={loadData} id={questionId} />
+                    </Link>
 
                     <button className="btn btn-icon btn-link-danger" onClick={() => handleDeleteQuestion(questions.id)}>
                         <i className="ti ti-trash"></i>
