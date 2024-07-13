@@ -28,7 +28,7 @@ function ClassCourseSlotCreateTeacher() {
         },
         {
             type: 2,
-            name: "Exam",
+            name: "Exercise",
         },
     ];
 

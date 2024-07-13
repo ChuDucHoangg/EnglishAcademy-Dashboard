@@ -15,7 +15,7 @@ function ItemCreate() {
     const itemType = [
         {
             type: 0,
-            name: "Video",
+            name: "Lesson",
         },
         {
             type: 1,
