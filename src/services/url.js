@@ -109,5 +109,11 @@ const url = {
     DASHBOARD_TRAINER: {
         POTENTIAL_CUSTOMER: "potential-customer",
     },
+
+    ENTRANCE_TEST: {
+        LIST: "test-input",
+        CREATE: "test-input",
+        DETAIL: "test-input/detail",
+    },
 };
 export default url;

@@ -31,18 +31,6 @@ const routes = {
     category_edit: "/category-edit/:slug",
     // End routes Category
 
-    // Start routes Lesson
-    lesson_online: "/lesson-online",
-    lesson_online_create: "/lesson-online/create",
-    lesson_online_edit: "/lesson-online/edit/:slug",
-    // End routes Lesson
-
-    // Start routes Exam
-    exam_online: "/exam-online",
-    exam_online_create: "/exam-online/create",
-    exam_online_edit: "/exam-online/edit/:slug",
-    // End routes Exam
-
     // Start routes Timetable
     timetable: "/timetable",
     // End routes Timetable
@@ -94,6 +82,12 @@ const routes = {
     // Start routes Subject
     subject_create: "/subject/create/:courseId",
     // End routes Subject
+
+    // Start routes Entrance Test
+    entrance_test: "/entrance-test",
+    entrance_test_detail: "/entrance-test/detail/:testSlug",
+    entrance_test_create: "/entrance-test/create",
+    // End routes Entrance Test
 
     // Start routes Meeting
     meeting: "/room/:roomId",
