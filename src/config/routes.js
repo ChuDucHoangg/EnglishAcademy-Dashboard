@@ -107,6 +107,7 @@ const routes = {
     // End routes Entrance Test
 
     // Start routes Meeting
+    room: "/room",
     meeting: "/room/:roomId",
     // End routes Meeting
 

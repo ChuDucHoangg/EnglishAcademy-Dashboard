@@ -72,7 +72,7 @@ function Sidebar() {
                 },
                 {
                     title: "Room",
-                    path: config.routes.tutor_registration,
+                    path: config.routes.room,
                     icon: "fas fa-door-open",
                 },
                 {
