@@ -20,9 +20,8 @@ import NotFound from "../components/pages/Other/NotFound";
 import CategoryList from "../components/pages/Category/CategoryList";
 import CategoryEdit from "../components/pages/Category/CategoryEdit";
 import CategoryCreate from "../components/pages/Category/CategoryCreate";
-import BookingWaitingList from "../components/pages/Booking/BookingWaiting/BookingWaitingList";
-import ByPackage from "../components/pages/Booking/BookingWaitingDetail/ByPackage";
-import ByWeeks from "../components/pages/Booking/BookingWaitingDetail/ByWeeks";
+import BookingWaitingList from "../components/pages/BookingWaiting/BookingWaitingList";
+import ByWeeks from "../components/pages/BookingWaiting/BookingWaitingDetail/ByWeeks";
 import CourseOfflineList from "../components/pages/CourseOffline/CourseOfflineList";
 import CourseOfflineDetail from "../components/pages/CourseOffline/CourseOfflineDetail";
 import CourseOfflineEdit from "../components/pages/CourseOffline/CourseOfflineEdit";
@@ -53,65 +52,85 @@ import EntranceTestDetail from "../components/pages/EntranceTest/EntranceTestDet
 import EntranceTestCreate from "../components/pages/EntranceTest/EntranceTestCreate";
 import TestOnlineCreate from "../components/pages/TestOnline/TestOnlineCreate";
 import QuestionEdit from "../components/pages/Course/Quiz/QuestionEdit";
+import TestOnlineEdit from "../components/pages/TestOnline/TestOnlineEdit";
+import TestOnlineDetail from "../components/pages/TestOnline/TestOnlineDetail";
+import SubjectDetail from "../components/pages/CourseOffline/Subject/SubjectDetail";
+import ExamOfflineCreate from "../components/pages/ExamOffline/ExamOfflineCreate";
+import ClassCourseExamDetail from "../components/pages/ClassesTeacher/ClassCourseExam/ClassCourseExamDetail";
+import ExamDetailOfStudent from "../components/pages/ClassesTeacher/ExamDetailOfStudent/ExamDetailOfStudent";
+import ByPackage from "../components/pages/BookingWaiting/BookingWaitingDetail/ByPackage";
+import TutoringSchedule from "../components/pages/TutoringSchedule";
+import TutoringScheduleDetail from "../components/pages/TutoringSchedule/TutoringScheduleDetail";
 
 const privateRoutes = [
     // Dashboard routes
-    { path: config.routes.dashboard, component: Dashboard },
-    { path: config.routes.dashboard_teacher, component: DashboardTeacher },
-    { path: config.routes.dashboard_admissions, component: DashboardAdmissions },
+    { path: config.routes.dashboard, component: Dashboard, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.dashboard_teacher, component: DashboardTeacher, allowedRoles: ["TEACHER"] },
+    { path: config.routes.dashboard_admissions, component: DashboardAdmissions, allowedRoles: ["ADMISSIONS"] },
 
     // Course Online routes
-    { path: config.routes.course_online, component: CourseList },
-    { path: config.routes.course_online_detail, component: CourseDetail },
-    { path: config.routes.course_online_create, component: CourseCreate },
-    { path: config.routes.course_online_edit, component: CourseEdit },
-    { path: config.routes.course_online_question_item_edit, component: QuestionEdit },
+    { path: config.routes.course_online, component: CourseList, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_online_detail, component: CourseDetail, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_online_create, component: CourseCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_online_edit, component: CourseEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_online_question_item_edit, component: QuestionEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     // Test Online routes
-    { path: config.routes.test_online_create, component: TestOnlineCreate },
+    { path: config.routes.test_online_create, component: TestOnlineCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.test_online_edit, component: TestOnlineEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.test_online_detail, component: TestOnlineDetail, allowedRoles: ["ADMIN", "TRAINERS"] },
 
-    { path: config.routes.course_online_topic_create, component: CourseTopicCreate },
-    { path: config.routes.course_online_topic_edit, component: CourseTopicEdit },
+    { path: config.routes.course_online_topic_create, component: CourseTopicCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_online_topic_edit, component: CourseTopicEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
 
-    { path: config.routes.course_online_item, component: ItemDetail },
-    { path: config.routes.course_online_item_create, component: ItemCreate },
-    { path: config.routes.course_online_item_edit, component: ItemEdit },
+    { path: config.routes.course_online_item, component: ItemDetail, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_online_item_create, component: ItemCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_online_item_edit, component: ItemEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     // Course Offline routes
-    { path: config.routes.course_offline, component: CourseOfflineList },
-    { path: config.routes.course_offline_detail, component: CourseOfflineDetail },
-    { path: config.routes.course_offline_create, component: CourseOfflineCreate },
-    { path: config.routes.course_offline_edit, component: CourseOfflineEdit },
+    { path: config.routes.course_offline, component: CourseOfflineList, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_offline_detail, component: CourseOfflineDetail, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_offline_create, component: CourseOfflineCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_offline_edit, component: CourseOfflineEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
+
+    { path: config.routes.course_offline_subject_detail, component: SubjectDetail, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.course_offline_exam_create, component: ExamOfflineCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     // Category routes
-    { path: config.routes.category_list, component: CategoryList },
-    { path: config.routes.category_create, component: CategoryCreate },
-    { path: config.routes.category_edit, component: CategoryEdit },
+    { path: config.routes.category_list, component: CategoryList, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.category_create, component: CategoryCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.category_edit, component: CategoryEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     // Class routes by Teacher
-    { path: config.routes.class_list_teacher, component: ClassListTeacher },
-    { path: config.routes.class_course_list_teacher, component: ClassCourseListTeacher },
-    { path: config.routes.class_course_detail_teacher, component: ClassCourseDetailTeacher },
-    { path: config.routes.class_course_subject_list_teacher, component: ClassCourseSubjectTeacher },
+    { path: config.routes.class_list_teacher, component: ClassListTeacher, allowedRoles: ["TEACHER"] },
+    { path: config.routes.class_course_list_teacher, component: ClassCourseListTeacher, allowedRoles: ["TEACHER"] },
+    { path: config.routes.class_course_detail_teacher, component: ClassCourseDetailTeacher, allowedRoles: ["TEACHER"] },
+    { path: config.routes.class_course_subject_list_teacher, component: ClassCourseSubjectTeacher, allowedRoles: ["TEACHER"] },
+    { path: config.routes.class_course_slot_view_exam_teacher, component: ExamDetailOfStudent, allowedRoles: ["TEACHER"] },
 
-    { path: config.routes.class_course_slot_detail_teacher, component: ClassCourseSlotDetailTeacher },
-    { path: config.routes.class_course_slot_create_teacher, component: ClassCourseSlotCreateTeacher },
-    { path: config.routes.class_course_slot_edit_teacher, component: ClassCourseSlotEditTeacher },
-    { path: config.routes.class_course_slot_answer_teacher, component: ClassCourseSlotAnswerTeacher },
+    { path: config.routes.class_course_slot_detail_teacher, component: ClassCourseSlotDetailTeacher, allowedRoles: ["TEACHER"] },
+    { path: config.routes.class_course_slot_create_teacher, component: ClassCourseSlotCreateTeacher, allowedRoles: ["TEACHER"] },
+    { path: config.routes.class_course_slot_edit_teacher, component: ClassCourseSlotEditTeacher, allowedRoles: ["TEACHER"] },
+    { path: config.routes.class_course_slot_answer_teacher, component: ClassCourseSlotAnswerTeacher, allowedRoles: ["TEACHER"] },
+
+    { path: config.routes.class_course_slot_exam_teacher, component: ClassCourseExamDetail, allowedRoles: ["TEACHER"] },
 
     // Tutor routes
     { path: config.routes.tutor_registration, component: TutorRegistration },
+    { path: config.routes.tutoring_schedule, component: TutoringSchedule, allowedRoles: ["TEACHER"] },
+    { path: config.routes.tutoring_schedule_detail, component: TutoringScheduleDetail, allowedRoles: ["TEACHER"] },
 
     // Booking routes
-    { path: config.routes.booking_waiting_list, component: BookingWaitingList },
-    { path: config.routes.booking_waiting_package, component: ByPackage },
-    { path: config.routes.booking_waiting_weeks, component: ByWeeks },
+    { path: config.routes.booking_waiting_list, component: BookingWaitingList, allowedRoles: ["TEACHER"] },
+    { path: config.routes.booking_waiting_package, component: ByPackage, allowedRoles: ["TEACHER"] },
+    { path: config.routes.booking_waiting_weeks, component: ByWeeks, allowedRoles: ["TEACHER"] },
 
-    { path: config.routes.booking_list, component: BookingList },
-    { path: config.routes.booking_detail, component: BookingDetail },
-    { path: config.routes.lesson_booking_edit, component: LessonBookingEdit },
+    { path: config.routes.booking_list, component: BookingList, allowedRoles: ["ADMIN", "TRAINERS"] },
 
-    { path: config.routes.subject_create, component: SubjectCreate },
+    { path: config.routes.booking_detail, component: BookingDetail, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.lesson_booking_edit, component: LessonBookingEdit, allowedRoles: ["TEACHER"] },
+
+    { path: config.routes.subject_create, component: SubjectCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     // Meeting routes
     { path: config.routes.meeting, component: Meeting },
@@ -130,9 +149,9 @@ const privateRoutes = [
     { path: config.routes.profile, component: ProfileWrap },
 
     // Entrance Test routes
-    { path: config.routes.entrance_test, component: EntranceTest },
-    { path: config.routes.entrance_test_detail, component: EntranceTestDetail },
-    { path: config.routes.entrance_test_create, component: EntranceTestCreate },
+    { path: config.routes.entrance_test, component: EntranceTest, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.entrance_test_detail, component: EntranceTestDetail, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.entrance_test_create, component: EntranceTestCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
 ];
 
 const authenticationRoutes = [

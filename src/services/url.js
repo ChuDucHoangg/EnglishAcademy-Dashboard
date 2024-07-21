@@ -65,6 +65,8 @@ const url = {
     TUTOR: {
         TUTOR_REGISTRATION: "any/tutor/hello",
 
+        BOOKING_LIST: "any/booking",
+
         BOOKING_WAITING: "tutor/booking-waiting",
         BOOKING_WAITING_PACKAGE: "package-student/tutor",
         BOOKING_WAITING_WEEKS: "subscription/tutor",
@@ -83,6 +85,8 @@ const url = {
 
     LESSON_BOOKING: {
         CREATE: "lession-booking",
+        LIST: "tutor/lession-booking",
+        DETAIL: "lession-booking",
     },
 
     SUBJECT: {
@@ -99,6 +103,8 @@ const url = {
         COURSE_ITEM_SLOT_CREATE: "item-slot",
         COURSE_ITEM_SLOT_EDIT: "item-slot",
         COURSE_ITEM_SLOT_DELETE: "item-slot",
+
+        ITEM_SLOT_MARK_POINT: "answer-student-item-slot/teacher/score",
     },
 
     DASHBOARD_TEACHER: {
@@ -111,18 +117,31 @@ const url = {
     },
 
     ENTRANCE_TEST: {
-        LIST: "test-input",
+        LIST: "any/test-input",
         CREATE: "test-input",
-        DETAIL: "test-input/detail",
+        DETAIL: "any/detail",
     },
 
     TEST_ONLINE: {
         CREATE: "test-online/create",
+        DETAIL: "test-online/get-by-slug",
+        EDIT: "test-online/edit",
         DELETE: "test-online/delete",
     },
 
     TEST_OFFLINE: {
-        CREATE: "test-offline/file",
+        CREATE: "test-offline/create",
+        MARK_POINT: "test-offline/score",
+        LIST_STUDENT_TEST: "test-offline/list-student",
+        DETAIL_OF_STUDENT: "test-offline/detail-score",
+    },
+
+    CLASSES: {
+        GET_ALL: "classes/get-all",
+    },
+
+    MENU: {
+        GET_ALL: "menu",
     },
 };
 export default url;

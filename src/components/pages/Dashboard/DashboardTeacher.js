@@ -3,7 +3,6 @@ import NewsFeed from "../../views/Dashboard/NewsFeed";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import useCheckRole from "../../../hooks/useCheckRole";
 import { useState } from "react";
 import api from "../../../services/api";
 import url from "../../../services/url";
@@ -13,10 +12,9 @@ import { useCallback } from "react";
 import { formatNumber } from "../../../utils/formatNumber";
 
 function DashboardTeacher() {
-    useCheckRole();
-
     const [totalClasses, setTotalClasses] = useState({});
     const [totalStudentTutoring, setTotalStudentTutoring] = useState({});
+    const [lessonBooking, setLessonBooking] = useState([]);
 
     const loadData = useCallback(async () => {
         try {
@@ -30,8 +28,11 @@ function DashboardTeacher() {
             const totalClassRequest = await api.get(url.DASHBOARD_TEACHER.TOTAL_CLASS, config);
             const totalStudentTutoringRequest = await api.get(url.DASHBOARD_TEACHER.COUNT_STUDENT_STUDYING, config);
 
+            const lessonBookingRequest = await api.get(url.LESSON_BOOKING.LIST, config);
+
             setTotalClasses(totalClassRequest.data.data);
             setTotalStudentTutoring(totalStudentTutoringRequest.data.data);
+            setLessonBooking(lessonBookingRequest.data.data);
         } catch (error) {
             console.log(error);
         }
@@ -67,6 +68,17 @@ function DashboardTeacher() {
             description: "Number of students being tutored.",
         },
     ];
+
+    const formattedEvents = lessonBooking.map((event) => {
+        const formattedStartTime = event.scheduledStartTime.slice(0, 19);
+        const formattedEndTime = event.scheduledEndTime.slice(0, 19);
+
+        return {
+            title: `Tutoring ${event.path}`,
+            start: formattedStartTime,
+            end: formattedEndTime,
+        };
+    });
 
     return (
         <Layout title="Dashboard Teacher">
@@ -227,6 +239,7 @@ function DashboardTeacher() {
                         </div>
                     </div>
                 </div>
+
                 <div className="col-md-6">
                     <div className="card">
                         <div className="card-body">
@@ -240,9 +253,13 @@ function DashboardTeacher() {
                                 }}
                                 eventDisplay="block"
                                 displayEventTime={false}
+                                events={formattedEvents}
                                 eventContent={(arg) => {
                                     return { html: arg.event.title };
                                 }}
+                                eventBackgroundColor="#ecfafb"
+                                eventTextColor="#2ca87f"
+                                eventBorderColor="#2ca87f"
                             />
                         </div>
                     </div>

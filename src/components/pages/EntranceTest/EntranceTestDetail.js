@@ -29,7 +29,6 @@ function EntranceTestDetail() {
 
     const testSessions = testDetail.testInputSessionDetails || [];
     const totalSession = testDetail.testInputSessionDetails ? testDetail.testInputSessionDetails.length : 0;
-    
 
     return (
         <Layout title={`${testDetail.title || "Loading..."}`}>
@@ -148,16 +147,16 @@ function EntranceTestDetail() {
 
                                 <div className="col-lg-6">
                                     <div className="bg-gray-100 p-4 rounded-3 h-100">
-                                    <p className="font-system fw-300 m-0">
-                                The test has a total of {totalSession} part and {testDetail.totalQuestion} questions:
-                            </p>
-                            <ul className="mb-4">
-                                {testDetail.testInputSessionDetails?.map((session, sessionIndex) => (
-                                    <li className="font-system fw-300 mb-2" key={sessionIndex}>
-                                        Part {sessionIndex + 1}: {session.sessionName} <span>{session.totalQuestion} questions.</span>
-                                    </li>
-                                ))}
-                            </ul>
+                                        <p className="font-system fw-300 m-0">
+                                            The test has a total of {totalSession} part and {testDetail.totalQuestion} questions:
+                                        </p>
+                                        <ul className="mb-4">
+                                            {testDetail.testInputSessionDetails?.map((session, sessionIndex) => (
+                                                <li className="font-system fw-300 mb-2" key={sessionIndex}>
+                                                    Part {sessionIndex + 1}: {session.sessionName} <span>{session.totalQuestion} questions.</span>
+                                                </li>
+                                            ))}
+                                        </ul>
 
                                         <p>Instructions for taking the test: {testDetail.description}</p>
                                     </div>
@@ -171,7 +170,7 @@ function EntranceTestDetail() {
                     <div className="row g-3">
                         {testSessions.map((session, sessionIndex) => (
                             <div className="card" key={sessionIndex}>
-                                <div className="card-header bg-white py-4" style={{position: "sticky", top: 74}}>
+                                <div className="card-header bg-white py-4" style={{ position: "sticky", top: 74, zIndex: 5 }}>
                                     <h4>
                                         Part {sessionIndex + 1}: {session.sessionName}
                                     </h4>

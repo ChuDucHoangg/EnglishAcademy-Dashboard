@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { format } from "date-fns";
 import { formatLevelCourse } from "../../../utils/formatLevelCourse";
-import { formatMinute } from "../../../utils/formatTime";
+import { formatHour } from "../../../utils/formatTime";
 import { useState } from "react";
 import api from "../../../services/api";
 import Swal from "sweetalert2";
@@ -514,12 +514,15 @@ function CourseDetail() {
                                                                                                 {item.pastMark} / {item.totalMark}
                                                                                             </td>
                                                                                             <td>{item.totalQuestion}</td>
-                                                                                            <td>{formatMinute(item.time)}</td>
+                                                                                            <td>{formatHour(item.time)}</td>
                                                                                             <td className="text-center">
-                                                                                                <Link to="" className="avtar avtar-xs btn-link-success btn-pc-default">
+                                                                                                <Link
+                                                                                                    to={`/test-online/detail/${item.slug}`}
+                                                                                                    className="avtar avtar-xs btn-link-success btn-pc-default"
+                                                                                                >
                                                                                                     <i className="ti ti-eye f-18"></i>
                                                                                                 </Link>
-                                                                                                <Link to="" className="avtar avtar-xs btn-link-success btn-pc-default">
+                                                                                                <Link to={`/test-online/edit/${item.slug}`} className="avtar avtar-xs btn-link-success btn-pc-default">
                                                                                                     <i className="ti ti-edit-circle f-18"></i>
                                                                                                 </Link>
                                                                                                 <button

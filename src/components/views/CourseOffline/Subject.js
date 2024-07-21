@@ -34,7 +34,9 @@ function CourseOfflineSubject({ subjects }) {
                                         <i className="ti ti-cloud-upload"></i> {subject.createdBy || "N/A"}
                                     </li>
                                 </ul>
-                                <Link className="btn btn-sm btn-outline-primary">View</Link>
+                                <Link to={`/course-offline/subject/${subject.slug}`} className="btn btn-sm btn-outline-primary">
+                                    View
+                                </Link>
                             </div>
                         </div>
                     </div>

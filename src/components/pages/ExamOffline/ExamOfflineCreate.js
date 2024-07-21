@@ -1,30 +1,46 @@
-import { useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../layouts";
 import ButtonSubmit from "../../layouts/ButtonSubmit";
-import url from "../../../services/url";
+import { useRef, useState } from "react";
 import api from "../../../services/api";
-import { getAccessToken } from "../../../utils/auth";
+import url from "../../../services/url";
 import { toast } from "react-toastify";
-import { useNavigate, useParams } from "react-router-dom";
+import { getAccessToken } from "../../../utils/auth";
+import useAxiosGet from "../../../hooks/useAxiosGet";
 
-function TestOnlineCreate() {
-    const { topicId } = useParams();
+function ExamOfflineCreate() {
+    const { subjectId } = useParams();
     const fileInputRef = useRef();
     const navigate = useNavigate();
 
+    const classesData = useAxiosGet({
+        path: url.CLASSES.GET_ALL,
+        headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+        },
+    });
+
+    const classes = classesData.response || [];
+
     const [formData, setFormData] = useState({
         title: "",
-        time: "",
+        startDate: "",
+        endDate: "",
         pastMark: "",
+        totalMark: 100,
         description: "",
+        subjectId: subjectId,
         file: null,
+        classesId: null,
     });
 
     const [formErrors, setFormErrors] = useState({
         title: "",
-        time: "",
+        startDate: "",
+        endDate: "",
         pastMark: "",
         description: "",
+        subjectId: "",
         file: "",
     });
 
@@ -49,20 +65,6 @@ function TestOnlineCreate() {
         });
     };
 
-    const convertTimeToSeconds = (time) => {
-        const timeParts = time.split(":");
-        if (timeParts.length === 3) {
-            const hours = parseInt(timeParts[0], 10);
-            const minutes = parseInt(timeParts[1], 10);
-            const seconds = parseInt(timeParts[2], 10);
-
-            if (!isNaN(hours) && !isNaN(minutes) && !isNaN(seconds)) {
-                return hours * 3600 + minutes * 60 + seconds;
-            }
-        }
-        return null;
-    };
-
     const validateForm = () => {
         let valid = true;
         const newErrors = {};
@@ -75,15 +77,6 @@ function TestOnlineCreate() {
             valid = false;
         } else if (formData.title.length > 255) {
             newErrors.title = "Title must be less than 255 characters.";
-            valid = false;
-        }
-
-        const timeInSeconds = convertTimeToSeconds(formData.time);
-        if (!formData.time) {
-            newErrors.time = "Please enter time.";
-            valid = false;
-        } else if (timeInSeconds === null) {
-            newErrors.time = "Time must be in hh:mm:ss format.";
             valid = false;
         }
 
@@ -115,26 +108,54 @@ function TestOnlineCreate() {
             valid = false;
         }
 
+        const currentDate = new Date();
+
+        if (!formData.startDate) {
+            newErrors.startDate = "Please enter Start Date.";
+            valid = false;
+        } else if (new Date(formData.startDate) < currentDate) {
+            newErrors.startDate = "Start Date cannot be in the past.";
+            valid = false;
+        }
+
+        if (formData.classesId === null || formData.classesId === "") {
+            newErrors.classesId = "Please choose class.";
+            valid = false;
+        }
+
+        if (!formData.endDate) {
+            newErrors.endDate = "Please enter End Date.";
+            valid = false;
+        } else if (new Date(formData.endDate) < currentDate) {
+            newErrors.endDate = "End Date cannot be in the past.";
+            valid = false;
+        } else if (new Date(formData.endDate) <= new Date(formData.startDate)) {
+            newErrors.endDate = "End Date cannot be before Start Date.";
+            valid = false;
+        }
+
         setFormErrors(newErrors);
         return valid;
     };
 
+    console.log(formData.classesId);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validateForm()) {
-            const timeInSeconds = convertTimeToSeconds(formData.time);
-
             const formDataToSend = new FormData();
             formDataToSend.append("title", formData.title);
-            formDataToSend.append("time", timeInSeconds);
+            formDataToSend.append("startDate", formData.startDate);
+            formDataToSend.append("endDate", formData.endDate);
             formDataToSend.append("pastMark", formData.pastMark);
-            formDataToSend.append("totalMark", 100);
+            formDataToSend.append("totalMark", formData.totalMark);
             formDataToSend.append("description", formData.description);
             formDataToSend.append("file", formData.file);
-            formDataToSend.append("topicId", topicId);
+            formDataToSend.append("subjectId", formData.subjectId);
+            formDataToSend.append("classesId", formData.classesId);
 
             try {
-                const createRequest = await api.post(url.TEST_ONLINE.CREATE, formDataToSend, { headers: { Authorization: `Bearer ${getAccessToken()}`, "Content-Type": "multipart/form-data" } });
+                const createRequest = await api.post(url.TEST_OFFLINE.CREATE, formDataToSend, { headers: { Authorization: `Bearer ${getAccessToken()}`, "Content-Type": "multipart/form-data" } });
 
                 if (createRequest.status === 200) {
                     toast.success("Created Test Online!", {
@@ -146,15 +167,6 @@ function TestOnlineCreate() {
                         draggable: true,
                         progress: undefined,
                         theme: "colored",
-                    });
-
-                    setFormData({
-                        title: "",
-                        time: "",
-                        pastMark: "",
-                        totalMark: "",
-                        description: "",
-                        file: null,
                     });
 
                     if (fileInputRef.current) {
@@ -181,7 +193,7 @@ function TestOnlineCreate() {
     };
 
     return (
-        <Layout title="Create Test Online">
+        <Layout title="Create Final Exam">
             <form onSubmit={handleSubmit}>
                 <div className="col-xl-12">
                     <div className="card">
@@ -203,6 +215,47 @@ function TestOnlineCreate() {
                                     </div>
 
                                     <div className="form-group">
+                                        <label className="form-label">Start Date</label>
+                                        <input
+                                            type="datetime-local"
+                                            name="startDate"
+                                            className={`form-control ${formErrors.startDate ? "is-invalid" : ""}`}
+                                            value={formData.startDate}
+                                            onChange={handleChange}
+                                        />
+                                        {formErrors.startDate && <p className="invalid-feedback">{formErrors.startDate}</p>}
+                                    </div>
+                                </div>
+
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label className="form-label">Choose Class</label>
+                                        <select className={`form-select ${formErrors.classesId ? "is-invalid" : ""}`} name="classesId" onChange={handleChange}>
+                                            <option value="">Please choose class</option>
+                                            {classes.map((cl) => (
+                                                <option value={cl.id} key={cl.id}>
+                                                    {cl.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {formErrors.classesId && <p className="invalid-feedback">{formErrors.classesId}</p>}
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label">End Date</label>
+                                        <input
+                                            type="datetime-local"
+                                            name="endDate"
+                                            className={`form-control ${formErrors.endDate ? "is-invalid" : ""}`}
+                                            value={formData.endDate}
+                                            onChange={handleChange}
+                                        />
+                                        {formErrors.endDate && <p className="invalid-feedback">{formErrors.endDate}</p>}
+                                    </div>
+                                </div>
+
+                                <div className="col-md-6">
+                                    <div className="form-group">
                                         <label className="form-label">Pass Mark</label>
                                         <input
                                             type="text"
@@ -214,32 +267,7 @@ function TestOnlineCreate() {
                                         />
                                         {formErrors.pastMark && <p className="invalid-feedback">{formErrors.pastMark}</p>}
                                     </div>
-                                </div>
 
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label className="form-label">
-                                            Test Duration <span className="text-secondary">(hh:mm:ss)</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="time"
-                                            className={`form-control ${formErrors.time ? "is-invalid" : ""}`}
-                                            value={formData.time}
-                                            onChange={handleChange}
-                                            placeholder="Enter Test Duration"
-                                        />
-                                        {formErrors.time && <p className="invalid-feedback">{formErrors.time}</p>}
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label className="form-label">Question file</label>
-                                        <input ref={fileInputRef} type="file" name="file" className={`form-control ${formErrors.file ? "is-invalid" : ""}`} onChange={handleFileChange} />
-                                        {formErrors.file && <p className="invalid-feedback">{formErrors.file}</p>}
-                                    </div>
-                                </div>
-
-                                <div className="col-md-6">
                                     <div className="form-group">
                                         <label className="form-label">Description</label>
                                         <textarea
@@ -253,8 +281,14 @@ function TestOnlineCreate() {
                                     </div>
                                 </div>
 
-                                <div className="col-md-6 mt-auto">
-                                    <div className="text-end btn-page ">
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label className="form-label">Question file</label>
+                                        <input ref={fileInputRef} type="file" name="file" className={`form-control ${formErrors.file ? "is-invalid" : ""}`} onChange={handleFileChange} />
+                                        {formErrors.file && <p className="invalid-feedback">{formErrors.file}</p>}
+                                    </div>
+
+                                    <div className="text-end">
                                         <ButtonSubmit className="btn-primary" value="Create New Test" icon="ti ti-plus" handleEvent={handleSubmit} />
                                     </div>
                                 </div>
@@ -267,4 +301,4 @@ function TestOnlineCreate() {
     );
 }
 
-export default TestOnlineCreate;
+export default ExamOfflineCreate;
