@@ -62,23 +62,23 @@ function TutoringSchedule() {
     return (
         <Layout title={`Tutoring Schedule`}>
             <div className="col-lg-6 col-12">
-                <div className="card">
-                    <div class="card-body ">
-                        <ul className="p-0">
-                            {bookings.map((booking, bookingsIndex) => (
-                                <li class="list-group-item" key={bookingsIndex}>
+                <ul className="p-0">
+                    {bookings.map((booking, bookingsIndex) => (
+                        <li className="list-group-item" key={bookingsIndex}>
+                            <div className="card">
+                                <div className="card-body ">
                                     <Link to={`/tutoring-schedule/${booking.id}`}>
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="avtar avtar-s border">
+                                        <div className="d-flex align-items-center">
+                                            <div className="flex-shrink-0">
+                                                <div className="avtar avtar-s border">
                                                     <i className="fas fa-graduation-cap"></i>
                                                 </div>
                                             </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <div class="row g-1">
-                                                    <div class="col-6">
-                                                        <h6 class="mb-0">{booking.studentName}</h6>
-                                                        <p class="text-muted mb-0">
+                                            <div className="flex-grow-1 ms-3">
+                                                <div className="row g-1">
+                                                    <div className="col-6">
+                                                        <h6 className="mb-0">{booking.studentName}</h6>
+                                                        <p className="text-muted mb-0">
                                                             <small>Status: {booking.status}</small>
                                                         </p>
                                                     </div>
@@ -97,11 +97,11 @@ function TutoringSchedule() {
                                             </li>
                                         ))}
                                     </ul>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
             </div>
 
             <div className="col-lg-6 col-12">

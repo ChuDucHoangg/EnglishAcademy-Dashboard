@@ -61,6 +61,7 @@ import ExamDetailOfStudent from "../components/pages/ClassesTeacher/ExamDetailOf
 import ByPackage from "../components/pages/BookingWaiting/BookingWaitingDetail/ByPackage";
 import TutoringSchedule from "../components/pages/TutoringSchedule";
 import TutoringScheduleDetail from "../components/pages/TutoringSchedule/TutoringScheduleDetail";
+import Room from "../components/pages/Room";
 
 const privateRoutes = [
     // Dashboard routes
@@ -133,6 +134,7 @@ const privateRoutes = [
     { path: config.routes.subject_create, component: SubjectCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     // Meeting routes
+    { path: config.routes.room, component: Room },
     { path: config.routes.meeting, component: Meeting },
 
     { path: config.routes.not_found, component: NotFound },

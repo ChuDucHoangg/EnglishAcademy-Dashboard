@@ -87,6 +87,11 @@ const url = {
         CREATE: "lession-booking",
         LIST: "tutor/lession-booking",
         DETAIL: "lession-booking",
+
+        STATUS_CANCEL: "status-cancel/lession-booking",
+        STATUS_INPROCESS: "status-inprocess/lession-booking",
+        STATUS_COMPLETE: "status-complete/lession-booking",
+        STATUS_RESCHEDULE: "status-rescheduled/lession-booking",
     },
 
     SUBJECT: {
