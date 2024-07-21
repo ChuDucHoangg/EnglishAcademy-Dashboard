@@ -20,7 +20,8 @@ const routes = {
 
     // Start routes Test Online
     test_online_create: "/test-online/create/:topicId",
-    test_online_edit: "/test-online/edit/:topicId",
+    test_online_edit: "/test-online/edit/:testSlug",
+    test_online_detail: "/test-online/detail/:testSlug",
     // End routes Test Online
 
     // Start routes Course Online
@@ -28,6 +29,10 @@ const routes = {
     course_offline_detail: "/course-offline/:slug",
     course_offline_create: "/course-offline/create",
     course_offline_edit: "/course-offline/edit/:slug",
+
+    course_offline_subject_detail: "/course-offline/subject/:slug",
+
+    course_offline_exam_create: "/course-offline/exam/create/:subjectId",
     // End routes Course Online
 
     // Start routes Category
@@ -50,6 +55,11 @@ const routes = {
     class_course_slot_create_teacher: "/teacher/class/:classId/:slug/item-slot/create",
     class_course_slot_edit_teacher: "/teacher/class/:classId/:slug/item-slot/edit/:itemSlug",
     class_course_slot_answer_teacher: "/teacher/class/:classId/answer/:slug",
+
+    // Final exam
+    class_course_slot_exam_teacher: "/teacher/class/:classId/slot-test/:slotSlug",
+    class_course_slot_view_exam_teacher: "/teacher/class/:classId/view-exam/detail/:examDetailCode",
+
     // End routes Class Teacher
 
     // Start routes Student
@@ -76,12 +86,14 @@ const routes = {
 
     booking_list: "/booking",
     booking_detail: "/booking/:bookingId",
-    lesson_booking_create: "/lesson-booking",
-    lesson_booking_edit: "/lesson-booking/edit/:bookingId",
 
     booking_waiting_list: "/booking-waiting",
     booking_waiting_package: "/booking-waiting/package/:bookingId",
     booking_waiting_weeks: "/booking-waiting/weeks/:bookingId",
+
+    tutoring_schedule: "/tutoring-schedule",
+    tutoring_schedule_detail: "/tutoring-schedule/:bookingId",
+
     // End routes Tutor
 
     // Start routes Subject

@@ -8,7 +8,7 @@ import { getAccessToken } from "../../../utils/auth";
 
 function BookingList() {
     const bookingData = useAxiosGet({
-        path: url.TUTOR.BOOKING_BY_TUTOR,
+        path: url.TUTOR.BOOKING_LIST,
         headers: {
             Authorization: `Bearer ${getAccessToken()}`,
         },
@@ -51,6 +51,7 @@ function BookingList() {
                                             <div className="datatable-search">
                                                 <input className="datatable-input" placeholder="Search..." type="search" title="Search within table" aria-controls="pc-dt-dynamic-import" />
                                             </div>
+
                                             <div className="datatable-dropdown">
                                                 <a className="btn btn-primary d-flex align-items-center justify-content-center" href="/student-create">
                                                     <i className="ti ti-plus"></i> Add new Booking
@@ -87,9 +88,6 @@ function BookingList() {
                                                                     <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" aria-label="View" data-bs-original-title="View">
                                                                         <Link to={`/booking/${booking.id}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
                                                                             <i className="ti ti-eye f-18"></i>
-                                                                        </Link>
-                                                                        <Link to={`/lesson-booking/edit/${booking.id}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
-                                                                            <i className="ti ti-edit f-18"></i>
                                                                         </Link>
                                                                     </li>
                                                                 </ul>

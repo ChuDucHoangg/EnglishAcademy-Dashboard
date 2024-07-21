@@ -21,7 +21,7 @@ function ClassCourseSubjectTeacher() {
         },
     });
 
-    const subjects = subjectData.response || [];
+    const slots = subjectData.response || [];
     const [submitting, setSubmitting] = useState(false);
 
     const handleDeleteSlot = async (id) => {
@@ -78,7 +78,7 @@ function ClassCourseSubjectTeacher() {
             {subjectData.loading ? (
                 <Loading />
             ) : (
-                <Layout title={`${subjects.name || "Loading..."}`}>
+                <Layout title={`${slots.name || "Loading..."}`}>
                     <div className="col-xl-12">
                         <div className="card">
                             <div className="card-header text-start">
@@ -88,12 +88,6 @@ function ClassCourseSubjectTeacher() {
                                     </div>
                                     <div className="datatable-dropdown">
                                         <div className="d-flex align-items-center gap-3">
-                                            {subjects?.testOfflineResponseList?.length === 0 && (
-                                                <Link to={``} className="btn btn-outline-secondary d-flex align-items-center justify-content-end">
-                                                    <i className="fas fa-file-signature"></i> Create Final Exam
-                                                </Link>
-                                            )}
-
                                             <Link to={`/teacher/class/${classId}/${courseSlug}/item-slot/create`} className="btn btn-outline-primary d-flex align-items-center justify-content-end">
                                                 <i className="ti ti-plus"></i> Create Slot
                                             </Link>
@@ -103,7 +97,7 @@ function ClassCourseSubjectTeacher() {
                             </div>
                             <div className="card-body pc-component">
                                 <div className="accordion accordion-flush" id="accordionFlushExample">
-                                    {subjects?.slotResponseDetailList?.map((subject, subjectIndex) => (
+                                    {slots?.slotResponseDetailList?.map((subject, subjectIndex) => (
                                         <div className="accordion-item" key={subjectIndex}>
                                             <h2 className="accordion-header" id={`flush-heading-${subjectIndex}`}>
                                                 <button
@@ -178,7 +172,7 @@ function ClassCourseSubjectTeacher() {
                                         </div>
                                     ))}
 
-                                    {subjects?.testOfflineResponseList?.map((subject, subjectIndex) => (
+                                    {slots?.testOfflineResponseList?.map((subject, subjectIndex) => (
                                         <div className="accordion-item" key={subjectIndex}>
                                             <h2 className="accordion-header" id={`flush-heading-2-${subjectIndex}`}>
                                                 <button
@@ -200,7 +194,7 @@ function ClassCourseSubjectTeacher() {
                                                 data-bs-parent="#accordionFlushExample"
                                             >
                                                 <div className="accordion-body">
-                                                    <Link to={`/teacher/class/${classId}/subject-test/${subject.slug}`} className="text-secondary d-block">
+                                                    <Link to={`/teacher/class/${classId}/slot-test/${subject.slug}`} className="text-secondary d-block">
                                                         <i className="fas fa-file-signature"></i>
                                                         {subject.title}
                                                     </Link>

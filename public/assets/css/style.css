@@ -31213,8 +31213,14 @@ div.dataTables_wrapper div.dt-row {
 .bg-cs-success {
     background: #3eb75e;
 }
+.bg-cs-danger-opacity {
+    background: #fce9e9;
+}
 .border-cs-success {
     border: 1px solid #3eb75e !important;
+}
+.border-cs-danger {
+    border: 1px solid #dc2626 !important;
 }
 .datatable-table thead th, .table thead th {
     text-transform: none;
@@ -31223,6 +31229,15 @@ div.dataTables_wrapper div.dt-row {
 .rhap_container {
     background: transparent !important;
     box-shadow: none !important;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+audio.size-initial {
+    width: 300px !important;
+    height: 60px !important;
 }
 /**  =====================
   36. Customizer css end

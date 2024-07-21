@@ -1,11 +1,10 @@
-import Layout from "../../../layouts/index";
-import useAxiosGet from "../../../../hooks/useAxiosGet";
-import url from "../../../../services/url";
-import { getAccessToken } from "../../../../utils/auth";
-import PackageTable from "../../../views/Tutor/BookingWaiting/PackageTable";
-
-import { statusColor } from "../../../../utils/statusColor";
-import BookLoading from "../../../layouts/BookLoading";
+import useAxiosGet from "../../../hooks/useAxiosGet";
+import url from "../../../services/url";
+import { getAccessToken } from "../../../utils/auth";
+import { statusColor } from "../../../utils/statusColor";
+import Layout from "../../layouts";
+import BookLoading from "../../layouts/BookLoading";
+import PackageTable from "../../views/Tutor/BookingWaiting/PackageTable";
 
 function BookingWaitingList() {
     // Call API
