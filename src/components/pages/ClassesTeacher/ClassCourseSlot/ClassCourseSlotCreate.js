@@ -133,13 +133,26 @@ function ClassCourseSlotCreateTeacher() {
         return valid;
     };
 
+    const adjustDateByHours = (dateString, hours) => {
+        const date = new Date(dateString);
+        date.setHours(date.getHours() - hours);
+        return date.toISOString().slice(0, 16);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (validateForm()) {
             try {
                 setSubmitting(true);
-                const createRequest = await api.post(url.CLASS.COURSE_ITEM_SLOT_CREATE, formData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+
+                const adjustedFormData = {
+                    ...formData,
+                    startDate: adjustDateByHours(formData.startDate, 7),
+                    endDate: adjustDateByHours(formData.endDate, 7),
+                };
+
+                const createRequest = await api.post(url.CLASS.COURSE_ITEM_SLOT_CREATE, adjustedFormData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
                 if (createRequest.status === 200) {
                     toast.success("Created successful!", {
                         position: "top-right",

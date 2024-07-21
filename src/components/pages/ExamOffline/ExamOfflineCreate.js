@@ -138,15 +138,19 @@ function ExamOfflineCreate() {
         return valid;
     };
 
-    console.log(formData.classesId);
+    const adjustDateByHours = (dateString, hours) => {
+        const date = new Date(dateString);
+        date.setHours(date.getHours() - hours);
+        return date.toISOString().slice(0, 16);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validateForm()) {
             const formDataToSend = new FormData();
             formDataToSend.append("title", formData.title);
-            formDataToSend.append("startDate", formData.startDate);
-            formDataToSend.append("endDate", formData.endDate);
+            formDataToSend.append("startDate", adjustDateByHours(formData.startDate, 7));
+            formDataToSend.append("endDate", adjustDateByHours(formData.endDate, 7));
             formDataToSend.append("pastMark", formData.pastMark);
             formDataToSend.append("totalMark", formData.totalMark);
             formDataToSend.append("description", formData.description);
