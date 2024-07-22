@@ -111,6 +111,10 @@ const routes = {
     meeting: "/room/:roomId",
     // End routes Meeting
 
+    // Start routes Potential Customers
+    potential_customers: "/potential-customers",
+    // End routes Potential Customers
+
     // Start routes Other
     not_found: "*",
     // End routes Other
