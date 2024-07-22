@@ -104,6 +104,7 @@ const routes = {
     entrance_test: "/entrance-test",
     entrance_test_detail: "/entrance-test/detail/:testSlug",
     entrance_test_create: "/entrance-test/create",
+    entrance_test_edit: "/entrance-test/edit/:testSlug",
     // End routes Entrance Test
 
     // Start routes Meeting

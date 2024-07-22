@@ -124,7 +124,10 @@ const url = {
     ENTRANCE_TEST: {
         LIST: "any/test-input",
         CREATE: "test-input",
+        UPDATE: "test-input",
         DETAIL: "any/detail",
+        DETAIL_QUESTION: "any/detail",
+        DELETE: "test-input",
     },
 
     TEST_ONLINE: {

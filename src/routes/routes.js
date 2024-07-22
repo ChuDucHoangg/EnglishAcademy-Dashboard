@@ -63,6 +63,7 @@ import TutoringSchedule from "../components/pages/TutoringSchedule";
 import TutoringScheduleDetail from "../components/pages/TutoringSchedule/TutoringScheduleDetail";
 import Room from "../components/pages/Room";
 import PotentialCustomers from "../components/pages/PotentialCustomers";
+import EntranceTestEdit from "../components/pages/EntranceTest/EntranceTestEdit";
 
 const privateRoutes = [
     // Dashboard routes
@@ -158,6 +159,7 @@ const privateRoutes = [
     { path: config.routes.entrance_test, component: EntranceTest, allowedRoles: ["ADMIN", "TRAINERS"] },
     { path: config.routes.entrance_test_detail, component: EntranceTestDetail, allowedRoles: ["ADMIN", "TRAINERS"] },
     { path: config.routes.entrance_test_create, component: EntranceTestCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.entrance_test_edit, component: EntranceTestEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
 ];
 
 const authenticationRoutes = [
