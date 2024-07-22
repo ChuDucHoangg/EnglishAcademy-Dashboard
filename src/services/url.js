@@ -129,7 +129,7 @@ const url = {
 
     TEST_ONLINE: {
         CREATE: "test-online/create",
-        DETAIL: "test-online/get-by-slug",
+        DETAIL: "test-online/user/detail",
         EDIT: "test-online/edit",
         DELETE: "test-online/delete",
     },
