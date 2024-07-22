@@ -92,6 +92,7 @@ const url = {
         STATUS_INPROCESS: "status-inprocess/lession-booking",
         STATUS_COMPLETE: "status-complete/lession-booking",
         STATUS_RESCHEDULE: "status-rescheduled/lession-booking",
+        CREATE_ROOM: "lession-booking",
     },
 
     SUBJECT: {

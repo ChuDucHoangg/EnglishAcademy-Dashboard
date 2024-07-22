@@ -63,14 +63,14 @@ function Sidebar() {
                                         <i className="ti ti-user"></i>
                                         <span>My Account</span>
                                     </Link>
-                                    <a href="#!">
+                                    <Link to="">
                                         <i className="ti ti-settings"></i>
                                         <span>Settings</span>
-                                    </a>
-                                    <a href="#!">
+                                    </Link>
+                                    <Link to="">
                                         <i className="ti ti-lock"></i>
                                         <span>Lock Screen</span>
-                                    </a>
+                                    </Link>
                                     <Link to={config.routes.login} onClick={handleLogout}>
                                         <i className="ti ti-power"></i>
                                         <span>Logout</span>
