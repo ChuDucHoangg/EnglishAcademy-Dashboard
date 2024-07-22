@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Layout from "../../../layouts";
 import ButtonSubmit from "../../../layouts/ButtonSubmit";
 import { useNavigate, useParams } from "react-router-dom";
@@ -6,23 +6,46 @@ import api from "../../../../services/api";
 import url from "../../../../services/url";
 import { getAccessToken } from "../../../../utils/auth";
 import { toast } from "react-toastify";
+import useAxiosGet from "../../../../hooks/useAxiosGet";
 
-function SubjectCreate() {
-    const { courseId } = useParams();
+function SubjectEdit() {
+    const { courseId, subjectSlug } = useParams();
     const navigate = useNavigate();
     const [submitting, setSubmitting] = useState(false);
 
-    const [formData, setFormData] = useState({
-        name: "",
-        totalSlot: "",
-        orderTop: "",
-        courseOfflineId: parseInt(courseId),
+    const subjectDetailData = useAxiosGet({
+        path: url.SUBJECT.UPDATE + `/${subjectSlug}`,
+        headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+        },
     });
+
+    const subjectData = useMemo(() => subjectDetailData.response || {}, [subjectDetailData]);
+
+    const [formData, setFormData] = useState({
+        id: null,
+        name: "",
+        orderTop: null,
+        totalSlot: null,
+        courseOfflineId: null,
+    });
+
+    useEffect(() => {
+        if (subjectData) {
+            setFormData({
+                id: subjectData.id || null,
+                name: subjectData.name || "",
+                orderTop: subjectData.orderTop || null,
+                totalSlot: subjectData.totalSlot || null,
+                courseOfflineId: courseId,
+            });
+        }
+    }, [subjectData, courseId]);
 
     const [formErrors, setFormErrors] = useState({
         name: "",
-        totalSlot: "",
         orderTop: "",
+        totalSlot: "",
         courseOfflineId: parseInt(courseId),
     });
 
@@ -63,15 +86,15 @@ function SubjectCreate() {
         return valid;
     };
 
-    const handleCreate = async (e) => {
+    const handleEdit = async (e) => {
         e.preventDefault();
 
         if (validateForm()) {
             try {
                 setSubmitting(true);
-                const createRequest = await api.post(url.SUBJECT.CREATE, formData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                const createRequest = await api.put(url.SUBJECT.UPDATE, formData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
                 if (createRequest.status === 200) {
-                    toast.success("Created successfully!", {
+                    toast.success("Updated successfully!", {
                         position: "top-right",
                         autoClose: 3000,
                         hideProgressBar: false,
@@ -83,24 +106,17 @@ function SubjectCreate() {
                     });
 
                     setFormData({
+                        id: null,
                         name: "",
-                        totalSlot: "",
-                        orderTop: "",
-                        courseOfflineId: parseInt(courseId),
+                        orderTop: null,
+                        totalSlot: null,
+                        courseOfflineId: null,
                     });
+
                     navigate(-1);
                 }
             } catch (error) {
-                toast.error(error.response.data.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                });
+                toast.error(error.response.data.message, {});
             } finally {
                 setSubmitting(false);
             }
@@ -108,7 +124,7 @@ function SubjectCreate() {
     };
 
     return (
-        <Layout title="Subject Create">
+        <Layout title="Subject Edit">
             <div className="col-xl-12">
                 <div className="card">
                     <div className="card-body">
@@ -161,7 +177,7 @@ function SubjectCreate() {
                                 </div>
                             </div>
                             <div className="text-end col-md-6 mt-auto">
-                                <ButtonSubmit className="btn-primary" value="Create Subject" valueSubmit="Creating..." icon="ti ti-plus" submitting={submitting} handleEvent={handleCreate} />
+                                <ButtonSubmit className="btn-primary" value="Save Change" valueSubmit="Saving..." icon="ti ti-edit" submitting={submitting} handleEvent={handleEdit} />
                             </div>
                         </div>
                     </div>
@@ -171,4 +187,4 @@ function SubjectCreate() {
     );
 }
 
-export default SubjectCreate;
+export default SubjectEdit;

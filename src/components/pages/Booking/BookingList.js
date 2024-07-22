@@ -3,7 +3,6 @@ import Layout from "../../layouts";
 import useAxiosGet from "../../../hooks/useAxiosGet";
 import url from "../../../services/url";
 import BookLoading from "../../layouts/BookLoading";
-import { statusColor } from "../../../utils/statusColor";
 import { getAccessToken } from "../../../utils/auth";
 
 function BookingList() {
@@ -16,6 +15,23 @@ function BookingList() {
 
     const bookings = bookingData.response || [];
 
+    const statusColor = (status) => {
+        switch (status) {
+            case "pending":
+                return "text-warning";
+            case "confirmed":
+                return "text-primary";
+            case "process":
+                return "text-info";
+            case "completed":
+                return "text-success";
+            case "cancelled":
+                return "text-danger";
+            default:
+                return "color-secondary";
+        }
+    };
+
     return (
         <Layout title="Booking List">
             <div className="col-xl-12">
@@ -24,9 +40,9 @@ function BookingList() {
                         <div className="d-flex align-items-center justify-content-between">
                             <h5 className="mb-0">Booking List</h5>
                             <div className="dropdown">
-                                <a className="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none" href="#!" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <Link to="" className="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i className="ti ti-dots-vertical f-18"></i>
-                                </a>
+                                </Link>
                                 <div className="dropdown-menu dropdown-menu-end">
                                     <Link to="" className="dropdown-item">
                                         Today
@@ -52,24 +68,18 @@ function BookingList() {
                                                 <input className="datatable-input" placeholder="Search..." type="search" title="Search within table" aria-controls="pc-dt-dynamic-import" />
                                             </div>
 
-                                            <div className="datatable-dropdown">
-                                                <a className="btn btn-primary d-flex align-items-center justify-content-center" href="/student-create">
-                                                    <i className="ti ti-plus"></i> Add new Booking
-                                                </a>
-                                            </div>
+                                            <div className="datatable-dropdown"></div>
                                         </div>
                                         <div className="datatable-container">
                                             <table className="table table-hover datatable-table" id="pc-dt-simple">
                                                 <thead>
                                                     <tr>
-                                                        <th data-sortable="true">No.</th>
-                                                        <th data-sortable="true">Tutor</th>
-                                                        <th data-sortable="true">Student</th>
-                                                        <th data-sortable="true">Description</th>
-                                                        <th data-sortable="true">Status</th>
-                                                        <th data-sortable="true" className="text-center">
-                                                            Actions
-                                                        </th>
+                                                        <th>No.</th>
+                                                        <th>Tutor</th>
+                                                        <th>Student</th>
+                                                        <th>Description</th>
+                                                        <th>Status</th>
+                                                        <th className="text-center">Actions</th>
                                                     </tr>
                                                 </thead>
 
