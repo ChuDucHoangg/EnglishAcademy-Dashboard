@@ -58,13 +58,6 @@ function TestOnlineDetail() {
                                             </div>
                                         );
                                     })}
-
-                                    {question.type === 1 && (
-                                        <>
-                                            <p>Audio Recording by Student:</p>
-                                            <audio className="size-initial" controls src={question.answerForStudent} />
-                                        </>
-                                    )}
                                 </div>
                             </div>
                         ))}
