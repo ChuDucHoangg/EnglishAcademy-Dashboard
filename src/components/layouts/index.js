@@ -11,6 +11,7 @@ function Layout({ children, title }) {
                 <title>{title} | English Academy</title>
             </Helmet>
             <Sidebar />
+
             <Header />
             <div className="pc-container">
                 <div className="pc-content">

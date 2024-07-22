@@ -20,7 +20,6 @@ function DashboardTeacher() {
         try {
             const config = {
                 headers: {
-                    "Content-Type": "application/json",
                     Authorization: `Bearer ${getAccessToken()}`,
                 },
             };
@@ -74,7 +73,7 @@ function DashboardTeacher() {
         const formattedEndTime = event.scheduledEndTime.slice(0, 19);
 
         return {
-            title: `Tutoring ${event.path}`,
+            title: `${event.path}`,
             start: formattedStartTime,
             end: formattedEndTime,
         };
