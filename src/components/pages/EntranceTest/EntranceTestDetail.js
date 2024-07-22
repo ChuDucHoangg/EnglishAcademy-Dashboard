@@ -150,7 +150,7 @@ function EntranceTestDetail() {
                                         <p className="font-system fw-300 m-0">
                                             The test has a total of {totalSession} part and {testDetail.totalQuestion} questions:
                                         </p>
-                                        <ul className="mb-4">
+                                        <ul className="my-4">
                                             {testDetail.testInputSessionDetails?.map((session, sessionIndex) => (
                                                 <li className="font-system fw-300 mb-2" key={sessionIndex}>
                                                     Part {sessionIndex + 1}: {session.sessionName} <span>{session.totalQuestion} questions.</span>
