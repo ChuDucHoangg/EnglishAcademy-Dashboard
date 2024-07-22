@@ -139,9 +139,7 @@ function ClassCourseSubjectTeacher() {
 
                                                                             <div className="flex-grow-1 ms-3">
                                                                                 <div className="row g-1">
-                                                                                    <div className="col-6">
-                                                                                        <h6 className="mb-0">{slot.title}</h6>
-                                                                                    </div>
+                                                                                    <h6 className="mb-0">{slot.title}</h6>
                                                                                     <p className="text-muted mb-0">
                                                                                         <small>
                                                                                             Created: {(slot.createdDate && format(new Date(slot.createdDate), "HH:mm:ss dd-MM-yyyy")) || "N/A"}

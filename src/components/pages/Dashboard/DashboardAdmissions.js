@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { copyText } from "../../../utils/copyText";
 import Chart from "react-apexcharts";
+import config from "../../../config";
 
 function DashboardAdmissions() {
     const potentialCustomerData = useAxiosGet({
@@ -141,7 +142,9 @@ function DashboardAdmissions() {
                     <div className="card-header p-3 border-0">
                         <div className="d-flex align-items-center justify-content-between">
                             <h5 className="mb-0">Potential Customer</h5>
-                            <button className="btn btn-sm btn-link-primary">View All</button>
+                            <Link to={config.routes.potential_customers} className="btn btn-sm btn-link-primary">
+                                View All
+                            </Link>
                         </div>
                     </div>
                     <div className="table-responsive">
