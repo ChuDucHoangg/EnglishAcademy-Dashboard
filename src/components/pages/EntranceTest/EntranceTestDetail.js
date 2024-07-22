@@ -16,7 +16,7 @@ function EntranceTestDetail() {
 
     const loadData = useCallback(async () => {
         try {
-            const entranceTestResponse = await api.get(url.ENTRANCE_TEST.DETAIL + `/${testSlug}`, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+            const entranceTestResponse = await api.get(url.ENTRANCE_TEST.DETAIL_QUESTION + `/${testSlug}`, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
             setTestDetail(entranceTestResponse.data.data);
         } catch (error) {
             console.log(error);
