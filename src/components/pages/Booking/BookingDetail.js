@@ -30,6 +30,23 @@ function BookingDetail() {
         return dateTime ? format(new Date(dateTime), "HH:mm:ss dd-MM-yyyy") : "N/A";
     };
 
+    const statusColor = (status) => {
+        switch (status) {
+            case "scheduled":
+                return "text-info";
+            case "inprogress":
+                return "text-primary";
+            case "completed":
+                return "text-success";
+            case "cancelled":
+                return "text-danger";
+            case "rescheduled":
+                return "text-warning";
+            default:
+                return "color-success";
+        }
+    };
+
     return (
         <Layout title="Booking Detail">
             <div className="col-xl-12">
@@ -68,7 +85,7 @@ function BookingDetail() {
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Room Meeting</th>
+                                                <th>Room</th>
                                                 <th>Scheduled Start</th>
                                                 <th>Scheduled End</th>
                                                 <th>Actual Start Time</th>
@@ -81,16 +98,20 @@ function BookingDetail() {
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>
-                                                        <Link to={`${lesson.path === null ? "" : `/room/${lesson.path}`}`} target="_blank" className="text-primary">
-                                                            {getLastSegment(lesson.path) || "N/A"}
-                                                        </Link>
+                                                        {lesson.path === null ? (
+                                                            "N/A"
+                                                        ) : (
+                                                            <Link to={`${lesson.path === null ? "" : `/room/${lesson.path}`}`} target="_blank" className="text-primary">
+                                                                {getLastSegment(lesson.path) || "N/A"}
+                                                            </Link>
+                                                        )}
                                                     </td>
 
                                                     <td>{formatDateTime(lesson.scheduledStartTime)}</td>
                                                     <td>{formatDateTime(lesson.scheduledEndTime)}</td>
                                                     <td>{formatDateTime(lesson.actualStartTime)}</td>
                                                     <td>{formatDateTime(lesson.actualEndTime)}</td>
-                                                    <td className="color-success">{lesson.status}</td>
+                                                    <td className={`${statusColor(lesson.status)}`}>{lesson.status}</td>
                                                 </tr>
                                             ))}
                                         </tbody>

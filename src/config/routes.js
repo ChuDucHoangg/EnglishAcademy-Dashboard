@@ -24,7 +24,7 @@ const routes = {
     test_online_detail: "/test-online/detail/:testSlug",
     // End routes Test Online
 
-    // Start routes Course Online
+    // Start routes Offline Online
     course_offline: "/course-offline",
     course_offline_detail: "/course-offline/:slug",
     course_offline_create: "/course-offline/create",
@@ -98,6 +98,7 @@ const routes = {
 
     // Start routes Subject
     subject_create: "/subject/create/:courseId",
+    subject_edit: "/subject/edit/:courseId/:subjectSlug",
     // End routes Subject
 
     // Start routes Entrance Test

@@ -1,28 +1,35 @@
 import Layout from "../../layouts";
-import useAxiosGet from "../../../hooks/useAxiosGet";
 import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { format } from "date-fns";
 import CourseOfflineSubject from "../../views/CourseOffline/Subject";
+import { useCallback, useEffect, useState } from "react";
+import api from "../../../services/api";
 
 function CourseOfflineDetail() {
     const { slug } = useParams();
 
-    const courseOfflineData = useAxiosGet({
-        path: url.COURSE_OFFLINE.DETAIL + `/${slug}`,
-        headers: {
-            Authorization: `Bearer ${getAccessToken()}`,
-        },
-    });
+    const [courseDetail, setCourseDetail] = useState({});
 
-    const courseDetail = courseOfflineData.response || {};
+    const loadData = useCallback(async () => {
+        try {
+            const courseDetailRequest = await api.get(url.COURSE_OFFLINE.DETAIL + `/${slug}`, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+            setCourseDetail(courseDetailRequest.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [slug]);
+
+    useEffect(() => {
+        loadData();
+    }, [loadData]);
 
     const subjects = courseDetail.subjectList || [];
 
     return (
-        <Layout title="Course Offline Detail">
+        <Layout title={`${courseDetail.name || "Loading..."}`}>
             <div className="row">
                 <div className="col-sm-4">
                     <div className="card">
@@ -146,47 +153,25 @@ function CourseOfflineDetail() {
                         <div className="mail-content">
                             <div className="card">
                                 <div className="card-body">
-                                    <div className="tab-content" id="nav-tabContent">
-                                        <div className="tab-pane fade show active" id="list-mail-1" role="tabpanel" aria-labelledby="list-mailtab-1">
-                                            <div className="table-card">
-                                                <div className="py-0 px-2">
-                                                    <div className="d-sm-flex align-items-center">
-                                                        <ul className="nav nav-tabs profile-tabs" id="myTab" role="tablist">
-                                                            <li className="nav-item" role="presentation">
-                                                                <a className="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="!#profile-1" role="tab" aria-selected="true">
-                                                                    <i className="ti ti-user me-2"></i>Subject
-                                                                </a>
-                                                            </li>
-                                                            <li className="nav-item" role="presentation">
-                                                                <a className="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="!#profile-2" role="tab" aria-selected="false" tabIndex="-1">
-                                                                    <i className="ti ti-file-text me-2"></i>Exam
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                        <ul className="list-inline ms-auto mb-3">
-                                                            <li className="list-inline-item">
-                                                                <Link className="btn btn-link-primary">View All</Link>
-                                                            </li>
-                                                            <li className="list-inline-item">
-                                                                <div className="form-search">
-                                                                    <Link to={`/subject/create/${courseDetail.id}`} className="btn btn-outline-primary">
-                                                                        Create Subject
-                                                                    </Link>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                    <div className="d-sm-flex align-items-center">
+                                        <ul className="nav nav-tabs profile-tabs" id="myTab" role="tablist">
+                                            <li className="nav-item" role="presentation">
+                                                <a className="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="!#profile-1" role="tab" aria-selected="true">
+                                                    <i className="ti ti-user me-2"></i>Subject
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul className="list-inline ms-auto mb-3">
+                                            <li className="list-inline-item">
+                                                <div className="form-search">
+                                                    <Link to={`/subject/create/${courseDetail.id}`} className="btn btn-outline-primary">
+                                                        Create Subject
+                                                    </Link>
                                                 </div>
-                                                <div className="card-body scroll-block">
-                                                    <div className="tab-content">
-                                                        <div className="tab-pane active show" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
-                                                            <CourseOfflineSubject subjects={subjects} />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            </li>
+                                        </ul>
                                     </div>
+                                    <CourseOfflineSubject subjects={subjects} courseId={courseDetail.id} reloadData={loadData} />
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,41 @@
 import { Link } from "react-router-dom";
+import api from "../../../services/api";
+import url from "../../../services/url";
+import { getAccessToken } from "../../../utils/auth";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
-function CourseOfflineSubject({ subjects }) {
+function CourseOfflineSubject({ subjects, courseId, reloadData }) {
+    const handleDelete = async (id) => {
+        try {
+            const isConfirmed = await Swal.fire({
+                title: "Are you sure?",
+                text: "Are you sure you want to delete?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "I'm sure",
+                reverseButtons: true,
+            });
+
+            if (isConfirmed.isConfirmed) {
+                const data = [id];
+                const deleteRequest = await api.delete(url.SUBJECT.DELETE, { data, headers: { Authorization: `Bearer ${getAccessToken()}` } });
+
+                if (deleteRequest.status === 200) {
+                    toast.success("Delete subject successfully!");
+                    reloadData();
+                }
+            }
+        } catch (error) {
+            if (error.response.status === 400) {
+                toast.error("The subject cannot be deleted!");
+            } else {
+                toast.error(error.response.data.message);
+            }
+        }
+    };
     return (
         <div className="row">
             {subjects?.map((subject, index) => (
@@ -18,9 +53,19 @@ function CourseOfflineSubject({ subjects }) {
                                     <p className="mb-1">No. {index + 1 < 10 ? `0${index + 1}` : index + 1}</p>
                                 </div>
                                 <div className="flex-shrink-0">
-                                    <Link to="" className="avtar avtar-s btn-link-secondary">
-                                        <i className="ti ti-bookmarks f-18"></i>
-                                    </Link>
+                                    <div className="dropdown">
+                                        <Link to="" className="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i className="ti ti-dots-vertical f-18"></i>
+                                        </Link>
+                                        <div className="dropdown-menu dropdown-menu-end p-2">
+                                            <Link to={`/subject/edit/${courseId}/${subject.slug}`} className="dropdown-item">
+                                                Edit
+                                            </Link>
+                                            <button className="dropdown-item" onClick={() => handleDelete(subject.id)}>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

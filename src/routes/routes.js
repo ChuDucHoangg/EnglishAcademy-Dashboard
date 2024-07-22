@@ -64,6 +64,7 @@ import TutoringScheduleDetail from "../components/pages/TutoringSchedule/Tutorin
 import Room from "../components/pages/Room";
 import PotentialCustomers from "../components/pages/PotentialCustomers";
 import EntranceTestEdit from "../components/pages/EntranceTest/EntranceTestEdit";
+import SubjectEdit from "../components/pages/CourseOffline/Subject/SubjectEdit";
 
 const privateRoutes = [
     // Dashboard routes
@@ -97,6 +98,7 @@ const privateRoutes = [
     { path: config.routes.course_offline_edit, component: CourseOfflineEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     { path: config.routes.course_offline_subject_detail, component: SubjectDetail, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.subject_edit, component: SubjectEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
     { path: config.routes.course_offline_exam_create, component: ExamOfflineCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     // Category routes

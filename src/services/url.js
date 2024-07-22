@@ -96,6 +96,8 @@ const url = {
 
     SUBJECT: {
         CREATE: "subject",
+        UPDATE: "subject",
+        DELETE: "subject",
     },
 
     CLASS: {
