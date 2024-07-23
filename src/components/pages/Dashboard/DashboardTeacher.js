@@ -10,6 +10,8 @@ import { getAccessToken } from "../../../utils/auth";
 import { useEffect } from "react";
 import { useCallback } from "react";
 import { formatNumber } from "../../../utils/formatNumber";
+import config from "../../../config";
+import Generality from "../../views/Dashboard/Generality";
 
 function DashboardTeacher() {
     const [totalClasses, setTotalClasses] = useState({});
@@ -43,10 +45,11 @@ function DashboardTeacher() {
 
     const generality = [
         {
-            title: "Class of day",
+            title: "Booking Waiting",
             response: formatNumber(totalClasses.totalClasses),
             icon: "assets/icons/dash-icon-07.svg",
-            description: "Number of classes being taught.",
+            description: "Number of tutoring registrations.",
+            path: config.routes.booking_waiting_list,
         },
         {
             title: "Tutoring of day",
@@ -55,16 +58,18 @@ function DashboardTeacher() {
             description: "Number of students being tutored.",
         },
         {
-            title: "Class",
+            title: "Classes",
             response: formatNumber(5),
             icon: "assets/icons/dash-icon-01.svg",
             description: "Number of classes being taught.",
+            path: config.routes.class_list_teacher,
         },
         {
             title: "Tutoring",
             response: formatNumber(9),
             icon: "assets/icons/dash-icon-06.svg",
             description: "Number of students being tutored.",
+            path: config.routes.tutoring_schedule,
         },
     ];
 
@@ -83,22 +88,7 @@ function DashboardTeacher() {
         <Layout title="Dashboard Teacher">
             <>
                 {generality.map((item, index) => (
-                    <div className="col-lg-3 col-md-6" key={index}>
-                        <div className="card border-0">
-                            <div className="card-body">
-                                <div className="row align-items-center">
-                                    <div className="col-8">
-                                        <h6 className="mb-2 text-muted">{item.title}</h6>
-                                        <h4 className="mb-2">{item.response}</h4>
-                                    </div>
-                                    <div className="col-4 text-end">
-                                        <img src={item.icon} alt="" className="dash-icon" />
-                                    </div>
-                                </div>
-                                <p className="mb-0 text-muted text-sm">{item.description}</p>
-                            </div>
-                        </div>
-                    </div>
+                    <Generality item={item} key={index} />
                 ))}
 
                 <div className="col-md-6">

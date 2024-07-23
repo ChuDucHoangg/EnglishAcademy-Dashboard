@@ -80,6 +80,8 @@ function ClassCourseSlotCreateTeacher() {
 
         const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
+        const currentDate = new Date();
+
         if (!formData.title) {
             newErrors.title = "Please enter title.";
             valid = false;
@@ -122,21 +124,27 @@ function ClassCourseSlotCreateTeacher() {
         if (!formData.startDate) {
             newErrors.startDate = "Please enter start date.";
             valid = false;
+        } else {
+            const startDate = new Date(formData.startDate);
+            if (startDate < currentDate) {
+                newErrors.startDate = "Start date and time cannot be in the past.";
+                valid = false;
+            }
         }
 
         if (!formData.endDate) {
             newErrors.endDate = "Please enter end date.";
             valid = false;
+        } else {
+            const endDate = new Date(formData.endDate);
+            if (endDate < currentDate) {
+                newErrors.endDate = "End date and time cannot be in the past.";
+                valid = false;
+            }
         }
 
         setFormErrors(newErrors);
         return valid;
-    };
-
-    const adjustDateByHours = (dateString, hours) => {
-        const date = new Date(dateString);
-        date.setHours(date.getHours() - hours);
-        return date.toISOString().slice(0, 16);
     };
 
     const handleSubmit = async (e) => {
@@ -146,13 +154,7 @@ function ClassCourseSlotCreateTeacher() {
             try {
                 setSubmitting(true);
 
-                const adjustedFormData = {
-                    ...formData,
-                    startDate: adjustDateByHours(formData.startDate, 7),
-                    endDate: adjustDateByHours(formData.endDate, 7),
-                };
-
-                const createRequest = await api.post(url.CLASS.COURSE_ITEM_SLOT_CREATE, adjustedFormData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                const createRequest = await api.post(url.CLASS.COURSE_ITEM_SLOT_CREATE, formData, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
                 if (createRequest.status === 200) {
                     toast.success("Created successful!", {
                         position: "top-right",
