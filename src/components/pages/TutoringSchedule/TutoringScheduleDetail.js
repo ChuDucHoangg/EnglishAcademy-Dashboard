@@ -219,8 +219,12 @@ function TutoringScheduleDetail() {
                                         <p className="mb-0">
                                             {lesson.path === null || lesson.path === "" ? (
                                                 "N/A"
+                                            ) : lesson.status === "completed" ? (
+                                                <p className="m-0">
+                                                    {lesson.path} <span className="text-danger">(closed)</span>
+                                                </p>
                                             ) : (
-                                                <Link to={`${`/room/${lesson.path}`}`} className="text-primary" target="_blank">
+                                                <Link to={`/room/${lesson.path}`} className="text-primary" target="_blank">
                                                     {getLastSegment(lesson.path)}
                                                 </Link>
                                             )}

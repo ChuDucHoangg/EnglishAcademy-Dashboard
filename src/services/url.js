@@ -115,6 +115,15 @@ const url = {
         ITEM_SLOT_MARK_POINT: "answer-student-item-slot/teacher/score",
     },
 
+    DASHBOARD: {
+        REVENUE_ALL: "revenue/all",
+        REVENUE_COURSE_ONLINE_12_MONTH: "course-online/monthly-revenue-last-12-months",
+        REVENUE_TUTOR_12_MONTH: "tutor/monthly-revenue-last-12-months",
+        TOP_10_COURSE_ONLINE: "course-online/top-10-revenue",
+        TOP_10_TUTOR: "tutor/top-10-revenue",
+        COUNT_ALL: "count/all",
+    },
+
     DASHBOARD_TEACHER: {
         TOTAL_CLASS: "classes/by-teacher/count",
         COUNT_STUDENT_STUDYING: "tutor/get-count-student-studing",
