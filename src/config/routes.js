@@ -42,7 +42,10 @@ const routes = {
     // End routes Category
 
     // Start routes Class
-    class_list: "classes",
+    class_list: "/classes",
+    class_create: "/class/create",
+
+    classroom: "classroom",
     // End routes Class
 
     // Start routes Timetable
