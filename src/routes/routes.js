@@ -66,6 +66,8 @@ import PotentialCustomers from "../components/pages/PotentialCustomers";
 import EntranceTestEdit from "../components/pages/EntranceTest/EntranceTestEdit";
 import SubjectEdit from "../components/pages/CourseOffline/Subject/SubjectEdit";
 import Classes from "../components/pages/Classes";
+import ClassCreate from "../components/pages/Classes/ClassCreate";
+import Classroom from "../components/pages/Classroom";
 
 const privateRoutes = [
     // Dashboard routes
@@ -109,6 +111,8 @@ const privateRoutes = [
 
     // Class routes
     { path: config.routes.class_list, component: Classes, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.class_create, component: ClassCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
+    { path: config.routes.classroom, component: Classroom, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     // Class routes by Teacher
     { path: config.routes.class_list_teacher, component: ClassListTeacher, allowedRoles: ["TEACHER"] },

@@ -102,7 +102,10 @@ const url = {
     },
 
     CLASS: {
-        LIST: "classes/by-teacher",
+        LIST_BY_ADMIN: "classes/get-all",
+        CREATE_BY_ADMIN: "classes",
+
+        LIST_BY_TEACHER: "classes/by-teacher",
         COURSE_BY_CLASS: "course-offline/user/get-by-class",
         COURSE_DETAIL_BY_CLASS: "course-offline/user/detail",
         COURSE_SUBJECT_LIST_BY_CLASS: "subject/detail/user",
@@ -162,6 +165,10 @@ const url = {
 
     MENU: {
         GET_ALL: "menu",
+    },
+
+    ROOM: {
+        LIST: "classes/get-all/room",
     },
 };
 export default url;

@@ -8,7 +8,7 @@ import Pagination from "../../layouts/Pagination";
 
 function ClassListTeacher() {
     const classData = useAxiosGet({
-        path: url.CLASS.LIST,
+        path: url.CLASS.LIST_BY_TEACHER,
         headers: {
             Authorization: `Bearer ${getAccessToken()}`,
         },
