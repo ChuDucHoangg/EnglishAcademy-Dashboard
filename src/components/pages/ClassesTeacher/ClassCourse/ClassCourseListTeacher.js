@@ -6,7 +6,6 @@ import { getAccessToken } from "../../../../utils/auth";
 import { formatLevelCourse } from "../../../../utils/formatLevelCourse";
 import Pagination from "../../../layouts/Pagination";
 import { useState } from "react";
-import Loading from "../../../layouts/Loading";
 
 function ClassCourseListTeacher() {
     const { classId } = useParams();
@@ -44,82 +43,78 @@ function ClassCourseListTeacher() {
     };
 
     return (
-        <>
-            {courseData.loading ? (
-                <Loading />
-            ) : (
-                <Layout title="Course List">
-                    <div className="col-xl-12">
-                        <div className="card">
-                            <div className="card-header text-start">
-                                <div className="row">
-                                    <div className="col-lg-4">
-                                        <input className="datatable-input" placeholder="Search..." type="search" value={searchQuery} onChange={handleSearch} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-body">
-                                <div className="datatable-container">
-                                    <table className="table table-hover datatable-table" id="pc-dt-simple">
-                                        <thead>
-                                            <tr>
-                                                <th data-sortable="true" className="text-center">
-                                                    No.
-                                                </th>
-                                                <th data-sortable="true">Course Name</th>
-                                                <th data-sortable="true">Level</th>
-                                                <th data-sortable="true">Price</th>
-                                                <th data-sortable="true">Status</th>
-                                                <th data-sortable="true" className="text-center">
-                                                    Actions
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="orders">
-                                            {currentCourse.map((course, index) => (
-                                                <tr data-index="0" key={index}>
-                                                    <td className="text-center">{index + 1}</td>
-                                                    <td>
-                                                        <div className="row">
-                                                            <div className="col-auto pe-0">
-                                                                <img src={course.image} alt="" className="wid-40 rounded" />
-                                                            </div>
-                                                            <div className="col">
-                                                                <h6 className="mb-1">{course.name}</h6>
-                                                                <p className="text-muted f-12 mb-0">{formatLevelCourse(course.level)}</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>{course.language}</td>
-                                                    <td>${course.price.toFixed(2)}</td>
-                                                    <td>
-                                                        <span className="badge bg-light-success f-12">{course.status}</span>
-                                                    </td>
-                                                    <td className="text-center">
-                                                        <ul className="list-inline me-auto mb-0">
-                                                            <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
-                                                                <Link to={`/teacher/class/${classId}/detail/${course.slug}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
-                                                                    <i className="fas fa-door-open f-18"></i>
-                                                                </Link>
-                                                            </li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                    <div className="row">
-                                        <div className="col-lg-3">
-                                            <Pagination currentPage={currentPagePackage} totalPages={totalPagesPackage} onPageChange={handlePageChangePackage} />
-                                        </div>
-                                    </div>
-                                </div>
+        <Layout title="Course List">
+            <div className="card">
+                <div className="card-header text-start">
+                    <div className="row">
+                        <div className="col-lg-3">
+                            <input className="datatable-input" placeholder="Search..." type="search" value={searchQuery} onChange={handleSearch} />
+                        </div>
+                    </div>
+                </div>
+                <div className="card-body">
+                    <div className="datatable-container">
+                        <table className="table table-hover datatable-table" id="pc-dt-simple">
+                            <thead>
+                                <tr>
+                                    <th className="text-center">No.</th>
+                                    <th>Course Name</th>
+                                    <th>Level</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th className="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders">
+                                {currentCourse.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="6" className="text-center">
+                                            No data.
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    currentCourse.map((course, index) => (
+                                        <tr data-index="0" key={index}>
+                                            <td className="text-center">{index + 1}</td>
+                                            <td>
+                                                <div className="row">
+                                                    <div className="col-auto pe-0">
+                                                        <img src={course.image} alt="" className="wid-40 rounded" />
+                                                    </div>
+                                                    <div className="col">
+                                                        <h6 className="mb-1">{course.name}</h6>
+                                                        <p className="text-muted f-12 mb-0">{formatLevelCourse(course.level)}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{course.language}</td>
+                                            <td>${course.price.toFixed(2)}</td>
+                                            <td>
+                                                <span className="badge bg-light-success f-12">{course.status}</span>
+                                            </td>
+                                            <td className="text-center">
+                                                <ul className="list-inline me-auto mb-0">
+                                                    <li className="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
+                                                        <Link to={`/teacher/class/${classId}/detail/${course.slug}`} className="avtar avtar-xs btn-link-secondary btn-pc-default">
+                                                            <i className="fas fa-door-open f-18"></i>
+                                                        </Link>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
+                        <div className="row">
+                            <div className="col-lg-3">
+                                <Pagination currentPage={currentPagePackage} totalPages={totalPagesPackage} onPageChange={handlePageChangePackage} />
                             </div>
                         </div>
                     </div>
-                </Layout>
-            )}
-        </>
+                </div>
+            </div>
+        </Layout>
     );
 }
 

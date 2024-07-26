@@ -261,8 +261,8 @@ function StatisticsUtility() {
 
     return (
         <>
-            {statisticsWidget.map((widget, index) => (
-                <div className="col-md-6 col-xxl-3" key={index}>
+            {statisticsWidget.map((widget, widgetIndex) => (
+                <div className="col-md-6 col-xxl-3" key={widgetIndex}>
                     <div className="card">
                         <div className="card-body">
                             <div className="d-flex align-items-center">

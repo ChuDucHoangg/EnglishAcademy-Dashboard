@@ -77,10 +77,17 @@ function DashboardTeacher() {
         const formattedStartTime = event.scheduledStartTime.slice(0, 19);
         const formattedEndTime = event.scheduledEndTime.slice(0, 19);
 
+        const isNullEvent = event.path === null;
+        const eventTitle = isNullEvent ? "N/A" : `room: ${event.path}`;
+
         return {
-            title: `${event.path}`,
+            title: eventTitle,
             start: formattedStartTime,
             end: formattedEndTime,
+            backgroundColor: isNullEvent ? "#eff0f2" : "#ecfafb",
+            textColor: isNullEvent ? "#5b6b79" : "#2ca87f",
+            borderColor: isNullEvent ? "#5b6b79" : "#2ca87f",
+            isNullEvent: isNullEvent,
         };
     });
 
