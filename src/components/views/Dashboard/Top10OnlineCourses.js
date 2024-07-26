@@ -20,6 +20,8 @@ function Top10OnlineCourses() {
         loadData();
     }, []);
 
+    console.log(courses);
+
     return (
         <div className="col-md-6">
             <div className="card h-100">
@@ -45,7 +47,7 @@ function Top10OnlineCourses() {
                     </div>
                     <ul className="list-group list-group-flush">
                         {courses.map((course) => (
-                            <li className="list-group-item px-0" key={course.id}>
+                            <li className="list-group-item px-0" key={course.courseId}>
                                 <div className="d-flex align-items-center">
                                     <div className="flex-shrink-0">
                                         <img className="avtar avtar-s object-fit-cover border" src={course.image} alt={course.courseName} />

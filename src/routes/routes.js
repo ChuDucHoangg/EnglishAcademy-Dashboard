@@ -65,6 +65,7 @@ import Room from "../components/pages/Room";
 import PotentialCustomers from "../components/pages/PotentialCustomers";
 import EntranceTestEdit from "../components/pages/EntranceTest/EntranceTestEdit";
 import SubjectEdit from "../components/pages/CourseOffline/Subject/SubjectEdit";
+import Classes from "../components/pages/Classes";
 
 const privateRoutes = [
     // Dashboard routes
@@ -105,6 +106,9 @@ const privateRoutes = [
     { path: config.routes.category_list, component: CategoryList, allowedRoles: ["ADMIN", "TRAINERS"] },
     { path: config.routes.category_create, component: CategoryCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
     { path: config.routes.category_edit, component: CategoryEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
+
+    // Class routes
+    { path: config.routes.class_list, component: Classes, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     // Class routes by Teacher
     { path: config.routes.class_list_teacher, component: ClassListTeacher, allowedRoles: ["TEACHER"] },

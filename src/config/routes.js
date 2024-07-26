@@ -41,6 +41,10 @@ const routes = {
     category_edit: "/category-edit/:slug",
     // End routes Category
 
+    // Start routes Class
+    class_list: "classes",
+    // End routes Class
+
     // Start routes Timetable
     timetable: "/timetable",
     // End routes Timetable

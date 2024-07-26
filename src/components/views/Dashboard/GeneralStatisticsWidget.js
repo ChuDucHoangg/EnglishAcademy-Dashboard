@@ -74,19 +74,19 @@ function GeneralStatistics() {
                     </div>
                     <div id="total-income-graph"></div>
                     <div className="row g-3 mt-3">
-                        {generalWidget.map((widget, index) => (
-                            <div className="col-sm-6" key={index}>
+                        {generalWidget.map((general, generalIndex) => (
+                            <div className="col-sm-6" key={generalIndex}>
                                 <div className="bg-body p-3 rounded">
                                     <div className="d-flex align-items-center mb-2">
                                         <div className="flex-shrink-0">
-                                            <span className={`p-1 d-block ${widget.dotColor} rounded-circle`}></span>
+                                            <span className={`p-1 d-block ${general.dotColor} rounded-circle`}></span>
                                         </div>
                                         <div className="flex-grow-1 ms-2">
-                                            <p className="mb-0">{widget.title}</p>
+                                            <p className="mb-0">{general.title}</p>
                                         </div>
                                     </div>
                                     <h6 className="mb-0">
-                                        {widget.count}
+                                        {general.count}
                                         {/* <small className="text-muted">
                                         <i className="ti ti-chevrons-up"></i> +$763,43
                                     </small> */}
