@@ -174,5 +174,9 @@ const url = {
     ORDER_HISTORY: {
         LIST: "course-online-student/history",
     },
+
+    STUDENT: {
+        LIST: "student",
+    },
 };
 export default url;
