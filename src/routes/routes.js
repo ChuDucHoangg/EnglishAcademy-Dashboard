@@ -68,6 +68,8 @@ import SubjectEdit from "../components/pages/CourseOffline/Subject/SubjectEdit";
 import Classes from "../components/pages/Classes";
 import ClassCreate from "../components/pages/Classes/ClassCreate";
 import Classroom from "../components/pages/Classroom";
+import ClassCourseExamCreate from "../components/pages/ClassesTeacher/ClassCourseExam/ClassCourseExamCreate";
+import OrderHistory from "../components/pages/OrderHistory";
 
 const privateRoutes = [
     // Dashboard routes
@@ -126,6 +128,7 @@ const privateRoutes = [
     { path: config.routes.class_course_slot_edit_teacher, component: ClassCourseSlotEditTeacher, allowedRoles: ["TEACHER"] },
     { path: config.routes.class_course_slot_answer_teacher, component: ClassCourseSlotAnswerTeacher, allowedRoles: ["TEACHER"] },
 
+    { path: config.routes.class_course_create_exam_teacher, component: ClassCourseExamCreate, allowedRoles: ["TEACHER"] },
     { path: config.routes.class_course_slot_exam_teacher, component: ClassCourseExamDetail, allowedRoles: ["TEACHER"] },
 
     // Tutor routes
@@ -170,6 +173,8 @@ const privateRoutes = [
     { path: config.routes.entrance_test_detail, component: EntranceTestDetail, allowedRoles: ["ADMIN", "TRAINERS"] },
     { path: config.routes.entrance_test_create, component: EntranceTestCreate, allowedRoles: ["ADMIN", "TRAINERS"] },
     { path: config.routes.entrance_test_edit, component: EntranceTestEdit, allowedRoles: ["ADMIN", "TRAINERS"] },
+
+    { path: config.routes.order_history, component: OrderHistory, allowedRoles: ["ADMIN", "TRAINERS"] },
 ];
 
 const authenticationRoutes = [

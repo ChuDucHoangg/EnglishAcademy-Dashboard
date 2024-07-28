@@ -56,6 +56,7 @@ const routes = {
     class_list_teacher: "/teacher/class",
     class_course_list_teacher: "/teacher/class/:classId",
     class_course_detail_teacher: "/teacher/class/:classId/detail/:courseSlug",
+    class_course_create_exam_teacher: "/teacher/class/:classId/exam-create/:subjectId",
     class_course_subject_list_teacher: "/teacher/class/:classId/subject/:courseSlug",
     class_course_slot_list_teacher: "/teacher/class/:classId/subject/:courseSlug",
     class_course_slot_detail_teacher: "/teacher/class/:classId/slot/:slug",
@@ -123,6 +124,8 @@ const routes = {
     // Start routes Potential Customers
     potential_customers: "/potential-customers",
     // End routes Potential Customers
+
+    order_history: "/order-history",
 
     // Start routes Other
     not_found: "*",

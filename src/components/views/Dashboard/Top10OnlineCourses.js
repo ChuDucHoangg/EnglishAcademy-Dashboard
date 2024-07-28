@@ -20,8 +20,6 @@ function Top10OnlineCourses() {
         loadData();
     }, []);
 
-    console.log(courses);
-
     return (
         <div className="col-md-6">
             <div className="card h-100">
@@ -48,28 +46,30 @@ function Top10OnlineCourses() {
                     <ul className="list-group list-group-flush">
                         {courses.map((course) => (
                             <li className="list-group-item px-0" key={course.courseId}>
-                                <div className="d-flex align-items-center">
-                                    <div className="flex-shrink-0">
-                                        <img className="avtar avtar-s object-fit-cover border" src={course.image} alt={course.courseName} />
-                                    </div>
-                                    <div className="flex-grow-1 ms-3">
-                                        <div className="row g-1">
-                                            <div className="col-6">
-                                                <h6 className="mb-0">{course.courseName}</h6>
-                                                <p className="text-muted mb-0">
-                                                    <small>
-                                                        <i className="fas fa-star text-warning"></i>
-                                                        {course.star}
-                                                    </small>
-                                                </p>
-                                            </div>
-                                            <div className="col-6 text-end">
-                                                <h6 className="mb-1">${course.price.toFixed(2)}</h6>
-                                                <p className="text-primary mb-0">Revenue: ${course.totalRevenue.toFixed(2)}</p>
+                                <Link to={`/course-online/detail/${course.courseSlug}`}>
+                                    <div className="d-flex align-items-center">
+                                        <div className="flex-shrink-0">
+                                            <img className="avtar avtar-s object-fit-cover border" src={course.image} alt={course.courseName} />
+                                        </div>
+                                        <div className="flex-grow-1 ms-3">
+                                            <div className="row g-1">
+                                                <div className="col-6">
+                                                    <h6 className="mb-0">{course.courseName}</h6>
+                                                    <p className="text-muted mb-0">
+                                                        <small>
+                                                            <i className="fas fa-star text-warning"></i>
+                                                            {course.star}
+                                                        </small>
+                                                    </p>
+                                                </div>
+                                                <div className="col-6 text-end">
+                                                    <h6 className="mb-1">${course.price.toFixed(2)}</h6>
+                                                    <p className="text-primary mb-0">Revenue: ${course.totalRevenue.toFixed(2)}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             </li>
                         ))}
                     </ul>

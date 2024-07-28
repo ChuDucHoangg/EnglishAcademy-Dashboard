@@ -1,26 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
-import Layout from "../../layouts";
-import ButtonSubmit from "../../layouts/ButtonSubmit";
 import { useRef, useState } from "react";
-import api from "../../../services/api";
-import url from "../../../services/url";
-import { toast } from "react-toastify";
-import { getAccessToken } from "../../../utils/auth";
-import useAxiosGet from "../../../hooks/useAxiosGet";
 
-function ExamOfflineCreate() {
-    const { subjectId } = useParams();
+import { toast } from "react-toastify";
+import url from "../../../../services/url";
+import { getAccessToken } from "../../../../utils/auth";
+import api from "../../../../services/api";
+import Layout from "../../../layouts";
+import ButtonSubmit from "../../../layouts/ButtonSubmit";
+
+function ClassCourseExamCreate() {
+    const { classId, subjectId } = useParams();
     const fileInputRef = useRef();
     const navigate = useNavigate();
-
-    const classesData = useAxiosGet({
-        path: url.CLASSES.GET_ALL,
-        headers: {
-            Authorization: `Bearer ${getAccessToken()}`,
-        },
-    });
-
-    const classes = classesData.response || [];
 
     const [formData, setFormData] = useState({
         title: "",
@@ -29,9 +20,9 @@ function ExamOfflineCreate() {
         pastMark: "",
         totalMark: 100,
         description: "",
-        subjectId: subjectId,
+        subjectId: parseInt(subjectId),
         file: null,
-        classesId: null,
+        classesId: parseInt(classId),
     });
 
     const [formErrors, setFormErrors] = useState({
@@ -115,11 +106,6 @@ function ExamOfflineCreate() {
             valid = false;
         } else if (new Date(formData.startDate) < currentDate) {
             newErrors.startDate = "Start Date cannot be in the past.";
-            valid = false;
-        }
-
-        if (formData.classesId === null || formData.classesId === "") {
-            newErrors.classesId = "Please choose class.";
             valid = false;
         }
 
@@ -227,16 +213,16 @@ function ExamOfflineCreate() {
 
                                 <div className="col-md-6">
                                     <div className="form-group">
-                                        <label className="form-label">Choose Class</label>
-                                        <select className={`form-select ${formErrors.classesId ? "is-invalid" : ""}`} name="classesId" onChange={handleChange}>
-                                            <option value="">Please choose class</option>
-                                            {classes.map((cl) => (
-                                                <option value={cl.id} key={cl.id}>
-                                                    {cl.name}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {formErrors.classesId && <p className="invalid-feedback">{formErrors.classesId}</p>}
+                                        <label className="form-label">Pass Mark</label>
+                                        <input
+                                            type="text"
+                                            name="pastMark"
+                                            className={`form-control ${formErrors.pastMark ? "is-invalid" : ""}`}
+                                            value={formData.pastMark}
+                                            onChange={handleChange}
+                                            placeholder="Enter Pass Mark"
+                                        />
+                                        {formErrors.pastMark && <p className="invalid-feedback">{formErrors.pastMark}</p>}
                                     </div>
 
                                     <div className="form-group">
@@ -253,19 +239,6 @@ function ExamOfflineCreate() {
                                 </div>
 
                                 <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label className="form-label">Pass Mark</label>
-                                        <input
-                                            type="text"
-                                            name="pastMark"
-                                            className={`form-control ${formErrors.pastMark ? "is-invalid" : ""}`}
-                                            value={formData.pastMark}
-                                            onChange={handleChange}
-                                            placeholder="Enter Pass Mark"
-                                        />
-                                        {formErrors.pastMark && <p className="invalid-feedback">{formErrors.pastMark}</p>}
-                                    </div>
-
                                     <div className="form-group">
                                         <label className="form-label">Description</label>
                                         <textarea
@@ -299,4 +272,4 @@ function ExamOfflineCreate() {
     );
 }
 
-export default ExamOfflineCreate;
+export default ClassCourseExamCreate;

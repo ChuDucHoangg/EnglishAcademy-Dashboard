@@ -145,18 +145,16 @@ function CategoryList() {
                                         <table className="table table-hover datatable-table" id="pc-dt-simple">
                                             <thead>
                                                 <tr>
-                                                    <th data-sortable="true">
+                                                    <th>
                                                         <div className="form-check custom-checkbox">
                                                             <input type="checkbox" className="form-check-input" checked={selectAll} onChange={handleSelectAll} />
                                                         </div>
                                                     </th>
-                                                    <th data-sortable="true">Name</th>
-                                                    <th data-sortable="true">Slug</th>
-                                                    <th data-sortable="true">Created Date</th>
-                                                    <th data-sortable="true">Created By</th>
-                                                    <th data-sortable="true" className="text-center">
-                                                        Actions
-                                                    </th>
+                                                    <th>Name</th>
+                                                    <th>Slug</th>
+                                                    <th>Created Date</th>
+                                                    <th>Created By</th>
+                                                    <th className="text-center">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="orders">

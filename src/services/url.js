@@ -170,5 +170,9 @@ const url = {
     ROOM: {
         LIST: "classes/get-all/room",
     },
+
+    ORDER_HISTORY: {
+        LIST: "course-online-student/history",
+    },
 };
 export default url;
