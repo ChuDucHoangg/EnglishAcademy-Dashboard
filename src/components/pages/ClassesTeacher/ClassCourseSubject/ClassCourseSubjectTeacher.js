@@ -82,6 +82,12 @@ function ClassCourseSubjectTeacher() {
                         </div>
                         <div className="datatable-dropdown">
                             <div className="d-flex align-items-center gap-3">
+                                {slots?.testOfflineResponseList?.length === 0 && (
+                                    <Link to={`/teacher/class/${classId}/exam-create/${slots.id}`} className="btn btn-outline-secondary d-flex align-items-center justify-content-end">
+                                        <i className="fas fa-file-signature"></i> Create Final Exam
+                                    </Link>
+                                )}
+
                                 <Link to={`/teacher/class/${classId}/${courseSlug}/item-slot/create`} className="btn btn-outline-primary d-flex align-items-center justify-content-end">
                                     <i className="ti ti-plus"></i> Create Slot
                                 </Link>
@@ -162,36 +168,31 @@ function ClassCourseSubjectTeacher() {
                             </div>
                         ))}
 
-                        {slots?.testOfflineResponseList?.map((subject, subjectIndex) => (
-                            <div className="accordion-item" key={subjectIndex}>
-                                <h2 className="accordion-header" id={`flush-heading-2-${subjectIndex}`}>
+                        {slots?.testOfflineResponseList?.[0] && (
+                            <div className="accordion-item" key={0}>
+                                <h2 className="accordion-header" id={`flush-heading-2-0`}>
                                     <button
                                         className="accordion-button collapsed"
                                         type="button"
                                         data-bs-toggle="collapse"
-                                        data-bs-target={`#flush-collapse-2-${subjectIndex}`}
+                                        data-bs-target={`#flush-collapse-2-0`}
                                         aria-expanded="false"
-                                        aria-controls={`flush-collapse-2-${subjectIndex}`}
+                                        aria-controls={`flush-collapse-2-0`}
                                     >
                                         Final Exam
-                                        <p className="fw-light px-3 f-10 m-0"> Start Date: {subject && format(new Date(subject.startDate), "HH:mm:ss dd-MM-yyyy")}</p>
+                                        <p className="fw-light px-3 f-10 m-0"> Start Date: {format(new Date(slots.testOfflineResponseList[0].startDate), "HH:mm:ss dd-MM-yyyy")}</p>
                                     </button>
                                 </h2>
-                                <div
-                                    id={`flush-collapse-2-${subjectIndex}`}
-                                    className="accordion-collapse collapse"
-                                    aria-labelledby={`flush-heading-2-${subjectIndex}`}
-                                    data-bs-parent="#accordionFlushExample"
-                                >
+                                <div id={`flush-collapse-2-0`} className="accordion-collapse collapse" aria-labelledby={`flush-heading-2-0`} data-bs-parent="#accordionFlushExample">
                                     <div className="accordion-body">
-                                        <Link to={`/teacher/class/${classId}/slot-test/${subject.slug}`} className="text-secondary d-block">
+                                        <Link to={`/teacher/class/${classId}/slot-test/${slots.testOfflineResponseList[0].slug}`} className="text-secondary d-block">
                                             <i className="fas fa-file-signature"></i>
-                                            {subject.title}
+                                            {slots.testOfflineResponseList[0].title}
                                         </Link>
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        )}
                     </div>
                 </div>
             </div>

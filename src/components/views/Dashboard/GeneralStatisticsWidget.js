@@ -3,6 +3,7 @@ import api from "../../../services/api";
 import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
 import config from "../../../config";
+import { Link } from "react-router-dom";
 
 function GeneralStatistics() {
     const [counts, setCounts] = useState([]);
@@ -20,14 +21,12 @@ function GeneralStatistics() {
         loadData();
     }, []);
 
-    console.log(counts);
-
     const generalWidget = [
         {
             title: "Total Classes",
             count: counts.countClasses,
             dotColor: "bg-primary",
-            path: "",
+            path: config.routes.class_list,
         },
         {
             title: "Total Online Course",
@@ -56,19 +55,19 @@ function GeneralStatistics() {
                     <div className="d-flex align-items-center justify-content-between">
                         <h5 className="mb-0">General statistics</h5>
                         <div className="dropdown">
-                            <a className="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none" href="#!" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <Link className="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i className="ti ti-dots-vertical f-18"></i>
-                            </a>
+                            </Link>
                             <div className="dropdown-menu dropdown-menu-end">
-                                <a className="dropdown-item" href="#!">
+                                <Link to="" className="dropdown-item">
                                     Today
-                                </a>
-                                <a className="dropdown-item" href="#!">
+                                </Link>
+                                <Link to="" className="dropdown-item">
                                     Weekly
-                                </a>
-                                <a className="dropdown-item" href="#!">
+                                </Link>
+                                <Link to="" className="dropdown-item">
                                     Monthly
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -76,22 +75,24 @@ function GeneralStatistics() {
                     <div className="row g-3 mt-3">
                         {generalWidget.map((general, generalIndex) => (
                             <div className="col-sm-6" key={generalIndex}>
-                                <div className="bg-body p-3 rounded">
-                                    <div className="d-flex align-items-center mb-2">
-                                        <div className="flex-shrink-0">
-                                            <span className={`p-1 d-block ${general.dotColor} rounded-circle`}></span>
+                                <Link to={general.path} className="text-dark">
+                                    <div className="bg-body p-3 rounded">
+                                        <div className="d-flex align-items-center mb-2">
+                                            <div className="flex-shrink-0">
+                                                <span className={`p-1 d-block ${general.dotColor} rounded-circle`}></span>
+                                            </div>
+                                            <div className="flex-grow-1 ms-2">
+                                                <p className="mb-0">{general.title}</p>
+                                            </div>
                                         </div>
-                                        <div className="flex-grow-1 ms-2">
-                                            <p className="mb-0">{general.title}</p>
-                                        </div>
+                                        <h6 className="mb-0">
+                                            {general.count}
+                                            <small className="text-muted">
+                                                <i className="ti ti-chevrons-up"></i> +$763,43
+                                            </small>
+                                        </h6>
                                     </div>
-                                    <h6 className="mb-0">
-                                        {general.count}
-                                        {/* <small className="text-muted">
-                                        <i className="ti ti-chevrons-up"></i> +$763,43
-                                    </small> */}
-                                    </h6>
-                                </div>
+                                </Link>
                             </div>
                         ))}
                     </div>

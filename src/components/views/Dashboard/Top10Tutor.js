@@ -47,25 +47,27 @@ function Top10Tutor() {
                     <ul className="list-group list-group-flush">
                         {tutors.map((tutor) => (
                             <li className="list-group-item px-0" key={tutor.id}>
-                                <div className="d-flex align-items-center">
-                                    <div className="flex-shrink-0">
-                                        <img className="avtar avtar-s object-fit-cover border" src={tutor.avatar} alt={tutor.fullname} />
-                                    </div>
-                                    <div className="flex-grow-1 ms-3">
-                                        <div className="row g-1">
-                                            <div className="col-6">
-                                                <h6 className="mb-0">{tutor.fullname}</h6>
-                                                <p className="text-muted mb-0">
-                                                    <small>{formatLevelCourse(tutor.level)}</small>
-                                                </p>
-                                            </div>
-                                            <div className="col-6 text-end">
-                                                <h6 className="mb-1">Hourly Rate{tutor.hourlyRate}h</h6>
-                                                <p className="text-success mb-0">Revenue: ${tutor.totalRevenue.toFixed(2)}</p>
+                                <Link to={``}>
+                                    <div className="d-flex align-items-center">
+                                        <div className="flex-shrink-0">
+                                            <img className="avtar avtar-s object-fit-cover border" src={tutor.avatar} alt={tutor.fullname} />
+                                        </div>
+                                        <div className="flex-grow-1 ms-3">
+                                            <div className="row g-1">
+                                                <div className="col-6">
+                                                    <h6 className="mb-0">{tutor.fullname}</h6>
+                                                    <p className="text-muted mb-0">
+                                                        <small>{formatLevelCourse(tutor.level)}</small>
+                                                    </p>
+                                                </div>
+                                                <div className="col-6 text-end">
+                                                    <h6 className="mb-1">Hourly Rate{tutor.hourlyRate}h</h6>
+                                                    <p className="text-success mb-0">Revenue: ${tutor.totalRevenue.toFixed(2)}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             </li>
                         ))}
                     </ul>
