@@ -71,7 +71,7 @@ const routes = {
     // End routes Class Teacher
 
     // Start routes Student
-    student_list: "/students",
+    student_list: "/student",
     student_create: "/student/create",
     student_edit: "/student/edit/:slug",
     // End routes Student

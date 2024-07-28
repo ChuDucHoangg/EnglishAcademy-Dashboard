@@ -21,7 +21,7 @@ function OrderHistory() {
     const [searchQuery, setSearchQuery] = useState("");
     const [courseQuery, setCourseQuery] = useState("");
     const [datePurchase, setDatePurchase] = useState("");
-    const itemsPerPagePackage = 3;
+    const itemsPerPagePackage = 10;
     const [currentPagePackage, setCurrentPagePackage] = useState(1);
 
     const filteredOrders = orders.filter((order) => {
