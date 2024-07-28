@@ -178,5 +178,9 @@ const url = {
     STUDENT: {
         LIST: "student",
     },
+
+    TEACHER: {
+        LIST: "teacher",
+    },
 };
 export default url;

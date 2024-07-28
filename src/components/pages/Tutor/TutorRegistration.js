@@ -106,6 +106,8 @@ function TutorRegistration() {
         }
     };
 
+    console.log(formData.cetificate);
+
     return (
         <Layout title="Tutor Registration">
             <div className="col-12">
