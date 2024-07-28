@@ -70,6 +70,7 @@ import ClassCreate from "../components/pages/Classes/ClassCreate";
 import Classroom from "../components/pages/Classroom";
 import ClassCourseExamCreate from "../components/pages/ClassesTeacher/ClassCourseExam/ClassCourseExamCreate";
 import OrderHistory from "../components/pages/OrderHistory";
+import TeacherList from "../components/pages/Teacher";
 
 const privateRoutes = [
     // Dashboard routes
@@ -159,9 +160,11 @@ const privateRoutes = [
 
     { path: config.routes.timetable, component: Timetable },
 
-    { path: config.routes.student_list, component: StudentList },
+    { path: config.routes.student_list, component: StudentList, allowedRoles: ["ADMIN", "TRAINERS", "ADMISSIONS"] },
     { path: config.routes.student_create, component: StudentCreate },
     { path: config.routes.student_edit, component: StudentEdit },
+
+    { path: config.routes.teacher_list, component: TeacherList, allowedRoles: ["ADMIN", "TRAINERS"] },
 
     { path: config.routes.staff_list, component: StaffList },
     { path: config.routes.staff_create, component: StaffCreate },
