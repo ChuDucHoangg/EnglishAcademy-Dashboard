@@ -18,8 +18,6 @@ function TeacherList() {
 
     const teachers = teacherData.response || [];
 
-    console.log(teachers);
-
     const [searchQuery, setSearchQuery] = useState("");
     const [emailQuery, setEmailQuery] = useState("");
     const [birthdayQuery, setBirthdayQuery] = useState("");
