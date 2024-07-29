@@ -10,7 +10,6 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { copyText } from "../../../utils/copyText";
-import Chart from "react-apexcharts";
 import config from "../../../config";
 
 function DashboardAdmissions() {
@@ -21,97 +20,73 @@ function DashboardAdmissions() {
         },
     });
 
+    const studentData = useAxiosGet({
+        path: url.STUDENT.LIST,
+        headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+        },
+    });
+
     const potentialCustomer = potentialCustomerData.response || [];
 
-    const generality = [
-        {
-            title: "Class of day",
-            response: formatNumber(2),
-            icon: "assets/icons/dash-icon-07.svg",
-            description: "Number of classes being taught.",
-        },
-        {
-            title: "Tutoring of day",
-            response: formatNumber(4),
-            icon: "assets/icons/dash-icon-08.svg",
-            description: "Number of students being tutored.",
-        },
-        {
-            title: "Class",
-            response: formatNumber(5),
-            icon: "assets/icons/dash-icon-01.svg",
-            description: "Number of classes being taught.",
-        },
-        {
-            title: "Tutoring",
-            response: formatNumber(9),
-            icon: "assets/icons/dash-icon-06.svg",
-            description: "Number of students being tutored.",
-        },
-    ];
-
-    const options = {
-        chart: {
-            type: "area",
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        series: [
-            {
-                name: "Sales 2",
-                data: [30, 20, 45, 60, 69, 90, 91, 100, 125],
-            },
-            {
-                name: "Sales",
-                data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
-            },
-        ],
-        xaxis: {
-            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
-        },
-        stroke: {
-            curve: "smooth",
-        },
-        fill: {
-            type: "gradient",
-            gradient: {
-                shadeIntensity: 1,
-                opacityFrom: 0.7,
-                opacityTo: 0.9,
-                stops: [0, 90, 100],
-            },
-        },
-    };
+    const students = studentData.response || [];
 
     return (
         <Layout title="Dashboard Admissions">
-            {generality.map((item, index) => (
-                <div className="col-lg-3 col-md-6" key={index}>
-                    <div className="card border-0">
-                        <div className="card-body">
-                            <div className="row align-items-center">
-                                <div className="col-8">
-                                    <h6 className="mb-2 text-muted">{item.title}</h6>
-                                    <h4 className="mb-2">{item.response}</h4>
-                                </div>
-                                <div className="col-4 text-end">
-                                    <img src={item.icon} alt="" className="dash-icon" />
-                                </div>
-                            </div>
-                            <p className="mb-0 text-muted text-sm">{item.description}</p>
+            <div className="col-lg-6">
+                <div className="card table-card">
+                    <div className="card-header p-3 border-0">
+                        <div className="d-flex align-items-center justify-content-between">
+                            <h5 className="mb-0">Potential Customer</h5>
+                            <Link to={config.routes.potential_customers} className="btn btn-sm btn-link-primary">
+                                View All
+                            </Link>
                         </div>
                     </div>
-                </div>
-            ))}
-
-            <div className="col-md-6">
-                <div className="card m-0 h-100">
-                    <div className="card-header border-0">
-                        <h5 className="m-0">Statistics of the day</h5>
-                    </div>
-                    <div className="card-body">
-                        <Chart options={options} series={options.series} type="area" />
+                    <div className="table-responsive">
+                        <table className="table table-hover">
+                            <tbody>
+                                {potentialCustomer.length > 0 ? (
+                                    potentialCustomer.map((customer) => (
+                                        <tr key={customer.id}>
+                                            <td>
+                                                <div className="row">
+                                                    <div className="col-auto">
+                                                        <div className="flex-shrink-0">
+                                                            <div className="avtar avtar-s border">
+                                                                <i className="ti ti-user"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col">
+                                                        <h6 className="mb-0">{customer.fullname}</h6>
+                                                        <p className="text-muted f-12 mb-0">{format(new Date(customer.createdDate), "dd-MM-yyyy")}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="cursor-copy" onClick={() => copyText(customer.phone)}>
+                                                {customer.phone}
+                                            </td>
+                                            <td className="cursor-copy" onClick={() => copyText(customer.email)}>
+                                                {customer.email}
+                                            </td>
+                                            <td className="d-flex align-items-center gap-3">
+                                                <Link to={`tel:${customer.phone}`} className="btn btn-icon btn-light-primary">
+                                                    <i className="ti ti-phone"></i>
+                                                </Link>
+                                                <Link to={`mailto:${customer.email}`} className="btn btn-icon btn-light-danger">
+                                                    <i className="ti ti-mail"></i>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td>No data</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -137,54 +112,60 @@ function DashboardAdmissions() {
                 </div>
             </div>
 
-            <div className="col-lg-12 mt-5">
-                <div className="card table-card">
-                    <div className="card-header p-3 border-0">
-                        <div className="d-flex align-items-center justify-content-between">
-                            <h5 className="mb-0">Potential Customer</h5>
-                            <Link to={config.routes.potential_customers} className="btn btn-sm btn-link-primary">
-                                View All
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="table-responsive">
-                        <table className="table table-hover">
-                            <tbody>
-                                {potentialCustomer.map((customer) => (
-                                    <tr key={customer.id}>
-                                        <td>
-                                            <div className="row">
-                                                <div className="col-auto">
-                                                    <div className="flex-shrink-0">
-                                                        <div className="avtar avtar-s border">
-                                                            <i className="ti ti-user"></i>
+            <div className="col-lg-12">
+                <div className="card">
+                    <div className="card-body">
+                        <div className="table-responsive px-3">
+                            <table className="table table-hover datatable-table" id="pc-dt-simple">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Full Name</th>
+                                        <th>Birthday</th>
+                                        <th>Address</th>
+                                        <th>Email</th>
+                                        <th>Phone Number</th>
+                                        <th>Gender</th>
+                                        <th>Status</th>
+                                        <th>Created Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {students.length === 0 ? (
+                                        <tr>
+                                            <td colSpan="10" className="text-center">
+                                                No data.
+                                            </td>
+                                        </tr>
+                                    ) : (
+                                        students.map((student, studentIndex) => (
+                                            <tr key={student.id}>
+                                                <td>{formatNumber(studentIndex + 1)}</td>
+                                                <td>
+                                                    <div className="row">
+                                                        <div className="col-auto">
+                                                            <img src="/assets/images/user/user-placeholder.png" alt={student.fullName} className="wid-40 rounded-circle" />
+                                                        </div>
+                                                        <div className="col">
+                                                            <h6 className="mb-0">{student.fullName}</h6>
+                                                            <p className="text-muted f-12 mb-0">{student.code}</p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div className="col">
-                                                    <h6 className="mb-0">{customer.fullname}</h6>
-                                                    <p className="text-muted f-12 mb-0">{format(new Date(customer.createdDate), "dd-MM-yyyy")}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="cursor-copy" onClick={() => copyText(customer.phone)}>
-                                            {customer.phone}
-                                        </td>
-                                        <td className="cursor-copy" onClick={() => copyText(customer.email)}>
-                                            {customer.email}
-                                        </td>
-                                        <td className="d-flex align-items-center gap-3">
-                                            <Link to={`tel:${customer.phone}`} className="btn btn-icon btn-light-primary">
-                                                <i className="ti ti-phone"></i>
-                                            </Link>
-                                            <Link to={`mailto:${customer.email}`} className="btn btn-icon btn-light-danger">
-                                                <i className="ti ti-mail"></i>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                                </td>
+                                                <td>{student.dayOfBirth || "N/A"}</td>
+                                                <td>{student.address || "N/A"}</td>
+                                                <td>{student.email || "N/A"}</td>
+                                                <td>{student.phone || "N/A"}</td>
+
+                                                <td>{student.gender || "N/A"}</td>
+                                                <td>{student.status || "N/A"}</td>
+                                                <td>{(student.createdDate && format(new Date(student.createdDate), "hh:mm:ss dd-MM-yyyy")) || "N/A"}</td>
+                                            </tr>
+                                        ))
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

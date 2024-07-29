@@ -260,7 +260,7 @@ function ClassCourseExamCreate() {
                                     </div>
 
                                     <div className="text-end">
-                                        <ButtonSubmit className="btn-primary" value="Create New Test" icon="ti ti-plus" handleEvent={handleSubmit} />
+                                        <ButtonSubmit className="btn-primary" value="Create New Test" valueSubmit="Creating..." icon="ti ti-plus" handleEvent={handleSubmit} />
                                     </div>
                                 </div>
                             </div>

@@ -182,8 +182,10 @@ function EntranceTestDetail() {
                                             <h5 className="mb-3">
                                                 Question {questionIndex + 1}: {question.title}
                                             </h5>
-                                            {question.image && <img src={question.image} className="w-100 mb-5" alt="" />}
-                                            {question.audiomp3 && <AudioPlayer src={question.audiomp3} autoPlay={false} controls className="mb-5 w-100" />}
+                                            {question.image && question.image.trim() !== "" && <img src={question.image} alt="" className="mb-5 w-100" />}
+                                            {question.audiomp3 && question.audiomp3 !== null && question.audiomp3.trim() !== "" && (
+                                                <AudioPlayer src={question.audiomp3} autoPlay={false} controls className="mb-5 w-100" />
+                                            )}
 
                                             <div className="row">
                                                 {["option1", "option2", "option3", "option4"].map((option, optionIndex) => (
