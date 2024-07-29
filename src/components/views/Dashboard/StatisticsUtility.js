@@ -7,9 +7,11 @@ import Chart from "react-apexcharts";
 function StatisticsUtility() {
     const [revenueAll, setRevenueAll] = useState({});
     const [revenueCourseOnline12Month, setRevenueCourseOnline12Month] = useState([]);
+    const [revenueCourseOffline12Month, setRevenueCourseOffline12Month] = useState([]);
     const [revenueTutor12Month, setRevenueTutor12Month] = useState([]);
 
     const [totalRevenueCourseOnline12Month, setTotalRevenueCourseOnline12Month] = useState(0);
+    const [totalRevenueCourseOffline12Month, setTotalRevenueCourseOffline12Month] = useState(0);
     const [totalRevenueTutor12Month, setTotalRevenueTutor12Month] = useState(0);
 
     const loadData = async () => {
@@ -19,14 +21,16 @@ function StatisticsUtility() {
                     Authorization: `Bearer ${getAccessToken()}`,
                 },
             };
-            const [revenueAllResponse, revenueCourseOnline12MonthResponse, revenueTutor12MonthResponse] = await Promise.all([
+            const [revenueAllResponse, revenueCourseOnline12MonthResponse, revenueCourseOffline12MonthResponse, revenueTutor12MonthResponse] = await Promise.all([
                 api.get(url.DASHBOARD.REVENUE_ALL, headerConfig),
                 api.get(url.DASHBOARD.REVENUE_COURSE_ONLINE_12_MONTH, headerConfig),
+                api.get(url.DASHBOARD.REVENUE_COURSE_OFFLINE_12_MONTH, headerConfig),
                 api.get(url.DASHBOARD.REVENUE_TUTOR_12_MONTH, headerConfig),
             ]);
 
             setRevenueAll(revenueAllResponse.data.data);
             setRevenueCourseOnline12Month(revenueCourseOnline12MonthResponse.data.data);
+            setRevenueCourseOffline12Month(revenueCourseOffline12MonthResponse.data.data);
             setRevenueTutor12Month(revenueTutor12MonthResponse.data.data);
         } catch (error) {
             console.log(error);
@@ -38,16 +42,19 @@ function StatisticsUtility() {
     }, []);
 
     useEffect(() => {
-        if (revenueCourseOnline12Month.length || revenueTutor12Month.length > 0) {
+        if (revenueCourseOnline12Month.length || revenueTutor12Month.length > 0 || revenueCourseOffline12Month.length > 0) {
             const totalCourseOnline = revenueCourseOnline12Month.reduce((acc, item) => acc + item.totalRevenue, 0);
+            const totalCourseOffline = revenueCourseOffline12Month.reduce((acc, item) => acc + item.totalRevenue, 0);
             const totalTutor = revenueTutor12Month.reduce((acc, item) => acc + item.totalRevenue, 0);
 
             setTotalRevenueCourseOnline12Month(totalCourseOnline);
+            setTotalRevenueCourseOffline12Month(totalCourseOffline);
             setTotalRevenueTutor12Month(totalTutor);
         }
-    }, [revenueCourseOnline12Month, revenueTutor12Month]);
+    }, [revenueCourseOnline12Month, revenueCourseOffline12Month, revenueTutor12Month]);
 
     const revenueCourseOnlineMonths = revenueCourseOnline12Month.map((item) => `${item.year}-${item.month}`);
+    const revenueCourseOfflineMonths = revenueCourseOffline12Month.map((item) => `${item.year}-${item.month}`);
     const revenueTutorMonths = revenueTutor12Month.map((item) => `${item.year}-${item.month}`);
 
     const statisticsWidget = [
@@ -159,7 +166,7 @@ function StatisticsUtility() {
         {
             title: "Offline Course",
             description: "Total revenue of offline courses",
-            total: `$634.00`,
+            total: `$${totalRevenueCourseOffline12Month.toFixed(2)}`,
             icon: `<div class="avtar avtar-s bg-light-warning"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z" stroke="#E58A00" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" /> <path opacity="0.6" d="M14.5 4.5V6.5C14.5 7.6 15.4 8.5 16.5 8.5H18.5" stroke="#E58A00" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" /> <path opacity="0.6" d="M8 13H12" stroke="#E58A00" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" /> <path opacity="0.6" d="M8 17H16" stroke="#E58A00" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" /> </svg> </div>`,
             optionChart: {
                 chart: {
@@ -167,30 +174,55 @@ function StatisticsUtility() {
                     sparkline: {
                         enabled: true,
                     },
-
                     toolbar: {
                         show: false,
                     },
                 },
-                dataLabels: {
-                    enabled: false,
+                xaxis: {
+                    categories: revenueCourseOfflineMonths,
+                    labels: {
+                        show: false,
+                    },
+                    title: {
+                        text: "",
+                    },
                 },
                 series: [
                     {
-                        name: "Online Courses",
-                        data: [revenueAll.courseOnlineRevenue || 0],
-                    },
-                    {
-                        name: "Offline Courses",
-                        data: [revenueAll.courseOfflineRevenue || 0, 10],
-                    },
-                    {
-                        name: "Tutoring",
-                        data: [revenueAll.tutorRevenue || 0],
+                        name: "Revenue",
+                        data: revenueCourseOffline12Month.map((item) => item.totalRevenue),
                     },
                 ],
-                stroke: {
-                    curve: "smooth",
+                dataLabels: {
+                    enabled: false,
+                },
+                yaxis: {
+                    labels: {
+                        show: false,
+                    },
+                    title: {
+                        text: "",
+                    },
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        endingShape: "rounded",
+                    },
+                },
+                fill: {
+                    opacity: 1,
+                },
+                tooltip: {
+                    y: {
+                        formatter: (val) => `$${val.toFixed(2)}`,
+                    },
+                },
+                legend: {
+                    show: false,
+                },
+                grid: {
+                    show: false,
                 },
             },
         },
