@@ -121,6 +121,7 @@ const url = {
     DASHBOARD: {
         REVENUE_ALL: "revenue/all",
         REVENUE_COURSE_ONLINE_12_MONTH: "course-online/monthly-revenue-last-12-months",
+        REVENUE_COURSE_OFFLINE_12_MONTH: "course-offline/monthly-revenue-last-12-months",
         REVENUE_TUTOR_12_MONTH: "tutor/monthly-revenue-last-12-months",
         TOP_10_COURSE_ONLINE: "course-online/top-10-revenue",
         TOP_10_TUTOR: "tutor/top-10-revenue",
